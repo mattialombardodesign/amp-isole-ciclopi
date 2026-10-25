@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><title>Stile Joi · anteprima</title>
+<style>
+:root{
+  --font:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Inter,system-ui,sans-serif;
+  --bg:#fafafa; --row:#f0f0f2; --row-2:#e8e8eb; --ink:#111113; --ink-2:#3c3c43; --ink-3:#8a8a8e; --line:#e3e3e6;
+  --black:#141416; --blue:#0a7aff; --blue-soft:#e3efff; --red:#ff453a; --ok:#248a3d; --ok-soft:#e4f4e8; --warn:#9a5b00; --warn-soft:#fff1d6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);font-variant-numeric:tabular-nums;background:#e5e5e8;color:var(--ink);padding:40px;-webkit-font-smoothing:antialiased}
+.cap{font-size:15px;color:#3c3c43;max-width:1180px;margin:0 auto 28px;line-height:1.5}
+.row{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+.phone{width:375px;height:812px;background:linear-gradient(180deg,#ffffff 0%,var(--bg) 40%,#f3f3f5 100%);border-radius:44px;overflow:hidden;position:relative;box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+.lbl{font-size:13px;color:#6e6e73;text-align:center;margin-top:12px;max-width:375px;line-height:1.45}
+.pad{padding:0 20px}
+/* tipografia Joi */
+.t-title{font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.t-body{font-size:17px;letter-spacing:-.01em}
+.t-sec{font-size:15px;color:var(--ink-3)}
+.t-cap{font-size:13px;color:var(--ink-3)}
+/* home */
+.top{padding:60px 20px 0}
+.next{margin:20px 20px 0;background:var(--black);color:#fff;border-radius:24px;padding:20px}
+.next .h{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:#a1a1a6}
+.badge{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:99px;font-size:13px;font-weight:600}
+.badge.warn{background:rgba(255,179,64,.16);color:#ffb340}
+.badge.ok{background:var(--ok-soft);color:var(--ok)}.badge.wait{background:var(--warn-soft);color:var(--warn)}
+.badge.blue{background:var(--blue-soft);color:var(--blue)}.badge.grey{background:var(--row-2);color:var(--ink-3)}
+.badge i{width:6px;height:6px;border-radius:9px;background:currentColor}
+.next .time{margin-top:14px;font-size:34px;font-weight:700;letter-spacing:-.03em}
+.next .time span{color:#6e6e73}
+.next .site{margin-top:4px;font-size:17px;font-weight:600}
+.next .meta{margin-top:2px;font-size:15px;color:#a1a1a6}
+.capr{display:flex;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px dashed #3a3a3c;font-size:13px;color:#a1a1a6}
+.capr b{color:#fff;font-weight:600}
+.seg{display:flex;gap:2px;height:6px;margin-top:8px}.seg i{flex:1;border-radius:2px;background:#3a3a3c}.seg i.u{background:#fff}.seg i.m{background:var(--blue)}
+.btn{height:56px;border-radius:16px;background:var(--black);color:#fff;font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn.ghost{background:var(--row);color:var(--ink)}
+.sh{margin:32px 20px 10px;font-size:20px;font-weight:700;letter-spacing:-.02em}
+.list{display:flex;flex-direction:column;gap:8px;padding:0 20px}
+.it{display:flex;align-items:center;gap:12px;min-height:56px;padding:0 16px;background:var(--row);border-radius:16px}
+.it .ico{width:22px;height:22px;flex:none;color:var(--ink-2)}
+.it .ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.it .tx{flex:1;min-width:0}.it .tx b{display:block;font-size:17px;font-weight:500;letter-spacing:-.01em}.it .tx span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px}
+.it .tm{font-size:15px;color:var(--ink-3)}
+.chev{width:8px;height:8px;border-right:2px solid #c7c7cc;border-top:2px solid #c7c7cc;transform:rotate(45deg)}
+.nav{position:absolute;left:0;right:0;bottom:0;height:82px;background:rgba(250,250,250,.94);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding-top:9px}
+.nav div{text-align:center;font-size:10px;font-weight:500;color:#999}
+.nav svg{display:block;width:25px;height:25px;margin:0 auto 2px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
+.nav .on{color:var(--ink)}
+/* flusso */
+.fbar{display:flex;justify-content:space-between;align-items:center;padding:58px 20px 0;font-size:17px;color:var(--ink-3)}
+.fbar .back{display:flex;align-items:center;gap:6px}
+.fbar .back i{width:22px;height:22px;border-radius:99px;background:#c7c7cc;position:relative}
+.fbar .back i::after{content:'';position:absolute;left:8px;top:7px;width:6px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg)}
+.prog{display:flex;gap:4px;padding:14px 20px 0}.prog i{flex:1;height:3px;border-radius:9px;background:var(--row-2)}.prog i.on{background:var(--ink)}
+.ftitle{padding:40px 20px 0}
+.fsub{padding:8px 20px 0}
+.rows{display:flex;flex-direction:column;gap:10px;padding:28px 20px 0}
+.trow{display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 10px 0 18px;background:var(--row);border-radius:16px;font-size:17px}
+.pill{height:34px;padding:0 12px;border-radius:10px;display:flex;align-items:center;font-size:17px;font-weight:500}
+.pill.blue{background:var(--blue-soft);color:var(--blue)}.pill.grey{background:var(--row-2);color:var(--ink)}
+.bottom{position:absolute;left:0;right:0;bottom:0;padding:12px 20px 34px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px}
+.chip{height:38px;padding:0 15px;border-radius:99px;border:1.5px solid #d8d8dc;display:flex;align-items:center;font-size:15px;font-weight:500;background:#fff}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip.add{border-style:dashed;color:var(--ink-3)}
+.grp{padding:24px 20px 10px;display:flex;justify-content:space-between;align-items:baseline}
+.grp b{font-size:17px;font-weight:600}.grp span{font-size:15px;color:var(--ink-3)}
+.budget{margin:22px 20px 0;padding:14px 16px;background:var(--row);border-radius:16px}
+.budget .r{display:flex;justify-content:space-between;font-size:15px}.budget .r b{font-weight:600}
+.budget .seg i{background:#d8d8dc}.budget .seg i.u{background:var(--ink)}.budget .seg i.m{background:var(--blue)}
+</style></head><body>
+<p class="cap"><b>Stile Joi sulla seconda versione dell'app</b> · font di sistema Apple (SF Pro), scala tipografica di Joi (titoli 28, testo e pulsanti 17, secondario 15, didascalie 13), fondo quasi bianco, righe grigie piene senza bordi, pulsante principale nero, colore solo in piccole dosi: blu per orari e "i tuoi", stati come piccoli badge. Dati di esempio. La Mappa resta com'è.</p>
+<div class="row">
+
+<div><div class="phone">
+  <div class="top"><h1 class="t-title">Oggi</h1><p class="t-sec" style="margin-top:4px">Domenica 25 ottobre · Mare 24° · Vento 6 km/h</p></div>
+  <div class="next">
+    <div class="h"><span>Prossima uscita</span><span class="badge warn"><i></i>In attesa dell'AMP</span></div>
+    <div class="time">15:00<span>–16:30</span></div>
+    <div class="site">Panettoni · Zona B</div>
+    <div class="meta">Visita subacquea guidata · 4 subacquei</div>
+    <div class="capr"><span>Posti al sito oggi</span><b>10 liberi su 20</b></div>
+    <div class="seg"><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="pad" style="margin-top:12px"><div class="btn">Nuova uscita</div></div>
+  <h2 class="sh">In programma</h2>
+  <div class="list">
+    <div class="it"><div class="tx"><b>Scogliera del Castello</b><span>Lun 26 ott · Sea watching · 4 sub</span></div><span class="pill blue" style="height:28px;font-size:15px">10:00</span></div>
+  </div>
+  <h2 class="sh">Altre attività</h2>
+  <div class="list">
+    <div class="it"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 12c3-4 7-6 11-6 3 0 5 2 7 6-2 4-4 6-7 6-4 0-8-2-11-6z"/><circle cx="15.5" cy="11" r="1"/></svg></span><div class="tx"><b>Sea watching guidato</b></div><span class="chev"></span></div>
+    <div class="it"><span class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 13l2 2 4-4"/></svg></span><div class="tx"><b>Rinnovo autorizzazione</b></div><span class="chev"></span></div>
+  </div>
+  <div class="nav"><div class="on"><svg viewBox="0 0 24 24"><path d="M4 18c2 0 2-1.5 4-1.5S10 18 12 18s2-1.5 4-1.5S18 18 20 18M12 3l5 10H7z"/></svg>Attività</div><div><svg viewBox="0 0 24 24"><path d="M4 10v4h3l6 4V6L7 10zM17 9a4 4 0 0 1 0 6"/></svg>Segnala</div><div><svg viewBox="0 0 24 24"><path d="M9 4l6 2 6-2v16l-6 2-6-2-6 2V6z"/><path d="M9 4v16M15 6v16"/></svg>Mappa</div><div><svg viewBox="0 0 24 24"><path d="M3 10l9-6 9 6M5 10v9M19 10v9M9 10v9M15 10v9M3 21h18"/></svg>AMP</div></div>
+</div><p class="lbl">Oggi: stessa struttura della seconda versione, ripulita alla Joi. Pannello scuro, pulsante nero, righe grigie.</p></div>
+
+<div><div class="phone">
+  <div class="fbar"><span class="back"><i></i>Indietro</span><span>3 di 6</span></div>
+  <div class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+  <h1 class="ftitle t-title">A che ora entri<br>ed esci dall'acqua?</h1>
+  <p class="fsub t-sec">Panettoni · domenica 25 ottobre</p>
+  <div class="rows">
+    <div class="trow">Ingresso<span class="pill blue">15:00</span></div>
+    <div class="trow">Uscita<span class="pill grey">16:30</span></div>
+  </div>
+  <div class="bottom"><div class="btn">Continua</div></div>
+</div><p class="lbl">Orari: righe grigie con l'orario in pillola, come le righe "Wake up / Wind down" di Joi.</p></div>
+
+<div><div class="phone">
+  <div class="fbar"><span class="back"><i></i>Indietro</span><span>4 di 6</span></div>
+  <div class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+  <h1 class="ftitle t-title">Chi va in acqua?</h1>
+  <div class="budget"><div class="r"><span>Panettoni</span><b>4 di 14 posti liberi</b></div>
+    <div class="seg"><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <div class="grp"><b>Istruttori</b><span>1 selezionato</span></div>
+  <div class="chips"><span class="chip on">Marco Russo</span><span class="chip">Elena Costa</span><span class="chip">Davide Musumeci</span><span class="chip add">+ Aggiungi</span></div>
+  <div class="grp"><b>Guide</b><span>1 selezionato</span></div>
+  <div class="chips"><span class="chip on">Chiara Leonardi</span><span class="chip">Andrea Patanè</span><span class="chip add">+ Aggiungi</span></div>
+  <div class="grp"><b>Ospiti</b><span>2</span></div>
+  <div class="chips"><span class="chip on">Giulia Ferro ✕</span><span class="chip on">Luca Bianchi ✕</span><span class="chip add">+ Aggiungi ospite</span></div>
+  <div class="bottom"><div class="btn">Continua</div></div>
+</div><p class="lbl">Persone: chip a pillola come Joi, neri se selezionati; la capienza si riempie di blu.</p></div>
+
+</div></body></html>

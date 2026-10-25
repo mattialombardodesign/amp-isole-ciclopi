@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400..800;1,400..600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden}
+body{font-family:'Libre Franklin',sans-serif;background:#fff;color:#111418;font-variant-numeric:tabular-nums}
+.chart{position:absolute;inset:0 0 300px 0;background:#fff}
+.chart svg{width:100%;height:100%}
+.top{position:absolute;top:50px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center}
+.title{background:#fff;border:1.5px solid #111418;padding:6px 10px;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.title small{display:block;font-weight:500;letter-spacing:0;text-transform:none;font-size:11px;color:#2f6fb0}
+.notice{background:#b0217e;color:#fff;font-size:11px;font-weight:700;padding:6px 8px;letter-spacing:.04em}
+.sheet{position:absolute;left:0;right:0;bottom:84px;height:236px;background:#fff;border-top:1.5px solid #111418;padding:16px 18px}
+.k{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2f6fb0}
+.name{font-size:26px;font-weight:800;margin-top:4px}
+.coord{font-style:italic;font-size:13px;color:#4b5563;margin-top:2px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:14px;border:1px solid #111418}
+.grid div{padding:8px 10px;border-right:1px solid #111418}
+.grid div:last-child{border:0}
+.grid b{display:block;font-size:22px;font-weight:800}
+.grid span{font-size:11px;color:#4b5563}
+.btn{margin-top:14px;height:50px;background:#111418;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px}
+.tabs{position:absolute;bottom:0;left:0;right:0;height:84px;border-top:1.5px solid #111418;display:flex;padding-top:10px;background:#fff}
+.tabs div{flex:1;text-align:center;font-size:11px;font-weight:700;color:#6b7280}
+.tabs div i{display:block;width:24px;height:24px;margin:0 auto 4px;border:1.5px solid #9ca3af;border-radius:50%}
+.tabs .on{color:#111418}.tabs .on i{background:#2f6fb0;border-color:#2f6fb0}
+</style></head><body>
+<div class="chart"><svg viewBox="0 0 390 544" preserveAspectRatio="none">
+  <rect width="390" height="544" fill="#ffffff"/>
+  <path d="M0 0 H150 C140 80 120 140 96 190 C80 230 60 300 40 360 C30 400 20 470 0 544 Z" fill="#efe3b4" stroke="#111418" stroke-width="1.2"/>
+  <path d="M150 0 C140 80 120 140 96 190 C80 230 60 300 40 360 C30 400 20 470 0 544 H60 C80 470 96 400 110 350 C130 290 150 230 170 180 C190 120 200 60 210 0Z" fill="#cfe8f2"/>
+  <path d="M230 0 C215 90 195 170 170 240 C150 300 130 390 110 544" fill="none" stroke="#2f6fb0" stroke-width="1" stroke-dasharray="4 3"/>
+  <path d="M300 0 C285 100 262 190 240 260 C220 330 200 430 185 544" fill="none" stroke="#2f6fb0" stroke-width="1" stroke-dasharray="4 3"/>
+  <ellipse cx="190" cy="250" rx="22" ry="12" fill="#efe3b4" stroke="#111418" stroke-width="1.2"/>
+  <circle cx="165" cy="292" r="4" fill="#111418"/><circle cx="174" cy="300" r="3" fill="#111418"/>
+  <circle cx="190" cy="250" r="22" fill="none" stroke="#b0217e" stroke-width="2"/>
+  <circle cx="205" cy="320" r="16" fill="none" stroke="#111418" stroke-width="1.5"/>
+  <text x="196" y="325" font-size="13" font-weight="800" fill="#111418">8</text>
+  <circle cx="160" cy="300" r="16" fill="none" stroke="#111418" stroke-width="1.5"/>
+  <text x="151" y="305" font-size="13" font-weight="800" fill="#111418">15</text>
+  <g font-style="italic" font-size="10" fill="#2f6fb0"><text x="250" y="140">32</text><text x="270" y="300">41</text><text x="230" y="420">27</text><text x="320" y="210">55</text><text x="300" y="470">48</text></g>
+  <text x="235" y="380" font-style="italic" font-size="14" fill="#2f6fb0">Mar Ionio</text>
+  <text x="18" y="120" font-size="11" font-weight="700" fill="#111418" letter-spacing="1">ACI TREZZA</text>
+</svg></div>
+<div class="top"><div class="title">AMP Isole Ciclopi<small>Carta del 25 ottobre</small></div><div class="notice">ZONA A · COMPLETO</div></div>
+<div class="sheet">
+  <div class="k">Sito selezionato</div>
+  <div class="name">Panettoni</div>
+  <div class="coord">37°33'34.2"N · 15°09'57.6"E · fondale 12–35 m</div>
+  <div class="grid"><div><b>8</b><span>posti liberi</span></div><div><b>20</b><span>capienza</span></div><div><b>B</b><span>zona</span></div></div>
+  <div class="btn">Comunica un'uscita qui</div>
+</div>
+<div class="tabs"><div><i></i>Segnala</div><div><i></i>Attività</div><div class="on"><i></i>Mappa</div><div><i></i>AMP</div></div>
+</body></html>

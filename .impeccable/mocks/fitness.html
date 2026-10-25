@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><title>Stile Apple Fitness · anteprima</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Nunito:wght@700..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000; --s1:#1c1c1e; --s2:#2c2c2e; --hair:rgba(255,255,255,.08);
+  --t1:#fff; --t2:#a1a1a8; --t3:#76767e;
+  --lime:#b4ff3c; --cyan:#40e0ff; --pink:#ff3b6b; --orange:#ff9f0a; --red:#ff453a;
+  --g4:4px;--g8:8px;--g12:12px;--g16:16px;--g24:24px;--g32:32px;--g48:48px;--gutter:20px;
+  --num:'Nunito',ui-rounded,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Geist,system-ui,sans-serif;font-feature-settings:'tnum';background:#0d0d0f;color:var(--t1);padding:40px;display:flex;flex-direction:column;align-items:center;gap:40px;-webkit-font-smoothing:antialiased}
+.cap{font-size:15px;color:var(--t2);width:100%;max-width:1220px}
+.row{display:flex;gap:40px;flex-wrap:wrap;justify-content:center;align-items:flex-start}
+.phone{width:390px;height:844px;background:var(--bg);border-radius:44px;overflow:hidden;position:relative;box-shadow:0 0 0 1px #222,0 40px 80px -30px rgba(0,0,0,.9)}
+.lbl{font-size:13px;color:var(--t3);text-align:center;margin-top:12px;max-width:390px}
+.num{font-family:var(--num);font-weight:900;letter-spacing:-.01em}
+header{padding:60px var(--gutter) 0}
+h1{font-size:34px;font-weight:700;letter-spacing:-.03em}
+.sub{margin-top:var(--g4);font-size:15px;color:var(--t2)}
+.card{background:linear-gradient(180deg,#232326,#18181b);border-radius:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 20px 40px -24px rgba(0,0,0,.9)}
+.hero{margin:var(--g24) var(--gutter) 0;padding:var(--g24);display:flex;gap:var(--g24);align-items:center}
+.ring{position:relative;flex:none}
+.ring svg{display:block;filter:drop-shadow(0 0 10px rgba(180,255,60,.35))}
+.ring .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .c b{font-family:var(--num);font-weight:900;font-size:30px;line-height:1}
+.ring .c span{font-size:12px;color:var(--t2);margin-top:2px}
+.info .k{font-size:13px;color:var(--t2);text-transform:none}
+.info .time{white-space:nowrap;font-family:var(--num);font-weight:900;font-size:32px;line-height:1;color:var(--lime);margin-top:var(--g4)}
+.info .time span{color:var(--t3);font-size:20px}
+.info .site{margin-top:var(--g8);font-size:18px;font-weight:600}
+.info .meta{font-size:14px;color:var(--t2);margin-top:2px}
+.status{display:inline-flex;align-items:center;gap:6px;margin-top:var(--g12);font-size:13px;font-weight:600;color:var(--orange)}
+.status i{width:7px;height:7px;border-radius:9px;background:currentColor;box-shadow:0 0 8px currentColor}
+.legend{display:flex;gap:var(--g16);margin:0 var(--g24) var(--g24);padding-top:var(--g16);border-top:1px solid var(--hair);font-size:13px;color:var(--t2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:9px;margin-right:6px;vertical-align:-1px}
+.cta{margin:var(--g16) var(--gutter) 0;height:56px;border-radius:999px;background:var(--lime);color:#000;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 30px -10px rgba(180,255,60,.6)}
+.sec{margin:var(--g48) var(--gutter) var(--g12);display:flex;justify-content:space-between;align-items:baseline}
+.sec h2{font-size:22px;font-weight:700;letter-spacing:-.02em}.sec span{font-size:15px;color:var(--lime);font-weight:500}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:var(--g12);margin:0 var(--gutter)}
+.tile{padding:var(--g16)}
+.tile .k{font-size:14px;font-weight:600}
+.tile .v{margin-top:var(--g16);font-size:34px;line-height:1}
+.tile .v small{font-family:Geist;font-size:14px;font-weight:500;color:var(--t2);margin-left:4px}
+.tile .bar{display:flex;gap:2px;margin-top:var(--g12);height:6px}.tile .bar i{flex:1;border-radius:2px;background:#3a3a3e}
+.tabs{position:absolute;left:0;right:0;bottom:0;height:84px;background:rgba(18,18,20,.92);border-top:1px solid var(--hair);display:grid;grid-template-columns:repeat(4,1fr);padding-top:10px}
+.tabs div{text-align:center;font-size:11px;font-weight:500;color:var(--t3)}
+.tabs div i{display:block;width:24px;height:24px;margin:0 auto 4px;border-radius:7px;border:1.8px solid currentColor}
+.tabs .on{color:var(--lime)}.tabs .on i{background:var(--lime);border-color:var(--lime)}
+/* flusso */
+.fh{padding:58px var(--gutter) 0}
+.fh .bar{display:flex;justify-content:space-between;font-size:15px;color:var(--t2)}
+.prog{display:flex;gap:4px;margin-top:var(--g12)}.prog i{flex:1;height:4px;border-radius:9px;background:#2c2c2e}.prog i.on{background:var(--lime)}
+.fh h1{margin-top:var(--g24);font-size:28px}
+.budget{margin:var(--g24) var(--gutter) 0;padding:var(--g16) var(--g24) var(--g16) var(--g16);display:flex;align-items:center;gap:var(--g16)}
+.budget .t b{display:block;font-size:17px;font-weight:600}.budget .t span{font-size:14px;color:var(--t2)}
+.budget .t .left{font-family:var(--num);font-weight:900;font-size:22px;color:var(--lime);margin-top:var(--g4);display:block}
+.pick{margin:var(--g12) var(--gutter) 0;padding:var(--g16)}
+.pick .h{display:flex;justify-content:space-between;font-size:16px;font-weight:600}.pick .h span{font-weight:400;font-size:14px;color:var(--t2)}
+.chips{display:flex;flex-wrap:wrap;gap:var(--g8);margin-top:var(--g12)}
+.chip{height:40px;padding:0 16px;border-radius:99px;background:var(--s2);display:flex;align-items:center;font-size:15px;font-weight:500}
+.chip.on{background:var(--lime);color:#000}.chip.on::before{content:'✓';margin-right:6px}
+.bottom{position:absolute;left:0;right:0;bottom:0;padding:var(--g12) var(--gutter) 30px;background:linear-gradient(180deg,rgba(0,0,0,0),#000 30%)}
+.bottom div{height:56px;border-radius:999px;background:var(--lime);color:#000;font-weight:700;display:flex;align-items:center;justify-content:center}
+/* dashboard */
+.dash{width:1220px;background:#000;border-radius:24px;overflow:hidden;box-shadow:0 0 0 1px #222}
+.dbar{height:60px;border-bottom:1px solid var(--hair);display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-size:15px}
+.dbar span{color:var(--t2)}.dbar .live{color:var(--lime)}
+.dh{padding:var(--g32) 32px 0}.dh h1{font-size:36px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--g12);margin:var(--g24) 32px 0}
+.stat{padding:var(--g24);display:flex;align-items:center;gap:var(--g16)}
+.stat b{display:block;font-family:var(--num);font-weight:900;font-size:38px;line-height:1}
+.stat span{display:block;font-size:14px;color:var(--t2);margin-top:var(--g4)}
+.dbody{height:110px;margin:var(--g24) 32px var(--g32);display:grid;grid-template-columns:1.35fr 1fr;gap:var(--g24)}
+.dbody div{border-radius:20px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:14px}
+.dbody .map{background:#e9ecef;color:#636b78}
+</style></head><body>
+<p class="cap">Stile Apple Fitness · anteprima con dati di esempio. Fondo nero, colori vivi da "anelli di attività", numeri arrotondati, profondità con luce e alone. La Mappa resta chiara e invariata.</p>
+
+<div class="row">
+<div>
+  <div class="phone">
+    <header><h1>Oggi</h1><p class="sub">Domenica 25 ottobre · Mare 24° · Vento 5 km/h</p></header>
+
+    <div class="card" style="margin:var(--g24) var(--gutter) 0">
+      <div class="hero" style="margin:0;padding:var(--g24) var(--g24) var(--g24) var(--g16);gap:var(--g16)">
+        <div class="ring">
+          <svg width="116" height="116" viewBox="0 0 128 128">
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8ff7a"/><stop offset="1" stop-color="#7fe000"/></linearGradient></defs>
+            <g transform="rotate(-90 64 64)" fill="none" stroke-width="14" stroke-linecap="butt">
+              <circle cx="64" cy="64" r="52" stroke="#2a2a2e" stroke-dasharray="14.33 2" />
+              <circle cx="64" cy="64" r="52" stroke="#ffffff" stroke-opacity=".9" stroke-dasharray="14.33 2 14.33 2 14.33 2 14.33 2 14.33 2 14.33 2 0 400" />
+              <circle cx="64" cy="64" r="52" stroke="url(#g1)" stroke-dasharray="0 98 14.33 2 14.33 2 14.33 2 14.33 2 0 400" />
+            </g>
+          </svg>
+          <div class="c"><b>10</b><span>liberi su 20</span></div>
+        </div>
+        <div class="info">
+          <div class="k">Prossima uscita</div>
+          <div class="time">15:00<span>–16:30</span></div>
+          <div class="site">Panettoni</div>
+          <div class="meta">Zona B · 4 subacquei</div>
+          <div class="status"><i></i>In attesa dell'AMP</div>
+        </div>
+      </div>
+    </div>
+    <div class="legend" style="margin:var(--g12) var(--gutter) 0;border:0;padding:0 var(--g4)"><span><i style="background:var(--lime)"></i>I tuoi 4</span><span><i style="background:#fff"></i>Altri diving 6</span><span><i style="background:#3a3a3e"></i>Liberi 10</span></div>
+
+    <div class="cta">＋ Nuova uscita</div>
+
+    <div class="sec"><h2>Siti oggi</h2><span>Mappa</span></div>
+    <div class="tiles">
+      <div class="card tile"><div class="k" style="color:var(--cyan)">Faraglione Grande</div><div class="v num">15<small>liberi</small></div><div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="card tile"><div class="k" style="color:var(--pink)">Isola Lachea</div><div class="v num" style="color:var(--pink)">Pieno</div><div class="bar"><i style="background:var(--pink)"></i><i style="background:var(--pink)"></i><i style="background:var(--pink)"></i><i style="background:var(--pink)"></i><i style="background:var(--pink)"></i><i style="background:var(--pink)"></i><i style="background:var(--pink)"></i><i style="background:var(--pink)"></i></div></div>
+    </div>
+    <div class="tabs"><div class="on"><i></i>Attività</div><div><i></i>Segnala</div><div><i></i>Mappa</div><div><i></i>AMP</div></div>
+  </div>
+  <p class="lbl">Oggi: anello di capienza (un segmento per subacqueo, i tuoi in lime con alone), orario in numeri arrotondati, pulsante a pillola lime</p>
+</div>
+
+<div>
+  <div class="phone">
+    <div class="fh"><div class="bar"><span>‹ &nbsp;Visita subacquea guidata</span><span>4 di 6</span></div>
+      <div class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+      <h1>Chi va in acqua?</h1></div>
+    <div class="card budget">
+      <div class="ring">
+        <svg width="84" height="84" viewBox="0 0 128 128">
+          <g transform="rotate(-90 64 64)" fill="none" stroke-width="16">
+            <circle cx="64" cy="64" r="52" stroke="#2a2a2e" stroke-dasharray="14.33 2" />
+            <circle cx="64" cy="64" r="52" stroke="#fff" stroke-opacity=".9" stroke-dasharray="14.33 2 14.33 2 14.33 2 14.33 2 14.33 2 14.33 2 0 400" />
+            <circle cx="64" cy="64" r="52" stroke="#b4ff3c" stroke-dasharray="0 98 14.33 2 14.33 2 14.33 2 14.33 2 0 400" />
+          </g>
+        </svg>
+      </div>
+      <div class="t"><b>Panettoni</b><span>stai aggiungendo 4 subacquei</span><span class="left">10 posti dopo di te</span></div>
+    </div>
+    <div class="card pick"><div class="h">Istruttori <span>1 selezionato</span></div>
+      <div class="chips"><div class="chip on">Marco Russo</div><div class="chip">Elena Costa</div><div class="chip">Davide Musumeci</div></div></div>
+    <div class="card pick"><div class="h">Guide <span>1 selezionato</span></div>
+      <div class="chips"><div class="chip on">Chiara Leonardi</div><div class="chip">Andrea Patanè</div></div></div>
+    <div class="card pick"><div class="h">Ospiti <span>2 selezionati</span></div>
+      <div class="chips"><div class="chip on">Giulia Ferro</div><div class="chip on">Luca Bianchi</div></div></div>
+    <div class="bottom"><div>Continua</div></div>
+  </div>
+  <p class="lbl">Flusso: l'anello si riempie di lime man mano che aggiungi persone; card scure con luce sul bordo superiore</p>
+</div>
+</div>
+
+<div>
+  <div class="dash">
+    <div class="dbar"><span><b style="color:#fff">Centrale operativa</b> · AMP Isole Ciclopi · Guardia Costiera</span><span class="live">● In tempo reale</span></div>
+    <div class="dh"><h1>Domenica 25 ottobre</h1></div>
+    <div class="stats">
+      <div class="card stat"><div><b style="color:var(--cyan)">5</b><span>Uscite comunicate</span></div></div>
+      <div class="card stat"><div><b style="color:var(--lime)">27</b><span>Subacquei in acqua</span></div></div>
+      <div class="card stat"><div><b style="color:var(--orange)">3</b><span>Da prendere in visione</span></div></div>
+      <div class="card stat"><div><b style="color:var(--pink)">1</b><span>Segnalazione aperta</span></div></div>
+    </div>
+    <div class="dbody"><div class="map">Mappa (chiara, invariata)</div><div class="card">Uscite · Segnalazioni · Richieste</div></div>
+  </div>
+  <p class="lbl" style="max-width:none">Dashboard AMP: stesso fondo nero, ogni numero con il suo colore</p>
+</div>
+</body></html>

@@ -1,0 +1,231 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens. Struttura ispirata a Komoot (ogni uscita è una "scheda
+ * percorso" con mappa, statistiche e profilo), palette Blu di Prussia e
+ * ghiaccio. Chiaro perché l'app si usa in banchina sotto il sole; il blu di
+ * Prussia porta struttura e azioni, il ghiaccio segna ciò che è tuo;
+ * verde, ambra e rosso solo per gli stati.
+ */
+@theme {
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+  --color-ground: #f4f6f9;
+  --color-card: #ffffff;
+  --color-ink: #0d1a2a;
+  --color-ink-2: #3d4b5e;
+  --color-ink-3: #5d6b7e;
+  --color-line: #e1e7ef;
+  --color-line-strong: #cbd5e1;
+
+  /* Blu di Prussia: azioni, selezione, struttura */
+  --color-accent: #123a5e;
+  --color-accent-hover: #0d2d4a;
+  --color-accent-soft: #e6eef6;
+  --color-accent-bright: #9cc7ef;
+
+  /* Ghiaccio: ciò che è tuo, profilo di profondità */
+  --color-ice: #7fb2e5;
+  --color-ice-ink: #2a659c;
+  --color-ice-soft: #e3effa;
+
+  /* Pannelli scuri */
+  --color-night: #0a2540;
+  --color-night-2: #1a3a5c;
+  --color-night-3: #a5b8cc;
+  --color-night-free: #2b4a6b;
+
+  /* Scala delle spaziature (base 4px) con nomi di ruolo */
+  --spacing-gutter: 1.25rem; /* margine laterale dello schermo */
+  --spacing-stack: 1rem; /* tra blocchi correlati */
+  --spacing-group: 1.5rem; /* tra titolo pagina e contenuto */
+  --spacing-section: 2.5rem; /* tra sezioni */
+
+  --color-ok: #0e6e3f;
+  --color-ok-soft: #e3f3ea;
+  --color-ok-bright: #5fd394;
+  --color-warn: #8a5000;
+  --color-warn-fill: #f2a516;
+  --color-warn-soft: #fdf1da;
+  --color-bad: #b3202d;
+  --color-bad-soft: #fce8ea;
+  --color-bad-bright: #ff7b84;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-enter: enter 0.32s var(--ease-out-expo) both;
+  --animate-flash: flash 3s ease-out;
+  --animate-check: check 0.6s var(--ease-out-expo) both;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes flash {
+  0%,
+  35% {
+    background-color: var(--color-accent-soft);
+  }
+}
+
+@keyframes check {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+    filter: blur(4px);
+  }
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: 'tnum';
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+/* Le parti del browser che non disegniamo noi */
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+input,
+textarea {
+  caret-color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+
+input[type='time']::-webkit-calendar-picker-indicator,
+input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0.5;
+}
+
+/* Mappa */
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: #eef1f4;
+}
+
+/* Il reset di Tailwind ridimensiona le immagini e crea fessure tra i tile */
+.leaflet-container img {
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* Tile allargate di mezzo pixel: niente fessure con zoom frazionari */
+.leaflet-container img.leaflet-tile {
+  width: 256.5px !important;
+  height: 256.5px !important;
+  mix-blend-mode: normal;
+}
+
+/* Tile OSM smorzate: la mappa fa da sfondo ai dati, non li copre */
+.leaflet-tile-pane {
+  filter: saturate(0.35) brightness(1.05) contrast(0.92);
+}
+
+.amp-marker {
+  background: none;
+  border: none;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 16px;
+  box-shadow: 0 10px 30px -10px rgb(11 15 20 / 0.3);
+}
+
+.leaflet-popup-content {
+  margin: 14px 16px;
+}
+
+.leaflet-control-attribution {
+  font-size: 11px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* La sezione Mappa resta com'era: riporta i colori precedenti al suo interno */
+.legacy-map {
+  --color-ground: #f2f3f5;
+  --color-ink: #0b0f14;
+  --color-ink-2: #3f4753;
+  --color-ink-3: #636b78;
+  --color-line: #e4e7eb;
+  --color-line-strong: #d0d5dc;
+  --color-accent: #0a5cff;
+  --color-accent-hover: #0849cc;
+  --color-accent-soft: #e7eeff;
+  --color-night: #0b0f14;
+  --color-night-2: #1b212b;
+}
+
+/* Posto libero nell'indicatore di capienza: vuoto, si distingue per forma */
+.cap-free {
+  background: var(--color-card);
+  box-shadow: inset 0 0 0 1.5px var(--color-line-strong);
+}
+
+.legacy-map .cap-used {
+  background: var(--color-ink);
+}
+
+.legacy-map .cap-free {
+  background: var(--color-line-strong);
+  box-shadow: none;
+}
+
+/* Anteprime statiche di mappa (schede percorso) */
+.site-thumb img.tile {
+  position: absolute;
+  width: 256.5px;
+  height: 256.5px;
+  max-width: none;
+  filter: var(--map-tint);
+}
+
+/* Mappe della palette Prussia: acqua verso il ghiaccio, terra verso il grigio freddo */
+:root {
+  --map-tint: grayscale(1) sepia(0.3) hue-rotate(172deg) saturate(1.5) brightness(1.05) contrast(0.92);
+}
+
+.map-prussia .leaflet-tile-pane {
+  filter: var(--map-tint);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

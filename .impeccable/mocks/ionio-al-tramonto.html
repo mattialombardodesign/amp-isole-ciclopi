@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><title>Ionio al tramonto · anteprima</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo:#26225e; --indigo-deep:#16143a; --indigo-2:#332e78; --lilac:#b9b5e8; --lilac-dim:#7d78bf;
+  --apricot:#ffb07a; --apricot-ink:#a33d0a; --apricot-soft:#fff1e6;
+  --ground:#f4f3f8; --card:#fff; --ink:#14122b; --ink-2:#45425e; --ink-3:#6b6884; --line:#e6e4ef; --line-strong:#d3d0e2;
+  --accent:#0a5cff; --ok:#0e6e3f; --ok-soft:#e3f3ea;
+  /* scala spaziature: 4 · 8 · 12 · 16 · 24 · 32 · 48 */
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s6:24px;--s8:32px;--s12:48px;--gutter:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Geist,system-ui,sans-serif;font-feature-settings:'tnum';background:#dcdae6;color:var(--ink);padding:40px;display:flex;flex-direction:column;align-items:center;gap:40px;-webkit-font-smoothing:antialiased}
+h2.cap{font-size:15px;font-weight:600;color:var(--ink-2);align-self:flex-start;max-width:1220px;width:100%;margin:0 auto}
+.row{display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.phone{width:390px;height:844px;background:var(--ground);border-radius:40px;overflow:hidden;position:relative;box-shadow:0 30px 60px -30px rgba(22,20,58,.5)}
+.label{font-size:13px;color:var(--ink-3);text-align:center;margin-top:12px}
+/* testata indaco */
+.hero{position:relative;background:var(--indigo);color:#fff;padding:56px var(--gutter) 96px;overflow:hidden}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.hero h1{position:relative;font-size:36px;font-weight:700;letter-spacing:-.035em;line-height:1}
+.hero p{position:relative;margin-top:var(--s2);font-size:15px;color:var(--lilac);line-height:1.45}
+/* pannello prossima uscita, sovrapposto alla testata */
+.next{position:relative;margin:-72px var(--gutter) 0;background:var(--indigo-deep);color:#fff;border-radius:24px;padding:var(--s6) var(--s6) var(--s6);box-shadow:0 18px 40px -20px rgba(22,20,58,.7)}
+.next .top{display:flex;justify-content:space-between;font-size:14px;color:var(--lilac)}
+.next .top b{font-weight:500;color:var(--apricot)}
+.time{margin-top:var(--s4);font-size:46px;font-weight:600;letter-spacing:-.045em;line-height:1;color:var(--apricot)}
+.time span{color:var(--lilac-dim)}
+.site{margin-top:var(--s3);font-size:20px;font-weight:600;letter-spacing:-.02em}
+.site small{font-size:15px;font-weight:400;color:var(--lilac)}
+.meta{margin-top:var(--s1);font-size:15px;color:var(--lilac)}
+.cap-row{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--indigo-2);display:flex;justify-content:space-between;font-size:14px;color:var(--lilac)}
+.cap-row b{color:#fff;font-weight:500}
+.gauge{display:flex;gap:2px;height:10px;margin-top:var(--s2)}
+.gauge i{flex:1;border-radius:2px;background:#3d3880}
+.gauge i.u{background:#fff}.gauge i.m{background:var(--apricot)}
+.legend{margin-top:var(--s2);font-size:13px;color:var(--lilac)}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--apricot);margin-right:6px}
+.cta{margin:var(--s4) var(--gutter) 0;height:56px;border-radius:16px;background:var(--accent);color:#fff;font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px}
+.sec{margin:var(--s12) var(--gutter) var(--s3);font-size:18px;font-weight:600;letter-spacing:-.02em}
+.list{margin:0 var(--gutter);background:var(--card);border-radius:16px;box-shadow:inset 0 0 0 1px var(--line)}
+.item{display:flex;gap:var(--s4);align-items:flex-start;padding:var(--s4)}
+.item+.item{border-top:1px solid var(--line)}
+.item .t{width:48px}.item .t b{display:block;font-size:15px}.item .t span{font-size:12px;color:var(--ink-3)}
+.item .n{flex:1}.item .n b{display:block;font-size:16px;font-weight:500}.item .n span{font-size:14px;color:var(--ink-3)}
+.pill{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:99px;font-size:12px;font-weight:600;margin-top:var(--s2)}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}.pill i{width:6px;height:6px;border-radius:9px;background:currentColor}
+.tabs{position:absolute;left:0;right:0;bottom:0;height:82px;background:rgba(255,255,255,.94);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding-top:10px}
+.tabs div{text-align:center;font-size:11px;font-weight:500;color:var(--ink-3)}
+.tabs div i{display:block;width:24px;height:24px;margin:0 auto 4px;border-radius:7px;border:1.8px solid currentColor}
+.tabs .on{color:var(--indigo)}.tabs .on i{background:var(--indigo);border-color:var(--indigo)}
+/* flusso */
+.fh{padding:56px var(--gutter) var(--s4)}
+.fh .bar{display:flex;align-items:center;justify-content:space-between;font-size:15px;color:var(--ink-2)}
+.prog{display:flex;gap:4px;margin-top:var(--s3)}.prog i{flex:1;height:4px;border-radius:9px;background:var(--line-strong)}.prog i.on{background:var(--indigo)}
+.fh h1{margin-top:var(--s6);font-size:28px;font-weight:700;letter-spacing:-.03em}
+.budget{margin:var(--s6) var(--gutter) 0;background:var(--indigo);color:#fff;border-radius:20px;padding:var(--s4)}
+.budget .r{display:flex;justify-content:space-between;font-size:15px}.budget .r b{color:var(--apricot);font-weight:600}
+.budget .gauge i{background:#3d3880}.budget .gauge i.u{background:#fff}.budget .gauge i.m{background:var(--apricot)}
+.pick{margin:var(--s4) var(--gutter) 0;background:var(--card);border-radius:20px;padding:var(--s4);box-shadow:inset 0 0 0 1px var(--line)}
+.pick .h{display:flex;justify-content:space-between;font-size:16px;font-weight:600}.pick .h span{font-weight:400;font-size:14px;color:var(--ink-3)}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s3)}
+.chip{height:40px;padding:0 14px;border-radius:99px;background:var(--ground);display:flex;align-items:center;font-size:15px;font-weight:500}
+.chip.on{background:var(--indigo);color:#fff}.chip.on::before{content:'✓';margin-right:6px;color:var(--apricot)}
+.add{margin-top:var(--s3);height:44px;border-radius:12px;background:var(--ground);display:flex;align-items:center;padding:0 14px;color:var(--ink-3);font-size:15px}
+.bottom{position:absolute;left:0;right:0;bottom:0;padding:var(--s3) var(--gutter) 28px;background:rgba(244,243,248,.94)}
+.bottom div{height:56px;border-radius:16px;background:var(--accent);color:#fff;font-weight:600;display:flex;align-items:center;justify-content:center}
+/* dashboard */
+.dash{width:1220px;background:var(--ground);border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(22,20,58,.5)}
+.dbar{height:60px;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-size:15px}
+.dbar b{font-weight:600}.dbar span{color:var(--ink-3)}
+.dhero{position:relative;background:var(--indigo);color:#fff;padding:var(--s8) 32px 88px;overflow:hidden}
+.dhero svg{position:absolute;inset:0;width:100%;height:100%}
+.dhero h1{position:relative;font-size:36px;font-weight:700;letter-spacing:-.035em}
+.dhero p{position:relative;color:var(--lilac);margin-top:var(--s2);font-size:15px}
+.strip{position:relative;margin:-60px 32px 0;background:var(--indigo-deep);border-radius:20px;display:grid;grid-template-columns:repeat(4,1fr);color:#fff;box-shadow:0 18px 40px -20px rgba(22,20,58,.7)}
+.strip div{padding:var(--s6)}.strip div+div{border-left:1px solid var(--indigo-2)}
+.strip b{display:block;font-size:34px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.strip span{display:block;margin-top:var(--s2);font-size:14px;color:var(--lilac)}
+.strip .a b{color:var(--apricot)}
+.dbody{height:120px;margin:var(--s8) 32px;display:grid;grid-template-columns:1.35fr 1fr;gap:var(--s6)}
+.dbody div{background:var(--card);border-radius:16px;box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:14px}
+</style></head><body>
+
+<h2 class="cap">Ionio al tramonto · anteprima (dati di esempio)</h2>
+<div class="row">
+  <div>
+    <div class="phone">
+      <div class="hero">
+        <svg viewBox="0 0 390 260" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="#b9b5e8" stroke-opacity=".22" stroke-width="1">
+          <path d="M-10 40 C80 20 140 70 230 50 S360 10 400 30"/>
+          <path d="M-10 75 C70 55 150 110 240 85 S350 45 400 65"/>
+          <path d="M-10 112 C90 92 160 150 250 122 S350 85 400 102"/>
+          <path d="M-10 150 C80 135 170 190 260 160 S355 125 400 142"/>
+          <path d="M-10 190 C100 175 175 230 270 198 S360 168 400 182"/>
+          <path d="M-10 230 C90 215 180 265 280 238 S365 210 400 222"/>
+          <g fill="#b9b5e8" fill-opacity=".45" stroke="none" font-size="10" font-style="italic" font-family="Geist"><text x="300" y="44">12</text><text x="318" y="80">18</text><text x="330" y="118">25</text><text x="342" y="156">32</text></g>
+        </svg>
+        <h1>Oggi</h1>
+        <p>Domenica 25 ottobre<br>Mare 24° · Aria 17° · Vento 5 km/h</p>
+      </div>
+      <div class="next">
+        <div class="top"><span>Prossima uscita</span><b>● In attesa dell'AMP</b></div>
+        <div class="time">15:00<span>–16:30</span></div>
+        <div class="site">Panettoni <small>· Zona B</small></div>
+        <div class="meta">Visita subacquea guidata · 4 subacquei</div>
+        <div class="cap-row"><span>Posti al sito oggi</span><b>10 liberi su 20</b></div>
+        <div class="gauge"><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="legend"><i></i>I tuoi 4 subacquei</div>
+      </div>
+      <div class="cta">＋ Nuova uscita</div>
+      <div class="sec">In programma</div>
+      <div class="list">
+        <div class="item"><div class="t"><b>10:00</b><span>26 ott</span></div><div class="n"><b>Scogliera del Castello</b><span>4 sub · Sea watching guidato</span><br><span class="pill ok"><i></i>Vista dall'AMP</span></div></div>
+      </div>
+      <div class="tabs"><div class="on"><i></i>Attività</div><div><i></i>Segnala</div><div><i></i>Mappa</div><div><i></i>AMP</div></div>
+    </div>
+    <p class="label">Oggi: testata indaco con le isobate, pannello sovrapposto, albicocca per orario e "i tuoi"</p>
+  </div>
+
+  <div>
+    <div class="phone">
+      <div class="fh">
+        <div class="bar"><span>‹ &nbsp;Visita subacquea guidata</span><span>4 di 6</span></div>
+        <div class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <h1>Chi va in acqua?</h1>
+      </div>
+      <div class="budget">
+        <div class="r"><span>Panettoni</span><b>4 di 14 posti liberi</b></div>
+        <div class="gauge"><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="pick"><div class="h">Istruttori <span>1 selezionato</span></div>
+        <div class="chips"><div class="chip on">Marco Russo</div><div class="chip">Elena Costa</div><div class="chip">Davide Musumeci</div></div>
+        <div class="add">Aggiungi istruttore</div></div>
+      <div class="pick"><div class="h">Guide <span>1 selezionato</span></div>
+        <div class="chips"><div class="chip on">Chiara Leonardi</div><div class="chip">Andrea Patanè</div></div></div>
+      <div class="bottom"><div>Continua</div></div>
+    </div>
+    <p class="label">Flusso: la capienza diventa un pannello indaco, i tuoi in albicocca</p>
+  </div>
+</div>
+
+<div>
+  <div class="dash">
+    <div class="dbar"><b>Centrale operativa <span>· AMP Isole Ciclopi · Guardia Costiera</span></b><span>● In tempo reale</span></div>
+    <div class="dhero">
+      <svg viewBox="0 0 1220 200" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="#b9b5e8" stroke-opacity=".2" stroke-width="1">
+        <path d="M-10 40 C300 10 500 80 800 45 S1100 15 1230 35"/><path d="M-10 85 C320 55 520 125 820 90 S1110 60 1230 80"/><path d="M-10 130 C300 100 540 170 840 135 S1120 105 1230 125"/><path d="M-10 175 C330 145 560 215 860 180 S1130 150 1230 170"/>
+      </svg>
+      <h1>Domenica 25 ottobre</h1>
+      <p>Mare 24° · Aria 17° · Vento 5 km/h</p>
+    </div>
+    <div class="strip">
+      <div><b>5</b><span>Uscite comunicate</span></div>
+      <div><b>27</b><span>Subacquei in acqua</span></div>
+      <div class="a"><b>3</b><span>Da prendere in visione</span></div>
+      <div><b>1</b><span>Segnalazione aperta</span></div>
+    </div>
+    <div class="dbody"><div>Mappa (invariata)</div><div>Uscite · Segnalazioni · Richieste</div></div>
+  </div>
+  <p class="label">Dashboard AMP: stessa testata indaco, striscia numeri sovrapposta, albicocca su ciò che richiede azione</p>
+</div>
+</body></html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Big+Shoulders+Stencil+Display:wght@800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden}
+body{font-family:'Archivo',sans-serif;background:#f7f8fa;color:#0e1626;font-variant-numeric:tabular-nums}
+.hull{background:#1d3b9a;color:#fff;padding:54px 20px 22px;position:relative}
+.org{font-stretch:75%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#f2c230}
+h1{font-stretch:80%;font-weight:800;font-size:44px;line-height:1;margin-top:6px;letter-spacing:-.01em}
+.meta{margin-top:10px;font-size:14px;color:#c9d3f2}
+.gunwale{height:8px;background:#f2c230;border-bottom:5px solid #d23a2a;box-shadow:0 3px 0 #fff inset}
+.cta{margin:18px 20px 0;height:58px;border-radius:14px;background:#f2c230;color:#0e1626;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-weight:800;font-size:18px;font-stretch:90%;box-shadow:0 2px 0 #c99a10}
+.cta span{font-size:26px;line-height:1}
+.sec{margin:24px 20px 10px;display:flex;justify-content:space-between;align-items:baseline}
+.sec b{font-stretch:75%;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.sec i{font-style:normal;font-size:13px;color:#4a5670}
+.trip{margin:0 20px 10px;background:#fff;border:1px solid #dfe3ea;border-radius:12px;display:flex;overflow:hidden}
+.trip .band{width:8px}
+.trip .body{flex:1;padding:12px 14px;display:flex;gap:14px;align-items:center}
+.reg{font-family:'Big Shoulders Stencil Display',sans-serif;font-weight:800;font-size:30px;line-height:.9;color:#1d3b9a;min-width:64px}
+.reg small{display:block;font-family:'Archivo';font-size:10px;letter-spacing:.12em;color:#4a5670;font-weight:600}
+.site{font-weight:700;font-size:16px}
+.det{font-size:13px;color:#4a5670;margin-top:2px}
+.pill{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:6px}
+.ok{background:#2e8b6e;color:#fff}.sent{background:#f2c230;color:#0e1626}
+.cap{margin:0 20px;background:#fff;border:1px solid #dfe3ea;border-radius:12px;padding:6px 14px}
+.row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #eef0f4}
+.row:last-child{border:0}
+.row .n{flex:1;font-weight:600;font-size:14px}
+.gauge{display:flex;gap:2px;width:120px}
+.gauge u{flex:1;height:14px;background:#e4e8f0;border-radius:2px;text-decoration:none}
+.gauge u.f{background:#1d3b9a}.gauge.full u.f{background:#d23a2a}.gauge.mid u.f{background:#e0a514}
+.row em{font-style:normal;font-weight:800;font-size:15px;width:44px;text-align:right}
+.tabs{position:absolute;bottom:0;left:0;right:0;height:84px;background:#fff;border-top:1px solid #dfe3ea;display:flex;padding-top:10px}
+.tabs div{flex:1;text-align:center;font-size:11px;font-weight:700;color:#7a8499}
+.tabs div i{display:block;width:26px;height:26px;margin:0 auto 4px;border-radius:7px;background:#dfe3ea}
+.tabs .on{color:#1d3b9a}.tabs .on i{background:#1d3b9a}
+</style></head><body>
+<div class="hull">
+  <div class="org">Centro Immersioni Acitrezza</div>
+  <h1>Attività</h1>
+  <div class="meta">Domenica 25 ottobre · mare 24° · vento 5 km/h</div>
+</div>
+<div class="gunwale"></div>
+<div class="cta">Comunica una nuova uscita <span>+</span></div>
+<div class="sec"><b>Oggi in mare</b><i>2 uscite</i></div>
+<div class="trip"><div class="band" style="background:#2e8b6e"></div><div class="body">
+  <div class="reg">TR 014<small>MATRICOLA</small></div>
+  <div><div class="site">Isola Lachea</div><div class="det">09:30–11:00 · 3 sub · Zona A</div></div>
+  <div class="pill ok">Vista</div></div></div>
+<div class="trip"><div class="band" style="background:#f2c230"></div><div class="body">
+  <div class="reg">TR 015<small>MATRICOLA</small></div>
+  <div><div class="site">Panettoni</div><div class="det">15:00–16:30 · 6 sub · Zona B</div></div>
+  <div class="pill sent">Inviata</div></div></div>
+<div class="sec"><b>Posti liberi oggi</b><i>per sito</i></div>
+<div class="cap">
+  <div class="row"><span class="n">Isola Lachea</span><div class="gauge full"><u class="f"></u><u class="f"></u><u class="f"></u><u class="f"></u><u class="f"></u><u class="f"></u></div><em>0/12</em></div>
+  <div class="row"><span class="n">Panettoni</span><div class="gauge mid"><u class="f"></u><u class="f"></u><u class="f"></u><u class="f"></u><u></u><u></u></div><em>8/20</em></div>
+  <div class="row"><span class="n">Faraglione Grande</span><div class="gauge"><u class="f"></u><u></u><u></u><u></u><u></u><u></u></div><em>15/15</em></div>
+</div>
+<div class="tabs"><div><i></i>Segnala</div><div class="on"><i></i>Attività</div><div><i></i>Mappa</div><div><i></i>AMP</div></div>
+</body></html>
