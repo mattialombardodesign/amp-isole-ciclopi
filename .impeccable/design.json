@@ -1,127 +1,22 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-25T22:25:30+00:00",
+  "generatedAt": "2026-10-25T22:51:16+00:00",
   "title": "Design System: AMP Isole Ciclopi",
   "extensions": {
     "colorMeta": {
-      "accent": {
-        "role": "primary",
-        "displayName": "Prussia Blue",
-        "canonical": "#123a5e",
-        "tonalRamp": [
-          "oklch(15% 0.077 249)",
-          "oklch(26% 0.077 249)",
-          "oklch(38% 0.077 249)",
-          "oklch(50% 0.077 249)",
-          "oklch(62% 0.077 249)",
-          "oklch(74% 0.077 249)",
-          "oklch(85% 0.077 249)",
-          "oklch(95% 0.077 249)"
-        ]
-      },
-      "accent-hover": {
-        "role": "primary",
-        "displayName": "Pressed Prussia",
-        "canonical": "#0d2d4a",
-        "tonalRamp": [
-          "oklch(15% 0.065 249)",
-          "oklch(26% 0.065 249)",
-          "oklch(38% 0.065 249)",
-          "oklch(50% 0.065 249)",
-          "oklch(62% 0.065 249)",
-          "oklch(74% 0.065 249)",
-          "oklch(85% 0.065 249)",
-          "oklch(95% 0.065 249)"
-        ]
-      },
-      "accent-soft": {
-        "role": "primary",
-        "displayName": "Prussia Wash",
-        "canonical": "#e6eef6",
-        "tonalRamp": [
-          "oklch(15% 0.014 248)",
-          "oklch(26% 0.014 248)",
-          "oklch(38% 0.014 248)",
-          "oklch(50% 0.014 248)",
-          "oklch(62% 0.014 248)",
-          "oklch(74% 0.014 248)",
-          "oklch(85% 0.014 248)",
-          "oklch(95% 0.014 248)"
-        ]
-      },
-      "accent-bright": {
-        "role": "primary",
-        "displayName": "Night Ice",
-        "canonical": "#9cc7ef",
-        "tonalRamp": [
-          "oklch(15% 0.073 247)",
-          "oklch(26% 0.073 247)",
-          "oklch(38% 0.073 247)",
-          "oklch(50% 0.073 247)",
-          "oklch(62% 0.073 247)",
-          "oklch(74% 0.073 247)",
-          "oklch(85% 0.073 247)",
-          "oklch(95% 0.073 247)"
-        ]
-      },
-      "ice": {
-        "role": "secondary",
-        "displayName": "Ice",
-        "canonical": "#7fb2e5",
-        "tonalRamp": [
-          "oklch(15% 0.092 249)",
-          "oklch(26% 0.092 249)",
-          "oklch(38% 0.092 249)",
-          "oklch(50% 0.092 249)",
-          "oklch(62% 0.092 249)",
-          "oklch(74% 0.092 249)",
-          "oklch(85% 0.092 249)",
-          "oklch(95% 0.092 249)"
-        ]
-      },
-      "ice-ink": {
-        "role": "secondary",
-        "displayName": "Ice Ink",
-        "canonical": "#2a659c",
-        "tonalRamp": [
-          "oklch(15% 0.107 250)",
-          "oklch(26% 0.107 250)",
-          "oklch(38% 0.107 250)",
-          "oklch(50% 0.107 250)",
-          "oklch(62% 0.107 250)",
-          "oklch(74% 0.107 250)",
-          "oklch(85% 0.107 250)",
-          "oklch(95% 0.107 250)"
-        ]
-      },
-      "ice-soft": {
-        "role": "secondary",
-        "displayName": "Ice Wash",
-        "canonical": "#e3effa",
-        "tonalRamp": [
-          "oklch(15% 0.020 246)",
-          "oklch(26% 0.020 246)",
-          "oklch(38% 0.020 246)",
-          "oklch(50% 0.020 246)",
-          "oklch(62% 0.020 246)",
-          "oklch(74% 0.020 246)",
-          "oklch(85% 0.020 246)",
-          "oklch(95% 0.020 246)"
-        ]
-      },
       "ground": {
         "role": "neutral",
-        "displayName": "Cool Ground",
-        "canonical": "#f4f6f9",
+        "displayName": "Paper Ground",
+        "canonical": "#fafafa",
         "tonalRamp": [
-          "oklch(15% 0.005 258)",
-          "oklch(26% 0.005 258)",
-          "oklch(38% 0.005 258)",
-          "oklch(50% 0.005 258)",
-          "oklch(62% 0.005 258)",
-          "oklch(74% 0.005 258)",
-          "oklch(85% 0.005 258)",
-          "oklch(95% 0.005 258)"
+          "#262626",
+          "#434343",
+          "#616161",
+          "#7e7e7e",
+          "#9b9b9b",
+          "#b8b8b8",
+          "#d5d5d5",
+          "#f2f2f2"
         ]
       },
       "card": {
@@ -129,597 +24,747 @@
         "displayName": "Card White",
         "canonical": "#ffffff",
         "tonalRamp": [
-          "oklch(15% 0.000 90)",
-          "oklch(26% 0.000 90)",
-          "oklch(38% 0.000 90)",
-          "oklch(50% 0.000 90)",
-          "oklch(62% 0.000 90)",
-          "oklch(74% 0.000 90)",
-          "oklch(85% 0.000 90)",
-          "oklch(95% 0.000 90)"
+          "#262626",
+          "#434343",
+          "#616161",
+          "#7e7e7e",
+          "#9b9b9b",
+          "#b8b8b8",
+          "#d5d5d5",
+          "#f2f2f2"
+        ]
+      },
+      "row": {
+        "role": "neutral",
+        "displayName": "Filled Row",
+        "canonical": "#f0f0f2",
+        "tonalRamp": [
+          "#242429",
+          "#3f3f48",
+          "#5a5a67",
+          "#757587",
+          "#9494a2",
+          "#b3b3bd",
+          "#d2d2d8",
+          "#f1f1f3"
+        ]
+      },
+      "row-2": {
+        "role": "neutral",
+        "displayName": "Pressed Row",
+        "canonical": "#e6e6e9",
+        "tonalRamp": [
+          "#242429",
+          "#3f3f48",
+          "#5a5a67",
+          "#767686",
+          "#9494a1",
+          "#b3b3bc",
+          "#d2d2d8",
+          "#f1f1f3"
         ]
       },
       "ink": {
-        "role": "neutral",
-        "displayName": "Prussia Ink",
-        "canonical": "#0d1a2a",
+        "role": "primary",
+        "displayName": "Ink Black",
+        "canonical": "#111113",
         "tonalRamp": [
-          "oklch(15% 0.037 254)",
-          "oklch(26% 0.037 254)",
-          "oklch(38% 0.037 254)",
-          "oklch(50% 0.037 254)",
-          "oklch(62% 0.037 254)",
-          "oklch(74% 0.037 254)",
-          "oklch(85% 0.037 254)",
-          "oklch(95% 0.037 254)"
-        ]
+          "#242428",
+          "#404047",
+          "#5b5b66",
+          "#777785",
+          "#9595a0",
+          "#b4b4bc",
+          "#d3d3d7",
+          "#f2f2f3"
+        ],
+        "translucent": [
+          "rgba(17,17,19,.3)",
+          "rgba(17,17,19,.35)",
+          "rgba(17,17,19,.5)",
+          "rgb(17 17 19 / 0.25)"
+        ],
+        "note": "Ink at 25-50% alpha is the only shadow tint."
       },
       "ink-2": {
         "role": "neutral",
-        "displayName": "Ink Secondary",
-        "canonical": "#3d4b5e",
+        "displayName": "Ink Grey",
+        "canonical": "#3c3c43",
         "tonalRamp": [
-          "oklch(15% 0.037 256)",
-          "oklch(26% 0.037 256)",
-          "oklch(38% 0.037 256)",
-          "oklch(50% 0.037 256)",
-          "oklch(62% 0.037 256)",
-          "oklch(74% 0.037 256)",
-          "oklch(85% 0.037 256)",
-          "oklch(95% 0.037 256)"
+          "#242428",
+          "#404047",
+          "#5b5b66",
+          "#777785",
+          "#9595a0",
+          "#b4b4bc",
+          "#d3d3d7",
+          "#f2f2f3"
         ]
       },
       "ink-3": {
         "role": "neutral",
-        "displayName": "Ink Tertiary",
-        "canonical": "#5d6b7e",
+        "displayName": "Muted Grey",
+        "canonical": "#6a6a6f",
         "tonalRamp": [
-          "oklch(15% 0.035 256)",
-          "oklch(26% 0.035 256)",
-          "oklch(38% 0.035 256)",
-          "oklch(50% 0.035 256)",
-          "oklch(62% 0.035 256)",
-          "oklch(74% 0.035 256)",
-          "oklch(85% 0.035 256)",
-          "oklch(95% 0.035 256)"
+          "#252527",
+          "#424245",
+          "#5e5e63",
+          "#7b7b81",
+          "#99999d",
+          "#b6b6ba",
+          "#d4d4d6",
+          "#f2f2f3"
         ]
       },
       "line": {
         "role": "neutral",
-        "displayName": "Hairline",
-        "canonical": "#e1e7ef",
+        "displayName": "Hairline Grey",
+        "canonical": "#e3e3e6",
         "tonalRamp": [
-          "oklch(15% 0.013 256)",
-          "oklch(26% 0.013 256)",
-          "oklch(38% 0.013 256)",
-          "oklch(50% 0.013 256)",
-          "oklch(62% 0.013 256)",
-          "oklch(74% 0.013 256)",
-          "oklch(85% 0.013 256)",
-          "oklch(95% 0.013 256)"
+          "#242428",
+          "#404047",
+          "#5b5b66",
+          "#777785",
+          "#9595a0",
+          "#b4b4bc",
+          "#d3d3d7",
+          "#f2f2f3"
         ]
       },
       "line-strong": {
         "role": "neutral",
-        "displayName": "Hairline Strong",
-        "canonical": "#cbd5e1",
+        "displayName": "Strong Hairline",
+        "canonical": "#d1d1d6",
         "tonalRamp": [
-          "oklch(15% 0.020 253)",
-          "oklch(26% 0.020 253)",
-          "oklch(38% 0.020 253)",
-          "oklch(50% 0.020 253)",
-          "oklch(62% 0.020 253)",
-          "oklch(74% 0.020 253)",
-          "oklch(85% 0.020 253)",
-          "oklch(95% 0.020 253)"
+          "#242428",
+          "#404047",
+          "#5b5b66",
+          "#767685",
+          "#9595a1",
+          "#b4b4bc",
+          "#d3d3d8",
+          "#f2f2f3"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "System Blue",
+        "canonical": "#0a7aff",
+        "tonalRamp": [
+          "#00234c",
+          "#003e87",
+          "#0058c1",
+          "#0073fb",
+          "#3792ff",
+          "#71b2ff",
+          "#abd2ff",
+          "#e6f1ff"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "System Blue Pressed",
+        "canonical": "#006be6",
+        "tonalRamp": [
+          "#00244c",
+          "#003f87",
+          "#005ac1",
+          "#0075fb",
+          "#3794ff",
+          "#71b3ff",
+          "#abd2ff",
+          "#e6f1ff"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "Blue Ink",
+        "canonical": "#0062d6",
+        "tonalRamp": [
+          "#00234c",
+          "#003e87",
+          "#0058c1",
+          "#0073fb",
+          "#3792ff",
+          "#71b2ff",
+          "#abd2ff",
+          "#e6f1ff"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Blue Wash",
+        "canonical": "#e3efff",
+        "tonalRamp": [
+          "#00214c",
+          "#003a87",
+          "#0053c1",
+          "#006cfb",
+          "#378dff",
+          "#71aeff",
+          "#abcfff",
+          "#e6f0ff"
+        ]
+      },
+      "accent-bright": {
+        "role": "primary",
+        "displayName": "Night Blue",
+        "canonical": "#64a8ff",
+        "tonalRamp": [
+          "#00224c",
+          "#003b87",
+          "#0055c1",
+          "#006efb",
+          "#378fff",
+          "#71afff",
+          "#abd0ff",
+          "#e6f1ff"
         ]
       },
       "night": {
         "role": "neutral",
-        "displayName": "Deep Prussia",
-        "canonical": "#0a2540",
+        "displayName": "Night Panel",
+        "canonical": "#141416",
         "tonalRamp": [
-          "oklch(15% 0.060 251)",
-          "oklch(26% 0.060 251)",
-          "oklch(38% 0.060 251)",
-          "oklch(50% 0.060 251)",
-          "oklch(62% 0.060 251)",
-          "oklch(74% 0.060 251)",
-          "oklch(85% 0.060 251)",
-          "oklch(95% 0.060 251)"
+          "#242428",
+          "#404047",
+          "#5c5c65",
+          "#787884",
+          "#9696a0",
+          "#b5b5bb",
+          "#d3d3d7",
+          "#f2f2f3"
         ]
       },
       "night-2": {
         "role": "neutral",
-        "displayName": "Prussia Raised",
-        "canonical": "#1a3a5c",
+        "displayName": "Night Raised",
+        "canonical": "#2c2c2e",
         "tonalRamp": [
-          "oklch(15% 0.071 252)",
-          "oklch(26% 0.071 252)",
-          "oklch(38% 0.071 252)",
-          "oklch(50% 0.071 252)",
-          "oklch(62% 0.071 252)",
-          "oklch(74% 0.071 252)",
-          "oklch(85% 0.071 252)",
-          "oklch(95% 0.071 252)"
+          "#252527",
+          "#424245",
+          "#5e5e63",
+          "#7b7b80",
+          "#99999d",
+          "#b6b6ba",
+          "#d4d4d6",
+          "#f2f2f3"
         ]
       },
       "night-3": {
         "role": "neutral",
-        "displayName": "Night Text",
-        "canonical": "#a5b8cc",
+        "displayName": "Night Muted",
+        "canonical": "#a1a1a6",
         "tonalRamp": [
-          "oklch(15% 0.036 250)",
-          "oklch(26% 0.036 250)",
-          "oklch(38% 0.036 250)",
-          "oklch(50% 0.036 250)",
-          "oklch(62% 0.036 250)",
-          "oklch(74% 0.036 250)",
-          "oklch(85% 0.036 250)",
-          "oklch(95% 0.036 250)"
+          "#252527",
+          "#424245",
+          "#5e5e63",
+          "#7a7a81",
+          "#98989e",
+          "#b6b6ba",
+          "#d4d4d6",
+          "#f2f2f3"
         ]
       },
       "night-free": {
         "role": "neutral",
-        "displayName": "Night Free",
-        "canonical": "#2b4a6b",
+        "displayName": "Night Free Segment",
+        "canonical": "#3a3a3c",
         "tonalRamp": [
-          "oklch(15% 0.067 251)",
-          "oklch(26% 0.067 251)",
-          "oklch(38% 0.067 251)",
-          "oklch(50% 0.067 251)",
-          "oklch(62% 0.067 251)",
-          "oklch(74% 0.067 251)",
-          "oklch(85% 0.067 251)",
-          "oklch(95% 0.067 251)"
+          "#262627",
+          "#424245",
+          "#5f5f62",
+          "#7c7c80",
+          "#99999d",
+          "#b7b7b9",
+          "#d4d4d6",
+          "#f2f2f2"
         ]
       },
       "ok": {
         "role": "state",
-        "displayName": "Acknowledged Green",
-        "canonical": "#0e6e3f",
+        "displayName": "Ok Green",
+        "canonical": "#1b7331",
         "tonalRamp": [
-          "oklch(15% 0.112 155)",
-          "oklch(26% 0.112 155)",
-          "oklch(38% 0.112 155)",
-          "oklch(50% 0.112 155)",
-          "oklch(62% 0.112 155)",
-          "oklch(74% 0.112 155)",
-          "oklch(85% 0.112 155)",
-          "oklch(95% 0.112 155)"
+          "#0f3e1a",
+          "#1a6d2f",
+          "#259c43",
+          "#30cc57",
+          "#5dd97c",
+          "#8ce4a2",
+          "#bbefc8",
+          "#eafaee"
         ]
       },
       "ok-soft": {
         "role": "state",
-        "displayName": "Acknowledged Wash",
-        "canonical": "#e3f3ea",
+        "displayName": "Ok Wash",
+        "canonical": "#e4f4e8",
         "tonalRamp": [
-          "oklch(15% 0.021 161)",
-          "oklch(26% 0.021 161)",
-          "oklch(38% 0.021 161)",
-          "oklch(50% 0.021 161)",
-          "oklch(62% 0.021 161)",
-          "oklch(74% 0.021 161)",
-          "oklch(85% 0.021 161)",
-          "oklch(95% 0.021 161)"
+          "#16361e",
+          "#276035",
+          "#38894c",
+          "#49b363",
+          "#71c586",
+          "#9ad6a9",
+          "#c3e7cc",
+          "#edf8f0"
         ]
       },
       "ok-bright": {
         "role": "state",
-        "displayName": "Acknowledged Bright",
-        "canonical": "#5fd394",
+        "displayName": "Ok Bright",
+        "canonical": "#4cd964",
         "tonalRamp": [
-          "oklch(15% 0.140 157)",
-          "oklch(26% 0.140 157)",
-          "oklch(38% 0.140 157)",
-          "oklch(50% 0.140 157)",
-          "oklch(62% 0.140 157)",
-          "oklch(74% 0.140 157)",
-          "oklch(85% 0.140 157)",
-          "oklch(95% 0.140 157)"
+          "#0d3f16",
+          "#186f27",
+          "#229f37",
+          "#2ccf48",
+          "#5adc70",
+          "#8ae69a",
+          "#baf0c3",
+          "#eafbed"
         ]
       },
       "warn": {
         "role": "state",
-        "displayName": "Pending Amber",
-        "canonical": "#8a5000",
+        "displayName": "Warn Amber",
+        "canonical": "#9a5b00",
         "tonalRamp": [
-          "oklch(15% 0.110 64)",
-          "oklch(26% 0.110 64)",
-          "oklch(38% 0.110 64)",
-          "oklch(50% 0.110 64)",
-          "oklch(62% 0.110 64)",
-          "oklch(74% 0.110 64)",
-          "oklch(85% 0.110 64)",
-          "oklch(95% 0.110 64)"
+          "#4c2d00",
+          "#875000",
+          "#c17200",
+          "#fb9500",
+          "#ffad37",
+          "#ffc571",
+          "#ffddab",
+          "#fff5e6"
         ]
       },
       "warn-fill": {
         "role": "state",
-        "displayName": "Pending Fill",
-        "canonical": "#f2a516",
+        "displayName": "Warn Fill / Zone B",
+        "canonical": "#ff9f0a",
         "tonalRamp": [
-          "oklch(15% 0.160 75)",
-          "oklch(26% 0.160 75)",
-          "oklch(38% 0.160 75)",
-          "oklch(50% 0.160 75)",
-          "oklch(62% 0.160 75)",
-          "oklch(74% 0.160 75)",
-          "oklch(85% 0.160 75)",
-          "oklch(95% 0.160 75)"
+          "#4c2f00",
+          "#875200",
+          "#c17500",
+          "#fb9900",
+          "#ffb037",
+          "#ffc771",
+          "#ffdeab",
+          "#fff5e6"
         ]
       },
       "warn-soft": {
         "role": "state",
-        "displayName": "Pending Wash",
-        "canonical": "#fdf1da",
+        "displayName": "Warn Wash",
+        "canonical": "#fff1d6",
         "tonalRamp": [
-          "oklch(15% 0.033 84)",
-          "oklch(26% 0.033 84)",
-          "oklch(38% 0.033 84)",
-          "oklch(50% 0.033 84)",
-          "oklch(62% 0.033 84)",
-          "oklch(74% 0.033 84)",
-          "oklch(85% 0.033 84)",
-          "oklch(95% 0.033 84)"
+          "#4c3200",
+          "#875900",
+          "#c17f00",
+          "#fba600",
+          "#ffbb37",
+          "#ffce71",
+          "#ffe2ab",
+          "#fff6e6"
         ]
       },
       "bad": {
         "role": "state",
-        "displayName": "Full Red",
-        "canonical": "#b3202d",
+        "displayName": "Bad Red",
+        "canonical": "#c4291f",
         "tonalRamp": [
-          "oklch(15% 0.160 23)",
-          "oklch(26% 0.160 23)",
-          "oklch(38% 0.160 23)",
-          "oklch(50% 0.160 23)",
-          "oklch(62% 0.160 23)",
-          "oklch(74% 0.160 23)",
-          "oklch(85% 0.160 23)",
-          "oklch(95% 0.160 23)"
+          "#420e0a",
+          "#741812",
+          "#a7231a",
+          "#d92d22",
+          "#e45b52",
+          "#ec8b84",
+          "#f4bab7",
+          "#fceae9"
         ]
       },
       "bad-soft": {
         "role": "state",
-        "displayName": "Full Wash",
-        "canonical": "#fce8ea",
+        "displayName": "Bad Wash",
+        "canonical": "#ffe5e3",
         "tonalRamp": [
-          "oklch(15% 0.022 11)",
-          "oklch(26% 0.022 11)",
-          "oklch(38% 0.022 11)",
-          "oklch(50% 0.022 11)",
-          "oklch(62% 0.022 11)",
-          "oklch(74% 0.022 11)",
-          "oklch(85% 0.022 11)",
-          "oklch(95% 0.022 11)"
+          "#4c0500",
+          "#870a00",
+          "#c10e00",
+          "#fb1200",
+          "#ff4537",
+          "#ff7b71",
+          "#ffb1ab",
+          "#ffe7e6"
         ]
       },
       "bad-bright": {
         "role": "state",
-        "displayName": "Full Bright",
-        "canonical": "#ff7b84",
+        "displayName": "Bad Bright",
+        "canonical": "#ff6961",
         "tonalRamp": [
-          "oklch(15% 0.160 18)",
-          "oklch(26% 0.160 18)",
-          "oklch(38% 0.160 18)",
-          "oklch(50% 0.160 18)",
-          "oklch(62% 0.160 18)",
-          "oklch(74% 0.160 18)",
-          "oklch(85% 0.160 18)",
-          "oklch(95% 0.160 18)"
+          "#4c0400",
+          "#870700",
+          "#c10a00",
+          "#fb0d00",
+          "#ff4137",
+          "#ff7871",
+          "#ffafab",
+          "#ffe7e6"
+        ]
+      },
+      "map-ground": {
+        "role": "map",
+        "displayName": "Map Ground",
+        "canonical": "#eef0f2",
+        "tonalRamp": [
+          "#21262b",
+          "#3a434c",
+          "#54616d",
+          "#6d7e8e",
+          "#8d9ba8",
+          "#aeb8c1",
+          "#d0d5db",
+          "#f1f2f4"
+        ]
+      },
+      "map-ok": {
+        "role": "map",
+        "displayName": "Map Pin Green",
+        "canonical": "#34c759",
+        "tonalRamp": [
+          "#103d1b",
+          "#1c6b30",
+          "#289944",
+          "#34c759",
+          "#60d57e",
+          "#8ee2a3",
+          "#bdeec9",
+          "#ebfaef"
+        ]
+      },
+      "map-bad": {
+        "role": "map",
+        "displayName": "Map Pin Red / Zone A",
+        "canonical": "#ff3b30",
+        "tonalRamp": [
+          "#4c0400",
+          "#870700",
+          "#c10a00",
+          "#fb0d00",
+          "#ff4137",
+          "#ff7871",
+          "#ffb0ab",
+          "#ffe7e6"
+        ]
+      },
+      "zone-c": {
+        "role": "map",
+        "displayName": "Zone C Grey",
+        "canonical": "#8e8e93",
+        "tonalRamp": [
+          "#252527",
+          "#424245",
+          "#5e5e63",
+          "#7b7b81",
+          "#99999d",
+          "#b6b6ba",
+          "#d4d4d6",
+          "#f2f2f3"
         ]
       }
     },
     "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Next-outing time and dashboard pending count only."
+      },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Tab page titles and the login title; 700 for the dashboard date and success titles."
+        "purpose": "Page, step and success titles; dashboard date."
       },
-      "headline-step": {
-        "displayName": "Headline Step",
-        "purpose": "The single question of each flow step, onboarding titles, outing detail title."
-      },
-      "stat": {
-        "displayName": "Stat",
-        "purpose": "Dashboard totals on the night stat strip."
-      },
-      "section": {
-        "displayName": "Section",
-        "purpose": "Section headings above lists and carousels."
-      },
-      "tour-title": {
-        "displayName": "Tour Title",
-        "purpose": "Descriptive title of a route card."
-      },
-      "body-lead": {
-        "displayName": "Body Lead",
-        "purpose": "Intro sentence under login and success titles."
-      },
-      "row-title": {
-        "displayName": "Row Title",
-        "purpose": "List rows and input text."
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section headings above lists."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Subtitles, dashboard rows, button labels at 600."
+        "purpose": "Row titles, fields, large buttons; document base."
       },
-      "stat-item": {
-        "displayName": "Stat Item",
-        "purpose": "Entries of the icon stats row on route cards."
-      },
-      "label": {
-        "displayName": "Label",
-        "purpose": "Field labels, metadata, chips, capacity labels."
-      },
-      "meta-line": {
-        "displayName": "Meta Line",
-        "purpose": "Date/time line of the operator's own outing, in ice-ink."
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Subtitles, meta, buttons, pills, labels, dashboard text."
       },
       "caption": {
         "displayName": "Caption",
-        "purpose": "Status pills; regular weight for the depth-profile caption."
+        "purpose": "Row descriptions, status badges, pin labels, gauge legends, weekday headers, weather chips."
       },
-      "tab": {
-        "displayName": "Tab",
-        "purpose": "Bottom tab-bar labels."
+      "tab-label": {
+        "displayName": "Tab Label",
+        "purpose": "Tab bar only."
       },
       "mono": {
         "displayName": "Mono",
-        "purpose": "Coordinates in DMS format only."
+        "purpose": "Declared in @theme; reserved for codes."
       }
     },
     "shadows": [
       {
-        "name": "card-rest",
-        "value": "0 1px 0 var(--color-line), 0 10px 24px -20px rgba(10,37,64,.45)",
-        "purpose": "Grouped lists and carousel site cards."
+        "name": "map-chip",
+        "value": "0 4px 14px -6px rgba(17,17,19,.3)",
+        "purpose": "Title pill, filter chips and light weather chips over the map."
       },
       {
-        "name": "card-lead",
-        "value": "0 1px 0 var(--color-line), 0 16px 36px -24px rgba(10,37,64,.55)",
-        "purpose": "The route card of the next outing."
+        "name": "map-pin-label",
+        "value": "0 4px 14px -4px rgba(17,17,19,.3)",
+        "purpose": "Site pin label pill."
       },
       {
-        "name": "action-glow",
-        "value": "0 10px 24px -14px rgba(18,58,94,.9)",
-        "purpose": "Primary buttons only."
+        "name": "map-report",
+        "value": "0 0 0 3px #fff, 0 4px 10px -2px rgba(17,17,19,.3)",
+        "purpose": "Report marker."
       },
       {
-        "name": "float-button",
-        "value": "0 6px 16px -6px rgba(10,37,64,.5)",
-        "purpose": "Back button and brand pill over a map cover."
+        "name": "map-drop-pin",
+        "value": "0 0 0 4px #fff, 0 0 0 10px #e3efff, 0 6px 14px -4px rgba(17,17,19,.35)",
+        "purpose": "Position pin when reporting."
       },
       {
-        "name": "sheet",
-        "value": "0 -12px 30px -18px rgba(10,37,64,.45)",
-        "purpose": "Bottom sheet rising over the planner map."
+        "name": "map-sheet",
+        "value": "0 12px 36px -12px rgba(17,17,19,.35)",
+        "purpose": "Site card floating on Mappa."
       },
       {
-        "name": "pin",
-        "value": "0 0 0 3px #fff, 0 4px 10px rgba(10,37,64,.35)",
-        "purpose": "Ice pin on map previews."
+        "name": "leaflet-popup",
+        "value": "0 10px 30px -10px rgb(17 17 19 / 0.25)",
+        "purpose": "Map popups."
+      },
+      {
+        "name": "toast",
+        "value": "0 16px 40px -12px rgba(17,17,19,.5)",
+        "purpose": "Dashboard night toasts."
+      },
+      {
+        "name": "app-tile",
+        "value": "0 8px 20px -10px rgba(17,17,19,.5)",
+        "purpose": "App icon on Login."
+      },
+      {
+        "name": "device",
+        "value": "0 30px 60px -30px rgba(17,17,19,.35)",
+        "purpose": "Phone column on the desktop backdrop."
       }
     ],
     "motion": [
       {
         "name": "ease-out-expo",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Default easing for entrances and gauge fills."
+        "purpose": "Default easing for entrances and the gauge."
       },
       {
         "name": "enter",
-        "value": "320ms ease-out-expo, 6px rise + fade",
-        "purpose": "Screen, step and sheet entrances."
-      },
-      {
-        "name": "check",
-        "value": "600ms ease-out-expo, scale .7 + blur 4px",
-        "purpose": "Success check."
+        "value": "enter 0.32s var(--ease-out-expo) both",
+        "purpose": "Screens and steps rise 6px and fade in."
       },
       {
         "name": "flash",
-        "value": "3s ease-out, accent-soft background",
-        "purpose": "Newly arrived dashboard items."
+        "value": "flash 3s ease-out",
+        "purpose": "New dashboard items flash accent-soft."
       },
       {
-        "name": "gauge-fill",
-        "value": "500ms ease-out-expo, 14ms stagger per segment",
-        "purpose": "Capacity gauge segment colour changes."
+        "name": "check",
+        "value": "check 0.6s var(--ease-out-expo) both",
+        "purpose": "Success tile pops in from 0.7 scale and blur."
       },
       {
         "name": "press",
-        "value": "150ms, scale .985",
-        "purpose": "Button active state."
+        "value": "150ms; scale .985",
+        "purpose": "Buttons on press."
+      },
+      {
+        "name": "gauge",
+        "value": "500ms colour, 14ms stagger per segment",
+        "purpose": "Capacity gauge fills."
       }
     ],
     "breakpoints": [
       {
-        "name": "sm",
-        "value": "640px",
-        "purpose": "Dashboard stat strip goes to 4 columns."
+        "name": "phone-column",
+        "value": "420px"
       },
       {
         "name": "md",
-        "value": "768px",
-        "purpose": "Operator app moves into the 420px phone column."
+        "value": "768px"
       },
       {
         "name": "lg",
-        "value": "1024px",
-        "purpose": "Dashboard two-column grid."
+        "value": "1024px"
+      },
+      {
+        "name": "desk-max",
+        "value": "1440px"
       }
     ],
-    "scopes": [
-      {
-        "name": "legacy-map",
-        "selector": ".legacy-map",
-        "appliesTo": "src/pages/Mappa.tsx (/mappa tab) and SiteMap tone=\"legacy\"",
-        "status": "frozen on purpose; not drift",
-        "overrides": {
-          "ground": "#f2f3f5",
-          "ink": "#0b0f14",
-          "ink-2": "#3f4753",
-          "ink-3": "#636b78",
-          "line": "#e4e7eb",
-          "line-strong": "#d0d5dc",
-          "accent": "#0a5cff",
-          "accent-hover": "#0849cc",
-          "accent-soft": "#e7eeff",
-          "night": "#0b0f14",
-          "night-2": "#1b212b"
+    "map": {
+      "tileFilter": "grayscale(0.7) brightness(1.06) contrast(0.9)",
+      "zones": [
+        {
+          "zone": "C",
+          "color": "#8e8e93"
         },
-        "note": "Keeps the previous system inside the Mappa tab. Do not restyle it toward Prussia and do not reuse these values elsewhere."
+        {
+          "zone": "B",
+          "color": "#ff9f0a"
+        },
+        {
+          "zone": "A",
+          "color": "#ff3b30"
+        }
+      ],
+      "zoneStroke": "1.25px dashed 5 6, fill opacity 0.05",
+      "pinColors": {
+        "ink": "#111113",
+        "card": "#ffffff",
+        "accent": "#0a7aff",
+        "ok": "#34c759",
+        "warn": "#ff9f0a",
+        "bad": "#ff3b30",
+        "muted": "#6a6a6f",
+        "free": "#e3e3e6"
       }
-    ]
+    }
   },
   "components": [
     {
       "name": "Large Primary Button",
       "kind": "button",
       "refersTo": "button-primary-lg",
-      "description": "Full-width 56px Prussia pill, the main action of a mobile screen, optionally with an ice plus glyph.",
-      "html": "<button class=\"ds-btn-lg\"><svg class=\"ds-btn-lg-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"M12 5v14\"/></svg>Pianifica un'uscita</button>",
-      "css": ".ds-btn-lg { font-family: Geist, ui-sans-serif, system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 56px; padding: 0 24px; border: 0; border-radius: 9999px; background: var(--color-accent, #123a5e); color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 24px -14px rgba(18,58,94,.9); transition: background-color .15s, transform .15s; } .ds-btn-lg:hover { background: var(--color-accent-hover, #0d2d4a); } .ds-btn-lg:active { transform: scale(.985); } .ds-btn-lg:focus-visible { outline: 2px solid var(--color-accent, #123a5e); outline-offset: 2px; } .ds-btn-lg-icon { width: 20px; height: 20px; color: var(--color-ice, #7fb2e5); }"
+      "description": "Full-width black action at the bottom of flows and under the night panel.",
+      "html": "<button class=\"ds-btn-lg\">Nuova uscita</button>",
+      "css": ".ds-btn-lg{display:flex;width:100%;height:56px;align-items:center;justify-content:center;gap:8px;padding:0 20px;border:0;border-radius:16px;background:var(--color-ink);color:#fff;font:600 17px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;letter-spacing:-0.01em;cursor:pointer;transition:background-color .15s,transform .15s}.ds-btn-lg:hover{background:var(--color-night-2)}.ds-btn-lg:active{transform:scale(.985)}.ds-btn-lg:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}"
     },
     {
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Standard 44px Prussia button with 12px corners; small 36px variant for dashboard actions.",
-      "html": "<div class=\"ds-row\"><button class=\"ds-btn\">Continua</button><button class=\"ds-btn ds-btn-sm\"><svg class=\"ds-ico16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg>Presa visione</button></div>",
-      "css": ".ds-row { display: flex; gap: 12px; align-items: center; } .ds-btn { font-family: Geist, ui-sans-serif, system-ui, sans-serif; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border: 0; border-radius: 12px; background: var(--color-accent, #123a5e); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 24px -14px rgba(18,58,94,.9); transition: background-color .15s, transform .15s; } .ds-btn:hover { background: var(--color-accent-hover, #0d2d4a); } .ds-btn:active { transform: scale(.985); } .ds-btn:focus-visible { outline: 2px solid var(--color-accent, #123a5e); outline-offset: 2px; } .ds-btn-sm { height: 36px; padding: 0 12px; border-radius: 8px; font-size: 14px; } .ds-ico16 { width: 16px; height: 16px; }"
+      "description": "Medium black button, 44px.",
+      "html": "<button class=\"ds-btn\">Invia</button>",
+      "css": ".ds-btn{height:44px;padding:0 16px;border:0;border-radius:12px;background:var(--color-ink);color:#fff;font:600 15px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;cursor:pointer;transition:background-color .15s,transform .15s}.ds-btn:hover{background:var(--color-night-2)}.ds-btn:active{transform:scale(.985)}.ds-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}"
     },
     {
-      "name": "Secondary Button",
+      "name": "Secondary and Ghost Buttons",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "White button with a strong hairline ring; ground on hover.",
-      "html": "<button class=\"ds-btn-sec\">Esci</button>",
-      "css": ".ds-btn-sec { font-family: Geist, ui-sans-serif, system-ui, sans-serif; height: 44px; padding: 0 16px; border: 0; border-radius: 12px; background: var(--color-card, #fff); color: var(--color-ink, #0d1a2a); box-shadow: inset 0 0 0 1px var(--color-line-strong, #cbd5e1); font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color .15s, transform .15s; } .ds-btn-sec:hover { background: var(--color-ground, #f4f6f9); } .ds-btn-sec:active { transform: scale(.985); } .ds-btn-sec:focus-visible { outline: 2px solid var(--color-accent, #123a5e); outline-offset: 2px; }"
+      "description": "Filled grey secondary; blue-text ghost for inline actions like Modifica.",
+      "html": "<div class=\"ds-row-btns\"><button class=\"ds-btn-sec\">Annulla</button><button class=\"ds-btn-ghost\">Modifica</button></div>",
+      "css": ".ds-row-btns{display:flex;gap:8px}.ds-btn-sec,.ds-btn-ghost{height:44px;padding:0 16px;border:0;border-radius:12px;font:600 15px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;cursor:pointer;transition:background-color .15s}.ds-btn-sec{background:var(--color-row);color:var(--color-ink)}.ds-btn-sec:hover{background:var(--color-row-2)}.ds-btn-ghost{background:transparent;color:var(--color-accent-ink)}.ds-btn-ghost:hover{background:var(--color-accent-soft)}.ds-btn-sec:focus-visible,.ds-btn-ghost:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}"
     },
     {
       "name": "Text Field",
       "kind": "input",
-      "refersTo": "input",
-      "description": "48px white field with a strong inset ring; focus thickens to 2px Prussia.",
-      "html": "<label class=\"ds-label\" for=\"ds-email\">Email</label><input id=\"ds-email\" class=\"ds-input\" placeholder=\"nome@diving.it\">",
-      "css": ".ds-label { font-family: Geist, ui-sans-serif, system-ui, sans-serif; display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: var(--color-ink-2, #3d4b5e); } .ds-input { font-family: Geist, ui-sans-serif, system-ui, sans-serif; width: 100%; height: 48px; padding: 0 16px; border: 0; border-radius: 12px; background: var(--color-card, #fff); color: var(--color-ink, #0d1a2a); font-size: 16px; box-shadow: inset 0 0 0 1px var(--color-line-strong, #cbd5e1); outline: none; caret-color: var(--color-accent, #123a5e); transition: box-shadow .15s; } .ds-input::placeholder { color: var(--color-ink-3, #5d6b7e); } .ds-input:focus { box-shadow: inset 0 0 0 2px var(--color-accent, #123a5e); }"
+      "refersTo": "field",
+      "description": "Filled grey field with a 15px muted label and a blue focus ring.",
+      "html": "<label class=\"ds-label\">Nome del diving</label><input class=\"ds-field\" placeholder=\"Es. Aci Diving\">",
+      "css": ".ds-label{display:block;margin-bottom:8px;font:400 15px/1.3 -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;color:var(--color-ink-3)}.ds-field{width:100%;height:56px;padding:0 16px;border:0;border-radius:16px;background:var(--color-row);color:var(--color-ink);font:400 17px -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;outline:none;caret-color:var(--color-accent);transition:box-shadow .15s}.ds-field::placeholder{color:var(--color-ink-3)}.ds-field:focus{box-shadow:0 0 0 2px var(--color-accent)}"
     },
     {
-      "name": "Grouped List with Choice Rows",
+      "name": "Rows with Time Pill",
       "kind": "card",
-      "refersTo": "list-group",
-      "description": "White group with Card Rest shadow; selected row takes the Prussia Wash and a filled check.",
-      "html": "<div class=\"ds-list\" role=\"radiogroup\"><button class=\"ds-choice\" role=\"radio\" aria-checked=\"true\"><span class=\"ds-choice-t\"><b>Centro diving</b><small>Immersioni guidate e corsi</small></span><span class=\"ds-check on\"><svg class=\"ds-ico14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg></span></button><button class=\"ds-choice\" role=\"radio\" aria-checked=\"false\"><span class=\"ds-choice-t\"><b>Noleggio barche</b><small>Uscite senza guida</small></span><span class=\"ds-check\"></span></button></div>",
-      "css": ".ds-list { overflow: hidden; border-radius: 16px; background: var(--color-card, #fff); box-shadow: 0 0 0 1px var(--color-line, #e1e7ef), 0 1px 0 var(--color-line, #e1e7ef), 0 10px 24px -20px rgba(10,37,64,.45); } .ds-choice { font-family: Geist, ui-sans-serif, system-ui, sans-serif; display: flex; width: 100%; min-height: 60px; align-items: center; gap: 12px; padding: 12px 16px; border: 0; border-top: 1px solid var(--color-line, #e1e7ef); background: transparent; text-align: left; cursor: pointer; transition: background-color .15s; } .ds-choice:first-child { border-top: 0; } .ds-choice:hover { background: var(--color-ground, #f4f6f9); } .ds-choice[aria-checked=\"true\"] { background: var(--color-accent-soft, #e6eef6); } .ds-choice:focus-visible { outline: 2px solid var(--color-accent, #123a5e); outline-offset: -2px; } .ds-choice-t { flex: 1; } .ds-choice-t b { display: block; font-size: 16px; font-weight: 500; color: var(--color-ink, #0d1a2a); } .ds-choice-t small { display: block; margin-top: 2px; font-size: 14px; color: var(--color-ink-3, #5d6b7e); } .ds-check { display: flex; width: 24px; height: 24px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 9999px; box-shadow: inset 0 0 0 1px var(--color-line-strong, #cbd5e1); } .ds-check.on { background: var(--color-accent, #123a5e); color: #fff; box-shadow: none; } .ds-ico14 { width: 14px; height: 14px; }"
+      "refersTo": "row",
+      "description": "Filled grey rows stacked with 8px gaps; times sit in a pill, accent when awaiting the AMP.",
+      "html": "<div class=\"ds-list\"><a class=\"ds-row\"><span class=\"ds-row-t\"><b>Faraglione Grande</b><small>sab 26 ott · 8 sub · in attesa dell'AMP</small></span><span class=\"ds-pill ds-pill-acc\">09:30</span></a><a class=\"ds-row\"><span class=\"ds-row-t\"><b>Isola Lachea</b><small>dom 27 ott · 6 sub · vista dall'AMP</small></span><span class=\"ds-pill\">10:00</span></a></div>",
+      "css": ".ds-list{display:flex;flex-direction:column;gap:8px}.ds-row{display:flex;min-height:64px;align-items:center;gap:12px;padding:12px 16px;border-radius:16px;background:var(--color-row);color:var(--color-ink);font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;cursor:pointer;transition:background-color .15s}.ds-row:hover{background:var(--color-row-2)}.ds-row-t{flex:1;min-width:0}.ds-row-t b{display:block;font-weight:400;font-size:17px}.ds-row-t small{display:block;font-size:13px;color:var(--color-ink-3)}.ds-pill{display:inline-flex;height:32px;align-items:center;padding:0 10px;border-radius:10px;background:var(--color-row-2);color:var(--color-ink);font:500 15px -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;font-variant-numeric:tabular-nums}.ds-pill-acc{background:var(--color-accent-soft);color:var(--color-accent-ink)}"
     },
     {
-      "name": "Status Pills",
+      "name": "Choice Row",
+      "kind": "custom",
+      "refersTo": "row",
+      "description": "One-question step choice with a trailing circle; selected fills ink.",
+      "html": "<div class=\"ds-list\"><button class=\"ds-choice\" aria-checked=\"true\"><span>Visita guidata</span><i></i></button><button class=\"ds-choice\" aria-checked=\"false\"><span>Sea watching</span><i></i></button></div>",
+      "css": ".ds-list{display:flex;flex-direction:column;gap:8px}.ds-choice{display:flex;width:100%;min-height:56px;align-items:center;gap:12px;padding:12px 16px;border:0;border-radius:16px;background:var(--color-row);color:var(--color-ink);font:400 17px -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;text-align:left;cursor:pointer}.ds-choice:hover{background:var(--color-row-2)}.ds-choice span{flex:1}.ds-choice i{width:24px;height:24px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--color-line-strong)}.ds-choice[aria-checked=true] i{background:var(--color-ink);box-shadow:none}"
+    },
+    {
+      "name": "Status Badges",
       "kind": "chip",
-      "refersTo": "status-pill-ok",
-      "description": "24px state pills with a dot; state colours only.",
-      "html": "<div class=\"ds-pills\"><span class=\"ds-pill ok\"><i></i>Vista dall'AMP</span><span class=\"ds-pill warn\"><i></i>In attesa dell'AMP</span><span class=\"ds-pill bad\"><i></i>Pieno</span><span class=\"ds-pill acc\"><i></i>Inviata</span></div>",
-      "css": ".ds-pills { display: flex; flex-wrap: wrap; gap: 8px; } .ds-pill { font-family: Geist, ui-sans-serif, system-ui, sans-serif; display: inline-flex; height: 24px; align-items: center; gap: 6px; padding: 0 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; white-space: nowrap; } .ds-pill i { width: 6px; height: 6px; border-radius: 9999px; } .ds-pill.ok { background: var(--color-ok-soft, #e3f3ea); color: var(--color-ok, #0e6e3f); } .ds-pill.ok i { background: var(--color-ok, #0e6e3f); } .ds-pill.warn { background: var(--color-warn-soft, #fdf1da); color: var(--color-warn, #8a5000); } .ds-pill.warn i { background: var(--color-warn-fill, #f2a516); } .ds-pill.bad { background: var(--color-bad-soft, #fce8ea); color: var(--color-bad, #b3202d); } .ds-pill.bad i { background: var(--color-bad, #b3202d); } .ds-pill.acc { background: var(--color-accent-soft, #e6eef6); color: var(--color-accent, #123a5e); } .ds-pill.acc i { background: var(--color-accent, #123a5e); }"
+      "refersTo": "status-neutral",
+      "description": "24px round badges with a leading dot.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-st ds-ok\">Vista dall'AMP</span><span class=\"ds-st ds-warn\">In attesa</span><span class=\"ds-st ds-bad\">Aperta</span><span class=\"ds-st ds-acc\">Nuova</span><span class=\"ds-st\">Chiusa</span></div>",
+      "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:8px}.ds-st{display:inline-flex;height:24px;align-items:center;gap:6px;padding:0 10px;border-radius:999px;background:var(--color-row-2);color:var(--color-ink-3);font:600 13px -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;white-space:nowrap}.ds-st::before{content:'';width:6px;height:6px;border-radius:999px;background:currentColor}.ds-ok{background:var(--color-ok-soft);color:var(--color-ok)}.ds-warn{background:var(--color-warn-soft);color:var(--color-warn)}.ds-bad{background:var(--color-bad-soft);color:var(--color-bad)}.ds-acc{background:var(--color-accent-soft);color:var(--color-accent-ink)}"
     },
     {
       "name": "Tab Bar",
       "kind": "nav",
       "refersTo": "tab-bar",
-      "description": "Frosted four-tab bottom bar; active tab in Prussia.",
-      "html": "<nav class=\"ds-tabs\"><a class=\"ds-tab on\" href=\"#\"><svg class=\"ds-ico24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 18H2a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4Z\"/><path d=\"M21 14 10 2 3 14h18Z\"/><path d=\"M10 2v16\"/></svg>Attività</a><a class=\"ds-tab\" href=\"#\"><svg class=\"ds-ico24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m3 11 18-5v12L3 14v-3z\"/><path d=\"M11.6 16.8a3 3 0 1 1-5.8-1.6\"/></svg>Segnala</a><a class=\"ds-tab\" href=\"#\"><svg class=\"ds-ico24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z\"/><path d=\"M15 5.764v15\"/><path d=\"M9 3.236v15\"/></svg>Mappa</a><a class=\"ds-tab\" href=\"#\"><svg class=\"ds-ico24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 22h18\"/><path d=\"M6 18v-7\"/><path d=\"M10 18v-7\"/><path d=\"M14 18v-7\"/><path d=\"M18 18v-7\"/><path d=\"M12 2 20 7H4z\"/></svg>AMP</a></nav>",
-      "css": ".ds-tabs { display: grid; grid-template-columns: repeat(4, 1fr); padding: 6px 0 8px; border-top: 1px solid var(--color-line, #e1e7ef); background: rgba(255,255,255,.9); backdrop-filter: blur(12px); } .ds-tab { font-family: Geist, ui-sans-serif, system-ui, sans-serif; display: flex; min-height: 48px; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 11px; font-weight: 500; color: var(--color-ink-3, #5d6b7e); text-decoration: none; transition: color .15s; } .ds-tab:hover { color: var(--color-ink, #0d1a2a); } .ds-tab.on { color: var(--color-accent, #123a5e); } .ds-tab:focus-visible { outline: 2px solid var(--color-accent, #123a5e); outline-offset: 2px; } .ds-ico24 { width: 24px; height: 24px; }"
+      "description": "Four icon+label tabs on translucent ground.",
+      "html": "<nav class=\"ds-tabs\"><a class=\"on\"><svg viewBox=\"0 0 24 24\"><path d=\"M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M19.4 18 22 10H2l2.6 8M12 2v8M12 2 4 10\"/></svg>Attività</a><a><svg viewBox=\"0 0 24 24\"><path d=\"m3 11 18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6\"/></svg>Segnala</a><a><svg viewBox=\"0 0 24 24\"><path d=\"M14.1 4.6 9 2 3 5v16l6-3 6 3 6-3V2zM9 2v16M15 5v16\"/></svg>Mappa</a><a><svg viewBox=\"0 0 24 24\"><path d=\"M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z\"/></svg>AMP</a></nav>",
+      "css": ".ds-tabs{display:grid;grid-template-columns:repeat(4,1fr);padding:8px 0 12px;border-top:1px solid var(--color-line);background:color-mix(in srgb,var(--color-ground) 95%,transparent);font:500 11px -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif}.ds-tabs a{display:flex;min-height:48px;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--color-ink-3);cursor:pointer;transition:color .15s}.ds-tabs a:hover,.ds-tabs a.on{color:var(--color-ink)}.ds-tabs svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}"
     },
     {
-      "name": "Route Card",
+      "name": "Night Panel with Capacity Gauge",
       "kind": "custom",
-      "refersTo": "tour-card",
-      "description": "Signature: map preview with ice pin and Prussia label, meta line, title, icon stats, depth profile and capacity gauge. The map is a flat placeholder here; the build uses desaturated OpenStreetMap tiles.",
-      "html": "<a class=\"ds-tour\" href=\"#\"><div class=\"ds-thumb\"><span class=\"ds-pill warn ds-thumb-st\"><i></i>In attesa dell'AMP</span><span class=\"ds-pin\"></span><span class=\"ds-thumb-lbl\">Grotta del Mago</span></div><div class=\"ds-tour-b\"><p class=\"ds-meta\">Prossima uscita · tra 2 ore</p><h3 class=\"ds-tour-t\">Immersione guidata alla Grotta del Mago</h3><div class=\"ds-stats\"><span><svg class=\"ds-sico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/></svg>09:30–11:00</span><span><svg class=\"ds-sico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M22 21v-2a4 4 0 0 0-3-3.87\"/><path d=\"M16 3.13a4 4 0 0 1 0 7.75\"/></svg>6 sub</span><span><svg class=\"ds-sico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 17V3\"/><path d=\"m6 11 6 6 6-6\"/><path d=\"M19 21H5\"/></svg>12–28 m</span><span><svg class=\"ds-sico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/></svg>Zona B</span></div><svg class=\"ds-depth\" viewBox=\"0 0 300 62\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><defs><linearGradient id=\"dsd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#123a5e\" stop-opacity=\".9\"/><stop offset=\"1\" stop-color=\"#123a5e\" stop-opacity=\".45\"/></linearGradient></defs><path d=\"M0 19 C40 19 70 31 110 33 S170 37 200 35 S260 25 300 19 L300 62 L0 62 Z\" fill=\"url(#dsd)\"/><path d=\"M0 19 C40 19 70 31 110 33 S170 37 200 35 S260 25 300 19\" fill=\"none\" stroke=\"#7fb2e5\" stroke-width=\"2.5\" vector-effect=\"non-scaling-stroke\"/></svg><p class=\"ds-cap\"><span>Posti al sito · <b>tuoi 6</b></span><strong>8 liberi su 20</strong></p><div class=\"ds-gauge\" role=\"meter\" aria-label=\"8 posti liberi su 20\"><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i></div></div></a>",
-      "css": ".ds-tour { font-family: Geist, ui-sans-serif, system-ui, sans-serif; display: block; max-width: 360px; overflow: hidden; border-radius: 24px; background: var(--color-card, #fff); color: var(--color-ink, #0d1a2a); text-decoration: none; box-shadow: 0 0 0 1px var(--color-line, #e1e7ef), 0 1px 0 var(--color-line, #e1e7ef), 0 16px 36px -24px rgba(10,37,64,.55); transition: transform .15s; } .ds-tour:active { transform: scale(.99); } .ds-tour:focus-visible { outline: 2px solid var(--color-accent, #123a5e); outline-offset: 2px; } .ds-thumb { position: relative; height: 160px; background: #e9eef2; } .ds-thumb-st { position: absolute; top: 12px; left: 12px; } .ds-pin { position: absolute; top: 50%; left: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 9999px; background: var(--color-ice, #7fb2e5); box-shadow: 0 0 0 3px #fff, 0 4px 10px rgba(10,37,64,.35); } .ds-thumb-lbl { position: absolute; top: 50%; left: calc(50% + 16px); transform: translateY(-50%); padding: 4px 10px; border-radius: 8px; background: var(--color-accent, #123a5e); color: #fff; font-size: 14px; font-weight: 600; white-space: nowrap; } .ds-tour-b { padding: 16px 16px 20px; } .ds-meta { margin: 0; font-size: 14px; font-weight: 600; color: var(--color-ice-ink, #2a659c); } .ds-tour-t { margin: 4px 0 0; font-size: 20px; line-height: 1.375; font-weight: 700; letter-spacing: -0.02em; } .ds-stats { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; } .ds-stats span { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 500; color: var(--color-ink-2, #3d4b5e); font-feature-settings: \"tnum\"; } .ds-sico { width: 16px; height: 16px; color: var(--color-accent, #123a5e); } .ds-depth { display: block; width: 100%; height: 56px; margin-top: 16px; } .ds-cap { display: flex; justify-content: space-between; margin: 16px 0 8px; font-size: 14px; color: var(--color-ink-3, #5d6b7e); } .ds-cap b { font-weight: 600; color: var(--color-ice-ink, #2a659c); } .ds-cap strong { font-weight: 600; color: var(--color-ink, #0d1a2a); } .ds-gauge { display: flex; height: 8px; gap: 2px; } .ds-gauge i { flex: 1; border-radius: 2px; background: var(--color-line-strong, #cbd5e1); transition: background-color .5s cubic-bezier(0.16,1,0.3,1); } .ds-gauge i.u { background: var(--color-accent, #123a5e); } .ds-gauge i.m { background: var(--color-ice, #7fb2e5); } .ds-pill { display: inline-flex; height: 24px; align-items: center; gap: 6px; padding: 0 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; } .ds-pill i { width: 6px; height: 6px; border-radius: 9999px; } .ds-pill.warn { background: var(--color-warn-soft, #fdf1da); color: var(--color-warn, #8a5000); box-shadow: 0 1px 2px rgba(0,0,0,.05); } .ds-pill.warn i { background: var(--color-warn-fill, #f2a516); }"
+      "refersTo": "night-panel",
+      "description": "Signature: the next outing on the dark panel, one gauge segment per diver, yours in blue.",
+      "html": "<div class=\"ds-night\"><div class=\"ds-n-top\"><span>Prossima uscita</span><span class=\"ds-n-st\">Vista dall'AMP</span></div><p class=\"ds-n-time\">09:30<span>–11:00</span></p><p class=\"ds-n-site\">Faraglione Grande · Zona B</p><p class=\"ds-n-meta\">Visita guidata · 6 subacquei</p><div class=\"ds-n-cap\"><div class=\"ds-n-leg\"><span>Posti al sito oggi · <em>tuoi 6</em></span><b>6 liberi su 20</b></div><div class=\"ds-gauge\"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"m\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i></div></div></div>",
+      "css": ".ds-night{padding:20px;border-radius:24px;background:var(--color-night);color:#fff;font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;font-variant-numeric:tabular-nums}.ds-n-top{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:var(--color-night-3)}.ds-n-st{display:inline-flex;height:24px;align-items:center;padding:0 10px;border-radius:999px;background:color-mix(in srgb,var(--color-ok-bright) 15%,transparent);color:var(--color-ok-bright);font-size:13px;font-weight:600}.ds-n-time{margin:12px 0 0;font-size:34px;line-height:1;font-weight:700;letter-spacing:-0.03em}.ds-n-time span{color:var(--color-night-3)}.ds-n-site{margin:8px 0 0;font-size:17px;font-weight:600}.ds-n-meta{margin:2px 0 0;font-size:15px;color:var(--color-night-3)}.ds-n-cap{margin-top:16px;padding-top:14px;border-top:1px dashed var(--color-night-free)}.ds-n-leg{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;color:var(--color-night-3)}.ds-n-leg em{font-style:normal;color:var(--color-accent-bright)}.ds-n-leg b{color:#fff}.ds-gauge{display:flex;height:8px;gap:2px}.ds-gauge i{flex:1;border-radius:2px;background:#fff}.ds-gauge i.m{background:var(--color-accent)}.ds-gauge i.f{background:var(--color-night-free)}"
     },
     {
-      "name": "Night Stat Strip with Capacity Gauge",
-      "kind": "card",
-      "refersTo": "night-panel",
-      "description": "Deep Prussia dashboard strip: 32px stats over night-3 labels, bright variants for highlighted figures; gauge in dark tone.",
-      "html": "<div class=\"ds-night\"><dl class=\"ds-night-g\"><div><dd>14</dd><dt>Uscite oggi</dt></div><div><dd class=\"hi\">3</dd><dt>Da prendere in visione</dt></div><div><dd class=\"bad\">1</dd><dt>Segnalazione aperta</dt></div></dl><div class=\"ds-gauge-d\" role=\"meter\" aria-label=\"7 posti liberi su 16\"><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i></div></div>",
-      "css": ".ds-night { font-family: Geist, ui-sans-serif, system-ui, sans-serif; max-width: 520px; padding: 20px 24px; border-radius: 16px; background: var(--color-night, #0a2540); color: #fff; } .ds-night-g { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 0 16px; } .ds-night-g div + div { padding-left: 24px; border-left: 1px solid var(--color-night-2, #1a3a5c); } .ds-night-g dd { margin: 0; font-size: 32px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; font-feature-settings: \"tnum\"; } .ds-night-g dd.hi { color: var(--color-accent-bright, #9cc7ef); } .ds-night-g dd.bad { color: var(--color-bad-bright, #ff7b84); } .ds-night-g dt { margin-top: 8px; font-size: 14px; color: var(--color-night-3, #a5b8cc); } .ds-gauge-d { display: flex; height: 10px; gap: 2px; } .ds-gauge-d i { flex: 1; border-radius: 2px; background: var(--color-night-free, #2b4a6b); } .ds-gauge-d i.u { background: #fff; }"
+      "name": "Map Site Pin",
+      "kind": "custom",
+      "refersTo": "pin",
+      "description": "State dot on the exact coordinate plus a white label pill with free places and the mini gauge.",
+      "html": "<div class=\"ds-mapbg\"><div class=\"ds-pin\"><i class=\"ds-dot\"></i><div class=\"ds-lbl\">8 liberi<span><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i class=\"u\"></i><i></i><i></i><i></i><i></i></span></div></div></div>",
+      "css": ".ds-mapbg{position:relative;height:120px;border-radius:24px;background:var(--color-row)}.ds-pin{position:absolute;left:50%;top:80px}.ds-dot{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:99px;background:#34c759;box-shadow:0 0 0 2px #fff}.ds-lbl{position:absolute;transform:translate(-50%,calc(-100% - 10px));display:flex;flex-direction:column;padding:6px 10px 7px;border-radius:12px;background:#fff;color:var(--color-ink);font:600 13px -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;white-space:nowrap;box-shadow:0 4px 14px -4px rgba(17,17,19,.3)}.ds-lbl span{display:flex;gap:1px;margin-top:3px}.ds-lbl span i{width:3px;height:4px;border-radius:2px;background:var(--color-line)}.ds-lbl span i.u{background:var(--color-ink)}"
     }
   ],
   "narrative": {
-    "northStar": "The Prussian Route Card",
-    "overview": "Every outing is a route card in the manner of Komoot: a real map of the dive site on top, a descriptive title, a row of icon stats, a depth profile where Komoot draws elevation, and the site's capacity. The palette is Prussia blue and ice on a cool light ground: deep Prussia for structure and every action, pale ice for what belongs to the operator, and green, amber and red only for state. It is light because the app is used on the dock in full sun, and it refuses both flat grey-card UI and the bright default blue of the 2023 project.\n\nDensity is comfortable on mobile (56px pill call to action, 60px rows, a 20px gutter, 40px between sections) and calmer but tighter on the desktop \"centrale operativa\", which shares the same palette, gauge and map pins. Titles are heavy and tightly tracked; numbers use tabular figures. White cards sit on the cool ground with a soft, Prussia-tinted elevation; inner boxes and forms stay flat with hairline rings.\n\nThe signatures are the **route card** (map preview, stats row, depth profile, gauge) and the **capacity gauge**, one segment per diver, the same picture for operator and AMP. The Mappa tab is a deliberately frozen legacy scope that keeps the previous system's colours (see Colors).",
+    "northStar": "The Quiet Logbook",
+    "overview": "The app borrows the clean iOS taste of Joi and applies it to dive outings: a near-white ground, filled grey rows, small precise system type and a single black action per screen. Nothing is decorated. Depth comes from tone, not from lines or shadows, and colour is spent in tiny, meaningful doses: blue says \"time, selection, yours\"; green, amber and red say state.\n\nOne dark panel carries the next outing on Oggi and the action-needed numbers on the AMP dashboard. It is the only heavy surface, so the eye lands there first. Its signature is the capacity gauge: one segment per diver, the same drawing in the flow, on the map and on the dashboard, so diving and AMP read the same picture.\n\nThe mobile app lives in a 420px phone column; the AMP dashboard is the same system widened to a 1440px desk layout. The map is a neutral, desaturated backdrop for data pins.",
     "keyCharacteristics": [
-      "Light by default; contrast tuned for outdoor sunlight.",
-      "Prussia blue for structure and action, ice for \"yours\", the state triad only for state.",
-      "Real OpenStreetMap previews, desaturated, wherever an outing or site is represented.",
-      "Geist with tabular figures; heavy, tightly tracked titles; icon stats in a wrapping row.",
-      "Soft Prussia-tinted elevation on lead cards and lists; flat ringed boxes inside them.",
-      "Fast out-expo motion, fully disabled under reduced motion."
+      "Apple system font stack, contained scale 34 / 28 / 20 / 17 / 15 / 13 / 11, tabular numerals everywhere.",
+      "Filled grey rows (`row`) separated by 8px of ground, no borders, no shadows.",
+      "Black primary button, full width at the bottom of flows.",
+      "Blue only for times, selection, focus and \"your divers\".",
+      "One `night` panel per screen at most.",
+      "Shadows exist only on things floating over the map."
     ],
     "rules": [
       {
-        "name": "The Prussia Acts Rule",
-        "body": "Prussia Blue means structure or \"act here\": actions, selection, focus, stat icons, used capacity. It never marks state and never decorates.",
+        "name": "The Blue Means Yours Rule",
+        "body": "Blue marks a time, a selection, focus or the operator's own divers. It never fills a primary button or a large surface.",
         "section": "colors"
       },
       {
-        "name": "The Ice Is Yours Rule",
-        "body": "Ice marks what belongs to the operator (own divers, own outing's time, the site pin, the depth line). If nothing on the element is the operator's, it is not ice.",
+        "name": "The One Night Rule",
+        "body": "At most one `night` panel per screen; it holds the most important thing (next outing, pending count).",
         "section": "colors"
       },
       {
-        "name": "The State-Only Triad Rule",
-        "body": "Green, amber and red appear only when they report a state. A coloured element with no state behind it is a defect.",
-        "section": "colors"
-      },
-      {
-        "name": "The Bright-On-Night Rule",
-        "body": "On night surfaces use accent-bright, the `-bright` state variants and night-3; the light-ground variants are for light surfaces only.",
-        "section": "colors"
-      },
-      {
-        "name": "The Title Then Stats Rule",
-        "body": "A route card reads top to bottom: map, meta line, title, icon stats row, depth profile, capacity. Stats are icon plus value in a wrapping row, never a table or a grid of tiles.",
+        "name": "The Five Steps Rule",
+        "body": "Text sizes come from 28 / 20 / 17 / 15 / 13; 34 and 11 are reserved for the next-outing time and tab labels. Weight, not size, carries emphasis (semibold 600 for buttons and status).",
         "section": "typography"
       },
       {
-        "name": "The No Eyebrow Rule",
-        "body": "No uppercase or letter-spaced labels above headings. A line above a title is allowed only when it carries data (a date, a time, \"tra 2 ore\"), in sentence case.",
-        "section": "typography"
-      },
-      {
-        "name": "The Thumb Zone Rule",
-        "body": "The primary action of a mobile screen is the full-width 56px pill within thumb reach. Interactive targets are at least 44px.",
-        "section": "layout"
-      },
-      {
-        "name": "The Prussia Shadow Rule",
-        "body": "Shadows are tinted with deep Prussia (rgb 10 37 64), never neutral black, and are long with negative spread so they read as lift, not outline.",
+        "name": "The Float-Only Shadow Rule",
+        "body": "If it does not float over the map, a toast layer or the desktop backdrop, it has no shadow and no border.",
         "section": "elevation"
-      },
-      {
-        "name": "The Same Picture Rule",
-        "body": "Capacity is always shown with this gauge, in every surface and for every role. Never a percentage bar, ring or number alone.",
-        "section": "components"
       }
     ],
     "dos": [
-      "Do represent every outing and site with a real map preview (the route card or its thumbnail), not an icon or illustration.",
-      "Do keep one full-width 56px Prussia pill as the primary action per mobile screen.",
-      "Do use Ice only for what belongs to the operator, and Ice Ink when it must be text on light.",
-      "Do show capacity with the segmented gauge plus the \"N liberi su M\" label, everywhere.",
-      "Do use the role spacing tokens (gutter 20px, stack 16px, group 24px, section 40px) instead of ad hoc margins.",
-      "Do tint every shadow with deep Prussia and keep inner boxes flat with hairline rings.",
-      "Do pass the `prussia` tone to every map outside the Mappa tab."
+      "**Do** use the `gutter` / `stack` / `group` / `section` spacing tokens for screen padding and vertical rhythm.",
+      "**Do** build lists as filled `row` blocks with 8px gaps and 16px corners.",
+      "**Do** keep one black primary action per screen, full width at the bottom of flows.",
+      "**Do** show times in a pill and use blue only for times, selection, focus and the operator's own divers.",
+      "**Do** reuse the capacity gauge wherever site capacity appears."
     ],
     "donts": [
-      "Don't restyle the Mappa tab or remove its `.legacy-map` scope; don't copy its signal blue or near-black values elsewhere.",
-      "Don't use green, amber or red for anything that is not a state.",
-      "Don't use ice or warn-fill as text on light surfaces, or the bright state variants off night.",
-      "Don't use gradients, wave motifs or illustrations as decoration; the only gradient is the depth profile fill.",
-      "Don't introduce a second accent hue or a second typeface (Geist Mono is only for coordinates).",
-      "Don't put uppercase or letter-spaced eyebrow labels above headings."
+      "**Don't** add borders or drop shadows to rows, cards or panels on the ground.",
+      "**Don't** fill a primary button or a large surface with blue.",
+      "**Don't** use type sizes outside 28 / 20 / 17 / 15 / 13 (34 and 11 only in their reserved roles).",
+      "**Don't** put more than one `night` panel on a screen.",
+      "**Don't** use the map's bright iOS state colours (`map-ok`, `map-bad`) for text on light surfaces; use `ok` / `bad`."
     ]
   }
 }

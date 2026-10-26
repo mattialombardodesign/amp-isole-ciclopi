@@ -1,62 +1,119 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens. Struttura ispirata a Komoot (ogni uscita è una "scheda
- * percorso" con mappa, statistiche e profilo), palette Blu di Prussia e
- * ghiaccio. Chiaro perché l'app si usa in banchina sotto il sole; il blu di
- * Prussia porta struttura e azioni, il ghiaccio segna ciò che è tuo;
- * verde, ambra e rosso solo per gli stati.
+ * Design tokens. Stile di riferimento: Joi (iOS). Font di sistema Apple,
+ * scala tipografica contenuta (28 · 20 · 17 · 15 · 13), superfici neutre
+ * quasi bianche, righe in grigio pieno senza bordi né ombre, pulsante
+ * principale nero, colore in piccole dosi: blu per orari, selezione e
+ * "i tuoi subacquei"; verde, ambra e rosso solo per gli stati.
  */
 @theme {
-  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Inter, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 
-  --color-ground: #f4f6f9;
+  /* Superfici */
+  --color-ground: #fafafa;
   --color-card: #ffffff;
-  --color-ink: #0d1a2a;
-  --color-ink-2: #3d4b5e;
-  --color-ink-3: #5d6b7e;
-  --color-line: #e1e7ef;
-  --color-line-strong: #cbd5e1;
+  --color-row: #f0f0f2; /* righe e campi pieni */
+  --color-row-2: #e6e6e9; /* righe premute, pillole neutre */
 
-  /* Blu di Prussia: azioni, selezione, struttura */
-  --color-accent: #123a5e;
-  --color-accent-hover: #0d2d4a;
-  --color-accent-soft: #e6eef6;
-  --color-accent-bright: #9cc7ef;
+  /* Testo */
+  --color-ink: #111113;
+  --color-ink-2: #3c3c43;
+  --color-ink-3: #6a6a6f;
+  --color-line: #e3e3e6;
+  --color-line-strong: #d1d1d6;
 
-  /* Ghiaccio: ciò che è tuo, profilo di profondità */
-  --color-ice: #7fb2e5;
-  --color-ice-ink: #2a659c;
-  --color-ice-soft: #e3effa;
+  /* Blu: orari, selezione, focus, "i tuoi" */
+  --color-accent: #0a7aff;
+  --color-accent-hover: #006be6;
+  --color-accent-ink: #0062d6;
+  --color-accent-soft: #e3efff;
+  --color-accent-bright: #64a8ff;
 
   /* Pannelli scuri */
-  --color-night: #0a2540;
-  --color-night-2: #1a3a5c;
-  --color-night-3: #a5b8cc;
-  --color-night-free: #2b4a6b;
+  --color-night: #141416;
+  --color-night-2: #2c2c2e;
+  --color-night-3: #a1a1a6;
+  --color-night-free: #3a3a3c;
+
+  /* Stati */
+  --color-ok: #1b7331;
+  --color-ok-soft: #e4f4e8;
+  --color-ok-bright: #4cd964;
+  --color-warn: #9a5b00;
+  --color-warn-fill: #ff9f0a;
+  --color-warn-soft: #fff1d6;
+  --color-bad: #c4291f;
+  --color-bad-soft: #ffe5e3;
+  --color-bad-bright: #ff6961;
 
   /* Scala delle spaziature (base 4px) con nomi di ruolo */
   --spacing-gutter: 1.25rem; /* margine laterale dello schermo */
   --spacing-stack: 1rem; /* tra blocchi correlati */
-  --spacing-group: 1.5rem; /* tra titolo pagina e contenuto */
-  --spacing-section: 2.5rem; /* tra sezioni */
-
-  --color-ok: #0e6e3f;
-  --color-ok-soft: #e3f3ea;
-  --color-ok-bright: #5fd394;
-  --color-warn: #8a5000;
-  --color-warn-fill: #f2a516;
-  --color-warn-soft: #fdf1da;
-  --color-bad: #b3202d;
-  --color-bad-soft: #fce8ea;
-  --color-bad-bright: #ff7b84;
+  --spacing-group: 1.5rem; /* tra titolo e contenuto */
+  --spacing-section: 2rem; /* tra sezioni */
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-enter: enter 0.32s var(--ease-out-expo) both;
   --animate-flash: flash 3s ease-out;
   --animate-check: check 0.6s var(--ease-out-expo) both;
+  --animate-rise: rise 0.6s var(--ease-out-expo) both;
+  --animate-drop: drop 0.7s var(--ease-out-expo) both;
+  --animate-ripple: ripple 3.6s ease-out infinite;
+  --animate-nudge: nudge 1.8s ease-in-out infinite;
+  --animate-sheet: sheet 0.42s var(--ease-out-expo) both;
+  --animate-fade: fade 0.3s ease-out both;
+}
+
+/* Foglio dal basso */
+@keyframes sheet {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Onboarding: righe che salgono, avviso che scende, onde intorno all'occhio */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-28px) scale(0.96);
+  }
+}
+
+@keyframes ripple {
+  from {
+    opacity: 0.55;
+    transform: scale(0.55);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 @keyframes enter {
@@ -81,6 +138,63 @@
   }
 }
 
+/* Logo: l'occhio del ciclope sbatte (una volta, poi due di fila) e si guarda intorno */
+.eye-lid {
+  transform-box: view-box;
+  transform-origin: 27px 24.5px;
+  animation: eye-blink 7s ease-in-out 1.5s infinite;
+}
+
+.eye-opening {
+  animation:
+    eye-open 0.7s var(--ease-out-expo) 0.35s both,
+    eye-blink 7s ease-in-out 2.5s infinite;
+}
+
+.eye-look {
+  animation: eye-look 9s var(--ease-out-expo) 3s infinite;
+}
+
+@keyframes eye-blink {
+  0%,
+  40%,
+  44%,
+  86%,
+  89.5%,
+  93.5%,
+  100% {
+    transform: scaleY(1);
+  }
+  42%,
+  87.7%,
+  91.7% {
+    transform: scaleY(0.06);
+  }
+}
+
+@keyframes eye-open {
+  from {
+    transform: scaleY(0.06);
+  }
+}
+
+@keyframes eye-look {
+  0%,
+  30%,
+  92%,
+  100% {
+    transform: translateX(0);
+  }
+  36%,
+  52% {
+    transform: translateX(-6px);
+  }
+  60%,
+  78% {
+    transform: translateX(6px);
+  }
+}
+
 html,
 body,
 #root {
@@ -91,7 +205,9 @@ body {
   background: var(--color-ground);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-feature-settings: 'tnum';
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   text-rendering: optimizeLegibility;
@@ -123,10 +239,23 @@ input[type='date']::-webkit-calendar-picker-indicator {
   opacity: 0.5;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Indicatore di capienza: posto libero */
+.cap-free {
+  background: var(--color-line);
+}
+
 /* Mappa */
 .leaflet-container {
   font-family: var(--font-sans);
-  background: #eef1f4;
+  background: #eef0f2;
 }
 
 /* Il reset di Tailwind ridimensiona le immagini e crea fessure tra i tile */
@@ -142,9 +271,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
   mix-blend-mode: normal;
 }
 
-/* Tile OSM smorzate: la mappa fa da sfondo ai dati, non li copre */
+/* Tile neutre e chiare: la mappa fa da sfondo ai dati */
 .leaflet-tile-pane {
-  filter: saturate(0.35) brightness(1.05) contrast(0.92);
+  filter: grayscale(0.7) brightness(1.06) contrast(0.9);
 }
 
 .amp-marker {
@@ -154,11 +283,12 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .leaflet-popup-content-wrapper {
   border-radius: 16px;
-  box-shadow: 0 10px 30px -10px rgb(11 15 20 / 0.3);
+  box-shadow: 0 10px 30px -10px rgb(17 17 19 / 0.25);
 }
 
 .leaflet-popup-content {
   margin: 14px 16px;
+  font-size: 15px;
 }
 
 .leaflet-control-attribution {
@@ -172,60 +302,15 @@ input[type='date']::-webkit-calendar-picker-indicator {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-}
 
-/* La sezione Mappa resta com'era: riporta i colori precedenti al suo interno */
-.legacy-map {
-  --color-ground: #f2f3f5;
-  --color-ink: #0b0f14;
-  --color-ink-2: #3f4753;
-  --color-ink-3: #636b78;
-  --color-line: #e4e7eb;
-  --color-line-strong: #d0d5dc;
-  --color-accent: #0a5cff;
-  --color-accent-hover: #0849cc;
-  --color-accent-soft: #e7eeff;
-  --color-night: #0b0f14;
-  --color-night-2: #1b212b;
-}
+  .eye-lid,
+  .eye-opening,
+  .eye-look,
+  .animate-nudge {
+    animation: none !important;
+  }
 
-/* Posto libero nell'indicatore di capienza: vuoto, si distingue per forma */
-.cap-free {
-  background: var(--color-card);
-  box-shadow: inset 0 0 0 1.5px var(--color-line-strong);
-}
-
-.legacy-map .cap-used {
-  background: var(--color-ink);
-}
-
-.legacy-map .cap-free {
-  background: var(--color-line-strong);
-  box-shadow: none;
-}
-
-/* Anteprime statiche di mappa (schede percorso) */
-.site-thumb img.tile {
-  position: absolute;
-  width: 256.5px;
-  height: 256.5px;
-  max-width: none;
-  filter: var(--map-tint);
-}
-
-/* Mappe della palette Prussia: acqua verso il ghiaccio, terra verso il grigio freddo */
-:root {
-  --map-tint: grayscale(1) sepia(0.3) hue-rotate(172deg) saturate(1.5) brightness(1.05) contrast(0.92);
-}
-
-.map-prussia .leaflet-tile-pane {
-  filter: var(--map-tint);
-}
-
-.no-scrollbar {
-  scrollbar-width: none;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+  .animate-ripple {
+    display: none;
+  }
 }

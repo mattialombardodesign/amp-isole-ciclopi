@@ -25,7 +25,7 @@ export function CapacityGauge({
   const over = used + adding > capacity
   return (
     <div
-      className={cn('flex h-2.5 gap-[2px]', className)}
+      className={cn('flex h-2 gap-[2px]', className)}
       role="meter"
       aria-valuemin={0}
       aria-valuemax={capacity}
@@ -41,8 +41,8 @@ export function CapacityGauge({
             className={cn(
               'flex-1 rounded-[2px] transition-colors duration-500 ease-(--ease-out-expo)',
               state === 'free' && (tone === 'dark' ? 'bg-night-free' : 'cap-free'),
-              state === 'used' && (tone === 'dark' ? 'bg-white' : 'cap-used bg-accent'),
-              (state === 'mine' || state === 'adding') && (over ? 'bg-bad' : 'bg-ice'),
+              state === 'used' && (tone === 'dark' ? 'bg-white' : 'bg-ink'),
+              (state === 'mine' || state === 'adding') && (over ? 'bg-bad' : 'bg-accent'),
             )}
           />
         )
@@ -52,11 +52,11 @@ export function CapacityGauge({
 }
 
 /** "8 liberi su 20", colorato quando il sito è quasi pieno o pieno. */
-export function CapacityLabel({ used, capacity, className }: { used: number; capacity: number; className?: string }) {
+export function CapacityLabel({ used, capacity, short, className }: { used: number; capacity: number; short?: boolean; className?: string }) {
   const free = Math.max(capacity - used, 0)
   return (
-    <span className={cn('text-sm', free === 0 ? 'font-semibold text-bad' : free / capacity < 0.3 ? 'font-semibold text-warn' : 'text-ink-3', className)}>
-      {free === 0 ? 'Pieno' : `${free} liberi su ${capacity}`}
+    <span className={cn('text-[15px]', free === 0 ? 'font-semibold text-bad' : free / capacity < 0.3 ? 'font-semibold text-warn' : 'text-ink-3', className)}>
+      {free === 0 ? 'Pieno' : short ? `${free} liberi` : `${free} liberi su ${capacity}`}
     </span>
   )
 }

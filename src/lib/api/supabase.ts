@@ -2,7 +2,17 @@
 // Le regole di sicurezza (RLS) e il controllo dei posti sono in supabase/schema.sql.
 
 import { createClient } from '@supabase/supabase-js'
-import type { AmpRequest, Api, Booking, Profile, Report } from '../types'
+import type { AmpRequest, Api, Booking, Member, Profile, Report, StaffMember } from '../types'
+
+// Messaggi di Supabase Auth tradotti per l'interfaccia
+const AUTH_ERRORS: Record<string, string> = {
+  'Invalid login credentials': 'Email o password non corretti.',
+  'Email not confirmed': "Conferma prima l'email, poi accedi.",
+}
+const authError = (message: string) => new Error(AUTH_ERRORS[message] ?? message)
+
+const UUID = /^[0-9a-f-]{36}$/i
+let channels = 0
 
 export function createSupabaseApi(url: string, key: string): Api {
   const supabase = createClient(url, key)
@@ -14,10 +24,6 @@ export function createSupabaseApi(url: string, key: string): Api {
     return id
   }
 
-  async function orgName() {
-    const { data } = await supabase.from('profiles').select('org_name').eq('id', await uid()).single()
-    return (data?.org_name as string | undefined) ?? ''
-  }
 
   function check<T>(res: { data: T | null; error: { message: string } | null }): T {
     if (res.error) throw new Error(res.error.message)
@@ -31,8 +37,11 @@ export function createSupabaseApi(url: string, key: string): Api {
       const { data } = await supabase.auth.getSession()
       const user = data.session?.user
       if (!user) return null
-      const res = await supabase.from('profiles').select('*').eq('id', user.id).maybeSingle()
-      return (res.data as Profile | null) ?? null
+      // la persona con il suo diving: nome e team arrivano da `organizations`
+      const res = await supabase.from('profiles').select('*, organizations(name, staff)').eq('id', user.id).maybeSingle()
+      if (!res.data) return null
+      const { organizations: org, ...p } = res.data as Omit<Profile, 'org_name' | 'staff'> & { organizations: { name: string; staff: StaffMember[] } | null }
+      return { ...p, org_name: org?.name ?? (p.role === 'amp' ? 'AMP Isole Ciclopi' : ''), staff: org?.staff ?? [] }
     },
 
     onAuthChange(cb) {
@@ -45,13 +54,7 @@ export function createSupabaseApi(url: string, key: string): Api {
 
     async signIn(email, password) {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
-      if (error) throw new Error(error.message === 'Invalid login credentials' ? 'Email o password non corretti.' : error.message)
-    },
-
-    async signUp(email, password) {
-      const { data, error } = await supabase.auth.signUp({ email, password })
-      if (error) throw new Error(error.message)
-      if (!data.session) throw new Error('Controlla la tua email per confermare la registrazione, poi accedi.')
+      if (error) throw authError(error.message)
     },
 
     async signOut() {
@@ -62,27 +65,44 @@ export function createSupabaseApi(url: string, key: string): Api {
       check(await supabase.from('profiles').update(patch).eq('id', await uid()))
     },
 
+    async updateTeam(staff) {
+      // la regola "solo l'admin" la applica il database (policy "diving: team (admin)")
+      const me = check(await supabase.from('profiles').select('org_id').eq('id', await uid()).single()) as { org_id: string | null }
+      if (!me.org_id) throw new Error('Il tuo account non è collegato a un diving.')
+      const res = check(await supabase.from('organizations').update({ staff }).eq('id', me.org_id).select('id'))
+      if (!res.length) throw new Error('Il team lo cambia solo l’admin del diving.')
+    },
+
+    async listMembers() {
+      // la sicurezza per riga mostra solo le persone dello stesso diving
+      const me = check(await supabase.from('profiles').select('org_id').eq('id', await uid()).single()) as { org_id: string | null }
+      if (!me.org_id) return []
+      const res = await supabase.from('profiles').select('id, email, full_name, org_role').eq('org_id', me.org_id).order('org_role').order('full_name')
+      return check(res) as Member[]
+    },
+
     async getOccupancy(date) {
       const rows = check(await supabase.rpc('site_occupancy', { p_date: date })) as { site_id: string; used: number }[]
       return Object.fromEntries(rows.map((r) => [r.site_id, r.used]))
     },
 
     async createBooking(b) {
-      const row = { ...b, user_id: await uid(), org_name: await orgName() }
-      return check(await supabase.from('bookings').insert(row).select().single()) as Booking
+      // autore, diving, stato e data li imposta il server (trigger `stamp_row`)
+      return check(await supabase.from('bookings').insert(b).select().single()) as Booking
     },
 
     async listMyBookings() {
+      await uid()
       const res = await supabase
         .from('bookings')
         .select('*')
-        .eq('user_id', await uid())
         .order('date', { ascending: false })
         .order('created_at', { ascending: false })
       return check(res) as Booking[]
     },
 
     async getBooking(id) {
+      if (!UUID.test(id)) return null
       return check(await supabase.from('bookings').select('*').eq('id', id).maybeSingle()) as Booking | null
     },
 
@@ -95,13 +115,23 @@ export function createSupabaseApi(url: string, key: string): Api {
       check(await supabase.from('bookings').update({ status }).eq('id', id))
     },
 
+    async updateBooking(id, b) {
+      // lo stato torna "inviata" lato server (trigger `booking_changed`)
+      return check(await supabase.from('bookings').update(b).eq('id', id).select().single()) as Booking
+    },
+
+    async cancelBooking(id) {
+      check(await supabase.from('bookings').update({ status: 'annullata' }).eq('id', id))
+    },
+
     async createReport(r) {
-      const row = { ...r, user_id: await uid(), org_name: await orgName() }
-      return check(await supabase.from('reports').insert(row).select().single()) as Report
+      // autore, diving, stato e data li imposta il server (trigger `stamp_row`)
+      return check(await supabase.from('reports').insert(r).select().single()) as Report
     },
 
     async listMyReports() {
-      const res = await supabase.from('reports').select('*').eq('user_id', await uid()).order('created_at', { ascending: false })
+      await uid()
+      const res = await supabase.from('reports').select('*').order('created_at', { ascending: false })
       return check(res) as Report[]
     },
 
@@ -114,12 +144,13 @@ export function createSupabaseApi(url: string, key: string): Api {
     },
 
     async createRequest(r) {
-      const row = { ...r, user_id: await uid(), org_name: await orgName() }
-      return check(await supabase.from('requests').insert(row).select().single()) as AmpRequest
+      // autore, diving, stato e data li imposta il server (trigger `stamp_row`)
+      return check(await supabase.from('requests').insert(r).select().single()) as AmpRequest
     },
 
     async listMyRequests() {
-      const res = await supabase.from('requests').select('*').eq('user_id', await uid()).order('created_at', { ascending: false })
+      await uid()
+      const res = await supabase.from('requests').select('*').order('created_at', { ascending: false })
       return check(res) as AmpRequest[]
     },
 
@@ -127,9 +158,13 @@ export function createSupabaseApi(url: string, key: string): Api {
       return check(await supabase.from('requests').select('*').order('created_at', { ascending: false })) as AmpRequest[]
     },
 
+    async setRequestStatus(id, status) {
+      check(await supabase.from('requests').update({ status }).eq('id', id))
+    },
+
     subscribe(cb) {
       const channel = supabase
-        .channel('amp-live-' + crypto.randomUUID())
+        .channel(`amp-live-${++channels}`)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'bookings' }, cb)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'reports' }, cb)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'requests' }, cb)

@@ -1,13 +1,12 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Check, ChevronLeft, Copy } from 'lucide-react'
+import { CalendarX, Check, Clock, Copy, Footprints, GraduationCap, LifeBuoy, Pencil, Repeat, Ship, UserRound, Users, UsersRound } from 'lucide-react'
 import { api } from '@/lib/api'
-import { ACTIVITY_LABEL, EXIT_LABEL, communicationText, formatDateLong, hhmm, timeAgo, totalDivers } from '@/lib/format'
+import { ACTIVITY_LABEL, EXIT_LABEL, communicationText, formatDateLong, hhmm, placeName, placeZone, timeAgo, totalDivers } from '@/lib/format'
 import { useLive } from '@/lib/hooks'
-import { getSite } from '@/lib/sites'
-import { cn } from '@/lib/utils'
-import { DepthProfile, SiteThumb, Stat, StatRow } from '@/components/Tour'
-import { Button, FlowHeader, FullScreenLoader, List, SectionHeading } from '@/components/ui'
+import { todayISO } from '@/lib/utils'
+import { SiteMap } from '@/components/SiteMap'
+import { Button, FlowHeader, FullScreenLoader, InfoRow, List, NavRow, SectionHeading, Timeline, TimelineStep } from '@/components/ui'
 import { BookingStatus } from './Attivita'
 
 export default function DettaglioUscita() {
@@ -15,19 +14,38 @@ export default function DettaglioUscita() {
   const navigate = useNavigate()
   const { data: booking } = useLive(() => api.getBooking(id).then((b) => b ?? false), [id])
   const [copied, setCopied] = useState(false)
+  const [confirmCancel, setConfirmCancel] = useState(false)
+  const [cancelling, setCancelling] = useState(false)
 
   if (booking === null) return <FullScreenLoader />
-  const site = booking ? getSite(booking.site_id) : undefined
-  if (booking === false || !site) {
+  if (booking === false) {
     return (
       <div className="flex min-h-dvh flex-col">
         <FlowHeader onBack={() => navigate('/attivita')} />
-        <p className="px-gutter text-ink-3">Uscita non trovata.</p>
+        <div className="px-gutter pt-6">
+          <h1 className="text-[28px] font-bold tracking-[-0.02em]">Uscita non trovata</h1>
+          <p className="mt-1 text-[15px] text-ink-3">Potrebbe essere stata comunicata da un altro dispositivo.</p>
+          <Button size="lg" className="mt-group" onClick={() => navigate('/attivita')}>
+            Torna ad Attività
+          </Button>
+        </div>
       </div>
     )
   }
-  const seen = booking.status === 'presa_visione'
+  const seaWatching = booking.activity_type === 'sea_watching'
+  const zone = placeZone(booking)
+  const cancelled = booking.status === 'annullata'
+  const today = todayISO()
+  const over = booking.date < today || (booking.date === today && hhmm(booking.time_in) <= new Date().toTimeString().slice(0, 5))
   const text = communicationText(booking)
+  const flow = `/attivita/nuova/${booking.activity_type}`
+
+  async function cancel() {
+    setCancelling(true)
+    await api.cancelBooking(id)
+    setCancelling(false)
+    setConfirmCancel(false)
+  }
 
   async function copy() {
     await navigator.clipboard.writeText(text)
@@ -35,58 +53,92 @@ export default function DettaglioUscita() {
     setTimeout(() => setCopied(false), 1500)
   }
 
-  const people = [
-    ['Istruttori', booking.instructors.join(', ') || '—'],
-    ['Guide', booking.guides.join(', ') || '—'],
-    ['Ospiti', booking.guests.join(', ') || '—'],
-    ['Pallone', booking.buoy ? 'Presente' : 'Assente'],
-    ['Uscita', EXIT_LABEL[booking.exit_mode]],
-  ]
+  const access: [ReactNode, string, string] = [booking.exit_mode === 'terra' ? <Footprints key="a" /> : <Ship key="a" />, 'Accesso', EXIT_LABEL[booking.exit_mode]]
+  // Sea watching = snorkeling: accompagnatori e numero di partecipanti, senza nomi
+  const facts: [ReactNode, string, string][] = seaWatching
+    ? [
+        [<Clock key="t" />, 'Orario indicativo', `${hhmm(booking.time_in)} → ${hhmm(booking.time_out)}`],
+        [<UserRound key="g" />, 'Accompagnatori', [...booking.instructors, ...booking.guides].join(', ') || '—'],
+        [<UsersRound key="p" />, 'Partecipanti', `${booking.participants + booking.guests.length}`],
+        [<LifeBuoy key="b" />, 'Boa segnasub', booking.buoy ? 'Presente' : 'Assente'],
+        access,
+      ]
+    : [
+        [<Clock key="t" />, 'Orario indicativo', `${hhmm(booking.time_in)} → ${hhmm(booking.time_out)}`],
+        [<Users key="n" />, 'Subacquei', `${totalDivers(booking)}`],
+        [<GraduationCap key="i" />, 'Istruttori', booking.instructors.join(', ') || '—'],
+        [<UserRound key="g" />, 'Guide', booking.guides.join(', ') || '—'],
+        [<UsersRound key="o" />, 'Ospiti', booking.guests.join(', ') || '—'],
+        [<LifeBuoy key="b" />, 'Pallone', booking.buoy ? 'Presente' : 'Assente'],
+        access,
+      ]
 
   return (
     <div className="flex min-h-dvh flex-col pb-section">
-      {/* mappa del sito a tutta larghezza, come la copertina di un percorso */}
-      <SiteThumb site={site} zoom={16} pin="label" caption={`${site.name} · Zona ${site.zone}`} className="h-64 shrink-0">
-        <button
-          onClick={() => navigate('/attivita')}
-          className="absolute top-[max(1rem,env(safe-area-inset-top))] left-4 flex size-11 cursor-pointer items-center justify-center rounded-full bg-card text-ink shadow-[0_6px_16px_-6px_rgba(10,37,64,.5)]"
-          aria-label="Indietro"
-        >
-          <ChevronLeft className="size-6" />
-        </button>
-      </SiteThumb>
-
-      <div className="relative -mt-6 animate-enter rounded-t-[28px] bg-ground px-gutter pt-group">
+      <FlowHeader onBack={() => navigate('/attivita')} label={ACTIVITY_LABEL[booking.activity_type]} />
+      <div className="animate-enter px-gutter pt-3">
         <BookingStatus status={booking.status} />
-        <h1 className="mt-3 text-[28px] leading-tight font-extrabold tracking-[-0.03em]">
-          {ACTIVITY_LABEL[booking.activity_type]} {site.at}
+        <h1 className="mt-3 text-[28px] leading-tight font-bold tracking-[-0.02em]">
+          {placeName(booking)}
+          {zone && ` · Zona ${zone}`}
         </h1>
-        <p className="mt-1 text-[15px] text-ink-3">{formatDateLong(booking.date)}</p>
-        <StatRow className="mt-stack">
-          <Stat icon="time">
-            {hhmm(booking.time_in)}–{hhmm(booking.time_out)}
-          </Stat>
-          <Stat icon="divers">{totalDivers(booking)} sub</Stat>
-          <Stat icon="depth">{site.depth}</Stat>
-        </StatRow>
-        <DepthProfile site={site} className="mt-group" />
+        <p className="mt-1 text-[15px] text-ink-3">
+          {formatDateLong(booking.date)} · {ACTIVITY_LABEL[booking.activity_type]}
+        </p>
 
-        <section className="mt-section">
-          <SectionHeading>Stato</SectionHeading>
-          <ol className="flex flex-col">
-            <Step done title="Inviata ad AMP e Guardia Costiera" text={timeAgo(booking.created_at)} />
-            <Step done={seen} last title={seen ? "Presa visione dall'AMP" : "In attesa che l'AMP la legga"} text={seen ? 'Puoi procedere con l’immersione.' : 'Lo stato si aggiorna da solo.'} />
-          </ol>
-        </section>
+        <Timeline className="mt-group">
+          <TimelineStep done title="Inviata" text={[timeAgo(booking.created_at), booking.author_name && `da ${booking.author_name}`].filter(Boolean).join(' · ')} />
+          <TimelineStep
+            done
+            tone="ok"
+            last={!cancelled}
+            title="Invio confermato"
+            text={cancelled ? undefined : 'Arrivata ad AMP e Guardia Costiera. Non serve altro.'}
+          />
+          {cancelled && <TimelineStep done tone="bad" last title="Annullata" text="L'annullamento è arrivato ad AMP e Guardia Costiera; i posti tornano liberi." />}
+        </Timeline>
 
-        <section className="mt-section">
-          <SectionHeading>Chi va in acqua</SectionHeading>
-          <List>
-            {people.map(([k, v]) => (
-              <div key={k} className="flex gap-4 px-4 py-3">
-                <span className="w-24 shrink-0 text-[15px] text-ink-3">{k}</span>
-                <span className="text-[15px] font-medium">{v}</span>
+        <List className="mt-3">
+          {!over && !cancelled && (
+            <NavRow icon={<Pencil />} title="Modifica l'uscita" description="La versione aggiornata parte ad AMP e Guardia Costiera" onClick={() => navigate(`${flow}?modifica=${booking.id}`)} />
+          )}
+          <NavRow icon={<Repeat />} title="Ripeti questa uscita" description={seaWatching ? "Stesso punto e gruppo, scegli solo quando" : "Stesso sito e team, scegli solo quando"} onClick={() => navigate(`${flow}?ripeti=${booking.id}`)} />
+          {!over && !cancelled && !confirmCancel && (
+            <button type="button" onClick={() => setConfirmCancel(true)} className="flex min-h-14 w-full cursor-pointer items-center gap-3 px-4 py-3 text-left text-bad transition-colors hover:bg-row-2">
+              <CalendarX className="size-[22px] shrink-0" strokeWidth={1.75} />
+              <span className="text-[17px]">Annulla l'uscita</span>
+            </button>
+          )}
+          {confirmCancel && (
+            <div className="px-4 py-4">
+              <p className="text-[17px] font-semibold">Vuoi annullare l'uscita?</p>
+              <p className="mt-0.5 text-[15px] text-ink-3">L'AMP e la Guardia Costiera vengono avvisate e i posti tornano liberi.</p>
+              <div className="mt-3 flex gap-2">
+                <Button variant="danger" className="flex-1" loading={cancelling} onClick={cancel}>
+                  Sì, annulla
+                </Button>
+                <Button variant="secondary" className="flex-1 bg-row-2" onClick={() => setConfirmCancel(false)}>
+                  No, tienila
+                </Button>
               </div>
+            </div>
+          )}
+        </List>
+
+        {seaWatching && booking.lat != null && booking.lng != null && (
+          <section className="mt-section">
+            <SectionHeading>Punto</SectionHeading>
+            <div className="h-56 overflow-hidden rounded-3xl">
+              <SiteMap compactPins zoom={15} center={[booking.lat, booking.lng]} pin={{ lat: booking.lat, lng: booking.lng }} />
+            </div>
+          </section>
+        )}
+
+        <section className="mt-section">
+          <SectionHeading>Dettagli</SectionHeading>
+          <List>
+            {facts.map(([icon, k, v]) => (
+              <InfoRow key={k} icon={icon} label={k} value={v} />
             ))}
           </List>
         </section>
@@ -95,31 +147,16 @@ export default function DettaglioUscita() {
           <SectionHeading
             action={
               <Button variant="ghost" size="sm" onClick={copy}>
-                {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+                {copied ? <Check className="size-[18px]" strokeWidth={2} /> : <Copy className="size-[18px]" strokeWidth={2} />}
                 {copied ? 'Copiato' : 'Copia'}
               </Button>
             }
           >
             Testo inviato agli enti
           </SectionHeading>
-          <pre className="rounded-2xl bg-card p-4 font-sans text-sm leading-relaxed whitespace-pre-wrap text-ink-2 ring-1 ring-line">{text}</pre>
+          <pre className="rounded-2xl bg-row p-4 font-sans text-[15px] leading-snug whitespace-pre-wrap text-ink-2">{text}</pre>
         </section>
       </div>
     </div>
-  )
-}
-
-function Step({ done, last, title, text }: { done: boolean; last?: boolean; title: string; text: string }) {
-  return (
-    <li className="relative flex gap-4 pb-6 last:pb-0">
-      {!last && <span className={cn('absolute top-7 bottom-0 left-[13px] w-0.5', done ? 'bg-accent' : 'bg-line')} />}
-      <span className={cn('relative flex size-7 shrink-0 items-center justify-center rounded-full', done ? 'bg-accent text-white' : 'bg-card ring-2 ring-line-strong ring-inset')}>
-        {done && <Check className="size-4" strokeWidth={2.5} />}
-      </span>
-      <div className="pt-0.5">
-        <p className={cn('text-base font-medium', !done && 'text-ink-2')}>{title}</p>
-        <p className="text-sm text-ink-3">{text}</p>
-      </div>
-    </li>
   )
 }

@@ -1,9 +1,11 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from '@/lib/hooks'
 import { PhoneFrame, RequireAuth, TabLayout } from '@/components/Layout'
+import Account from '@/pages/Account'
 import Amp from '@/pages/Amp'
 import Attivita from '@/pages/Attivita'
 import Dashboard from '@/pages/Dashboard'
+import DettaglioSegnalazione from '@/pages/DettaglioSegnalazione'
 import DettaglioUscita from '@/pages/DettaglioUscita'
 import Login from '@/pages/Login'
 import Mappa from '@/pages/Mappa'
@@ -35,9 +37,12 @@ export default function App() {
                 <Route path="/mappa" element={<Mappa />} />
                 <Route path="/amp" element={<Amp />} />
               </Route>
+              <Route path="/account" element={<Account />} />
+              <Route path="/attivita/nuova" element={<NuovaUscita />} />
               <Route path="/attivita/nuova/:tipo" element={<NuovaUscita />} />
               <Route path="/attivita/:id" element={<DettaglioUscita />} />
               <Route path="/segnala/nuova" element={<NuovaSegnalazione />} />
+              <Route path="/segnala/:id" element={<DettaglioSegnalazione />} />
               <Route path="/amp/richiesta/:kind" element={<RichiestaAmp />} />
             </Route>
           </Route>

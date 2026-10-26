@@ -41,11 +41,23 @@ the AMP, and no dive site over capacity.
 ## Operating Context
 
 - Area: AMP Isole Ciclopi, Aci Trezza / Aci Castello (Catania), Zones A, B, C.
-- Activities: guided scuba visit, guided sea watching; also reports
-  (illegal fishing/anchoring, species sightings, waste) and requests to the
-  AMP (appointments with experts, assistance, annual authorization renewal).
-- The AMP marks each outing "presa visione" (acknowledged); the operator sees
-  that status on the phone.
+- Activities: "Immersione" (guided scuba visit, with tanks) and "Sea
+  watching" (snorkeling at the surface), chosen at the start of the "Nuova
+  attività" flow. Sea watching is lighter: for the AMP decree snorkeling
+  is "balneazione" (allowed in zones B and C, in zone A only in the marked
+  areas of Isola Lachea), so it has no site capacity and no guest names:
+  a free point on the map, who leads the group and how many people; also reports (illegal fishing/anchoring, species
+  sightings, waste) and requests to the AMP (appointments with experts,
+  assistance).
+- People, not shared logins: each person of a diving has personal
+  credentials (created by the AMP) and belongs to the diving's space as
+  admin (the owner: manages the team, asks the AMP for colleagues'
+  access) or member. Outings, reports and requests belong to the diving
+  and show who sent them.
+- The AMP never gives feedback in the app: the operator only gets the
+  confirmation that the communication reached AMP and Guardia Costiera
+  ("Invio confermato"), never a "received/seen by the AMP". "Presa visione" / "Gestita" are internal tools of the
+  operations centre and are not shown on the phone.
 - Origin: UX/UI project from a master (2023, research with 9 interviews of AMP
   workers, 48h of process analysis, 8 marine-area apps reviewed), rebuilt as a
   working app for the final exam of the "Vibe Coding for Design" course (NID,
@@ -65,11 +77,14 @@ the AMP, and no dive site over capacity.
 No official AMP logo or palette is required. The 2023 master project is a
 reference for flows only, not for visual style.
 
-Standing preference (chosen by the user, 25 Oct 2026, revised the same
-evening): structure inspired by Komoot (each outing is a "tour card" with a
-real map preview, an icon stats row and a profile — here a depth profile),
-with the "Blu di Prussia e ghiaccio" palette: an elegant deep blue, not the
-bright blue of the 2023 project. The Mappa tab must stay as it is.
+Standing preference (chosen by the user, 25 Oct 2026, after several preview
+rounds): the clean iOS taste of the Joi app — Apple system font (SF Pro), Joi's
+type scale (28 / 20 / 17 / 15 / 13), near-white neutral surfaces, filled grey
+rows without borders or shadows, black primary buttons, colour in small doses
+(blue for times, selection and "your divers"). Applied to the second version
+of the app (Oggi with the dark next-outing panel, lists, 6-step flow). Copy
+Joi's taste, not its components. The Mappa tab follows the same style but its
+functions, behaviour and components must not change.
 
 ## Evidence on Hand
 

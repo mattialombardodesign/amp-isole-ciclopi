@@ -21,20 +21,20 @@ export function Calendar({ value, onChange }: { value: string | null; onChange: 
   const canGoBack = month > new Date(new Date().getFullYear(), new Date().getMonth(), 1)
 
   return (
-    <div className="rounded-2xl bg-card p-4 ring-1 ring-line">
+    <div className="rounded-3xl bg-row p-4">
       <div className="mb-3 flex items-center justify-between">
         <button
           onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))}
           disabled={!canGoBack}
-          className="flex size-9 cursor-pointer items-center justify-center rounded-lg text-ink hover:bg-ink/5 disabled:opacity-30"
+          className="flex size-9 cursor-pointer items-center justify-center rounded-lg text-ink-2 hover:bg-row-2 disabled:opacity-30"
           aria-label="Mese precedente"
         >
           <ChevronLeft className="size-5" />
         </button>
-        <span className="font-semibold capitalize">{month.toLocaleDateString('it-IT', { month: 'long', year: 'numeric' })}</span>
+        <span className="text-[17px] font-semibold capitalize">{month.toLocaleDateString('it-IT', { month: 'long', year: 'numeric' })}</span>
         <button
           onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() + 1, 1))}
-          className="flex size-9 cursor-pointer items-center justify-center rounded-lg text-ink hover:bg-ink/5"
+          className="flex size-9 cursor-pointer items-center justify-center rounded-lg text-ink-2 hover:bg-row-2"
           aria-label="Mese successivo"
         >
           <ChevronRight className="size-5" />
@@ -42,7 +42,7 @@ export function Calendar({ value, onChange }: { value: string | null; onChange: 
       </div>
       <div className="grid grid-cols-7 gap-1 text-center">
         {WEEKDAYS.map((d, i) => (
-          <span key={i} className="py-1 text-xs font-medium text-ink-3">
+          <span key={i} className="py-1 text-[13px] text-ink-3">
             {d}
           </span>
         ))}
@@ -57,11 +57,11 @@ export function Calendar({ value, onChange }: { value: string | null; onChange: 
               disabled={past}
               onClick={() => onChange(iso)}
               className={cn(
-                'mx-auto flex size-11 cursor-pointer items-center justify-center rounded-full text-[15px] font-medium transition-colors',
+                'mx-auto flex size-11 cursor-pointer items-center justify-center rounded-full text-[17px] transition-colors',
                 outside && 'text-ink-3/50',
                 past && 'cursor-default text-ink-3/35',
-                !past && !selected && 'hover:bg-ink/5',
-                iso === today && !selected && 'font-semibold text-accent',
+                !past && !selected && 'hover:bg-row-2',
+                iso === today && !selected && 'font-semibold text-accent-ink',
                 selected && 'bg-accent font-semibold text-white',
               )}
             >

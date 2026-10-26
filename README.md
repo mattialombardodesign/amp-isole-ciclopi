@@ -15,25 +15,32 @@ npm run dev
 ```
 
 Senza configurazione l'app parte in **modalità demo**: i dati restano nel browser.
-Per vedere il tempo reale apri due schede: in una "Entra come diving", nell'altra
-"Entra come AMP".
+Si accede come titolare del diving (admin) con `diving@demo.it`, o come
+collaboratore con `marco@demo.it`, e una password qualsiasi
+(alla prima volta si vede l'onboarding di presentazione).
+Per ripartire da zero: **Account (icona in alto a destra nella home) → Ricomincia la demo**.
+La centrale operativa AMP resta raggiungibile su `/dashboard` accedendo con
+`amp@isoleciclopi.it`.
 
 ## Collegare Supabase
 
 1. Crea un progetto su [supabase.com](https://supabase.com) (piano Free).
 2. **SQL Editor → New query**: incolla tutto `supabase/schema.sql` e premi **Run**.
-3. **Authentication → Sign In / Providers → Email**: disattiva *Confirm email*
-   (per la demo evita la conferma via mail).
+3. **Authentication → Sign In / Providers**: disattiva *Allow new users to sign up*.
+   Il diving si registra negli uffici dell'AMP: gli account li crea l'AMP.
 4. **Project Settings → API**: copia *Project URL* e *anon / publishable key*.
 5. Copia `.env.example` in `.env` e incolla i due valori.
-6. Riavvia `npm run dev`, registra due account (uno per il diving, uno per l'AMP)
-   e rendi "AMP" il secondo dal SQL Editor:
+6. **Authentication → Users → Add user** (con *Auto Confirm User*): crea un
+   account per il diving e uno per l'AMP. Nome del diving e team si
+   impostano con la query in fondo a `schema.sql`; rendi "AMP" il secondo:
 
    ```sql
    update public.profiles
    set role = 'amp', org_name = 'AMP Isole Ciclopi', onboarded = true
    where email = 'la-tua-email-amp@esempio.it';
    ```
+
+La guida passo passo per il giorno della demo è in `docs/checklist-supabase-vercel.md`.
 
 ## Deploy su Vercel
 

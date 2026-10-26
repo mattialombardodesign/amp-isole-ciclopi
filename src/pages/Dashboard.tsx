@@ -2,12 +2,13 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Bell, Check, ChevronDown, ChevronLeft, ChevronRight, LogOut } from 'lucide-react'
 import { api } from '@/lib/api'
-import { ACTIVITY_LABEL, EXIT_LABEL, REPORT_LABEL, REQUEST_LABEL, communicationText, formatDateLong, formatDateShort, hhmm, timeAgo, totalDivers } from '@/lib/format'
+import { ACTIVITY_LABEL, EXIT_LABEL, REPORT_LABEL, REQUEST_LABEL, communicationText, formatDateLong, formatDateShort, hhmm, peopleShort, placeName, timeAgo, totalDivers } from '@/lib/format'
 import { useAuth, useLive } from '@/lib/hooks'
-import { SITES, getSite } from '@/lib/sites'
+import { SITES } from '@/lib/sites'
 import type { AmpRequest, Booking, Report } from '@/lib/types'
 import { addDays, cn, todayISO } from '@/lib/utils'
 import { CapacityGauge } from '@/components/CapacityGauge'
+import { CyclopsEye } from '@/components/Logo'
 import { SiteMap } from '@/components/SiteMap'
 import { ConditionsChips } from '@/components/Weather'
 import { Button, Status } from '@/components/ui'
@@ -34,28 +35,39 @@ export default function Dashboard() {
 
   const occupancy = useMemo(() => {
     const out: Record<string, number> = {}
-    for (const b of bookings ?? []) out[b.site_id] = (out[b.site_id] ?? 0) + totalDivers(b)
+    // il sea watching (snorkeling, senza sito) non occupa posti nei siti di immersione
+    for (const b of bookings ?? []) if (b.status !== 'annullata' && b.site_id) out[b.site_id] = (out[b.site_id] ?? 0) + totalDivers(b)
     return out
   }, [bookings])
 
   // Evidenzia e notifica gli elementi arrivati in tempo reale
-  const known = useRef<Set<string> | null>(null)
+  // id → firma: così si notano anche le uscite modificate o annullate
+  const known = useRef<Map<string, string> | null>(null)
   const lastDate = useRef(date)
   const [fresh, setFresh] = useState<Set<string>>(new Set())
   const [toasts, setToasts] = useState<Toast[]>([])
 
   useEffect(() => {
     if (!bookings || !reports || !requests) return
-    const items: Toast[] = [
-      ...bookings.map((b) => ({ id: b.id, title: `Nuova uscita · ${b.org_name}`, text: `${getSite(b.site_id)?.name}, ${hhmm(b.time_in)}–${hhmm(b.time_out)} · ${totalDivers(b)} subacquei` })),
-      ...reports.map((r) => ({ id: r.id, title: `Nuova segnalazione · ${r.org_name}`, text: REPORT_LABEL[r.category] })),
-      ...requests.map((r) => ({ id: r.id, title: `Nuova richiesta · ${r.org_name}`, text: REQUEST_LABEL[r.kind] })),
+    const items: (Toast & { sig: string; changed?: string })[] = [
+      ...bookings.map((b) => {
+        const text = `${placeName(b)}, ${hhmm(b.time_in)}–${hhmm(b.time_out)} · ${peopleShort(b)}`
+        const sig = [b.status === 'annullata' ? 'x' : 'ok', b.site_id, b.lat, b.lng, b.date, b.time_in, b.time_out, totalDivers(b), b.buoy, b.exit_mode].join('|')
+        return { id: b.id, sig, title: `Nuova uscita · ${b.org_name}`, changed: b.status === 'annullata' ? `Uscita annullata · ${b.org_name}` : `Uscita modificata · ${b.org_name}`, text }
+      }),
+      ...reports.map((r) => ({ id: r.id, sig: '', title: `Nuova segnalazione · ${r.org_name}`, text: REPORT_LABEL[r.category] })),
+      ...requests.map((r) => ({ id: r.id, sig: '', title: `Nuova richiesta · ${r.org_name}`, text: REQUEST_LABEL[r.kind] })),
     ]
     const silent = known.current === null || lastDate.current !== date
-    known.current ??= new Set()
+    const prev = known.current ?? new Map<string, string>()
     lastDate.current = date
-    const incoming = items.filter((i) => !known.current!.has(i.id))
-    incoming.forEach((i) => known.current!.add(i.id))
+    const incoming: Toast[] = items.flatMap((i) => {
+      const before = prev.get(i.id)
+      if (before === undefined) return [{ id: i.id, title: i.title, text: i.text }]
+      if (before !== i.sig && i.changed) return [{ id: i.id, title: i.changed, text: i.text }]
+      return []
+    })
+    known.current = new Map(items.map((i) => [i.id, i.sig]))
     if (silent || incoming.length === 0) return
     setFresh(new Set(incoming.map((i) => i.id)))
     setToasts((t) => [...t, ...incoming])
@@ -65,14 +77,16 @@ export default function Dashboard() {
   if (profile && profile.role !== 'amp') {
     return (
       <div className="flex min-h-dvh flex-col items-center justify-center gap-4 p-6 text-center">
-        <p className="text-xl font-semibold">Accesso riservato al personale AMP</p>
+        <p className="text-[28px] font-bold">Accesso riservato al personale AMP</p>
         <p className="max-w-sm text-ink-2">Accedi con un account AMP per vedere le comunicazioni dei diving.</p>
         <Button onClick={() => navigate('/attivita')}>Torna all'app</Button>
       </div>
     )
   }
 
-  const divers = (bookings ?? []).reduce((n, b) => n + totalDivers(b), 0)
+  const active = (bookings ?? []).filter((b) => b.status !== 'annullata')
+  const divers = active.reduce((n, b) => n + totalDivers(b), 0)
+  const openRequests = (requests ?? []).filter((r) => r.status !== 'gestita')
   const pending = (bookings ?? []).filter((b) => b.status === 'inviata').length
   const openReports = (reports ?? []).filter((r) => r.status === 'aperta')
   const today = todayISO()
@@ -85,15 +99,15 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-dvh">
-      <header className="sticky top-0 z-[1000] border-b border-line bg-card/90 backdrop-blur-md">
+      <header className="sticky top-0 z-[1000] border-b border-line bg-ground/90 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-4 px-6">
           <div className="flex items-center gap-3">
-            <img src="/favicon.svg" alt="" className="size-8 rounded-lg" />
+            <CyclopsEye sclera="fill-ground" className="w-8" label="" />
             <span className="text-[15px] font-semibold">Centrale operativa</span>
             <span className="hidden text-[15px] text-ink-3 sm:inline">AMP Isole Ciclopi · Guardia Costiera</span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="hidden items-center gap-2 text-sm font-medium text-ink-2 sm:flex">
+            <span className="hidden items-center gap-2 text-[15px] font-medium text-ink-2 sm:flex">
               <span className="relative flex size-2">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-ok opacity-60" />
                 <span className="relative inline-flex size-2 rounded-full bg-ok" />
@@ -101,9 +115,9 @@ export default function Dashboard() {
               In tempo reale
             </span>
             {api.mode === 'demo' && <Status tone="warn">Demo</Status>}
-            <span className="hidden text-sm text-ink-3 lg:block">{profile?.email}</span>
+            <span className="hidden text-[15px] text-ink-3 lg:block">{profile?.email}</span>
             <button onClick={signOut} className="flex size-10 cursor-pointer items-center justify-center rounded-full text-ink-2 hover:bg-ink/5" aria-label="Esci">
-              <LogOut className="size-5" />
+              <LogOut className="size-[22px]" strokeWidth={1.75} />
             </button>
           </div>
         </div>
@@ -113,7 +127,7 @@ export default function Dashboard() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-[34px] leading-tight font-bold tracking-[-0.03em]">{formatDateLong(date)}</h1>
+              <h1 className="text-[28px] leading-tight font-bold tracking-[-0.02em]">{formatDateLong(date)}</h1>
               <div className="ml-2 flex gap-1">
                 <Button variant="secondary" size="sm" className="w-9 px-0" onClick={() => setDate(addDays(date, -1))} aria-label="Giorno precedente">
                   <ChevronLeft className="size-4" />
@@ -133,38 +147,39 @@ export default function Dashboard() {
         </div>
 
         {/* il numero che chiede un'azione guida; gli altri sono contesto */}
-        <div className="mt-group flex flex-wrap items-center gap-x-10 gap-y-4 rounded-2xl bg-night px-6 py-5 text-white">
-          <div className="flex items-center gap-5">
-            <p className={cn('text-[34px] leading-none font-extrabold tracking-[-0.035em]', pending ? 'text-accent-bright' : 'text-night-3')}>{pending}</p>
+        <div className="mt-group flex flex-wrap items-center gap-x-10 gap-y-4 rounded-3xl bg-night px-6 py-5 text-white">
+          <div>
             <div>
-              <p className="text-base font-semibold">{pending === 1 ? 'Uscita da prendere in visione' : 'Uscite da prendere in visione'}</p>
+              <p className="text-xl font-bold tracking-[-0.02em]">
+                {pending === 0 ? 'Nessuna uscita da prendere in visione' : pending === 1 ? '1 uscita da prendere in visione' : `${pending} uscite da prendere in visione`}
+              </p>
               {pending > 0 ? (
                 <button
                   onClick={() => {
                     setTab('uscite')
                     setOnlyPending(true)
                   }}
-                  className="mt-1 cursor-pointer text-sm font-semibold text-accent-bright underline underline-offset-4 hover:text-white"
+                  className="mt-1 cursor-pointer text-[15px] font-semibold text-accent-bright underline underline-offset-4 hover:text-white"
                 >
                   Mostra solo queste
                 </button>
               ) : (
-                <p className="mt-1 text-sm text-night-3">Tutto letto</p>
+                <p className="mt-1 text-[15px] text-night-3">Tutto letto</p>
               )}
             </div>
           </div>
           <dl className="ml-auto flex flex-wrap gap-x-8 gap-y-2">
-            <Stat value={bookings?.length ?? 0} label="uscite" />
-            <Stat value={divers} label="subacquei in acqua" />
+            <Stat value={active.length} label={active.length === 1 ? 'uscita' : 'uscite'} />
+            <Stat value={divers} label="persone in acqua" />
             <Stat value={openReports.length} label={openReports.length === 1 ? 'segnalazione aperta' : 'segnalazioni aperte'} tone={openReports.length ? 'bad' : undefined} />
           </dl>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+        <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
           <div className="flex flex-col gap-6">
-            <div className="h-[460px] overflow-hidden rounded-2xl ring-1 ring-line">
+            <div className="h-[460px] overflow-hidden rounded-3xl">
               <SiteMap
-                tone="prussia"
+                compactPins
                 showZones
                 occupancy={occupancy}
                 selectedId={focusSite}
@@ -175,12 +190,12 @@ export default function Dashboard() {
                   const here = (bookings ?? []).filter((b) => b.site_id === s.id)
                   return (
                     <div className="min-w-52">
-                      <p className="text-sm font-semibold">{s.name}</p>
-                      <p className="text-xs text-ink-3">
+                      <p className="text-[15px] font-semibold">{s.name}</p>
+                      <p className="text-[13px] text-ink-3">
                         {occupancy[s.id] ?? 0} su {s.capacity} subacquei · Zona {s.zone}
                       </p>
                       {here.map((b) => (
-                        <p key={b.id} className="mt-1 text-xs">
+                        <p key={b.id} className="mt-1 text-[13px]">
                           <strong>{hhmm(b.time_in)}</strong> {b.org_name} · {totalDivers(b)}
                         </p>
                       ))}
@@ -191,10 +206,10 @@ export default function Dashboard() {
             </div>
 
             <section>
-              <h2 className="mb-3 text-lg font-semibold tracking-tight">Capienza siti · {formatDateShort(date)}</h2>
-              <div className="overflow-hidden rounded-2xl bg-card ring-1 ring-line">
+              <h2 className="mb-3 text-xl font-bold tracking-[-0.02em]">Capienza siti · {formatDateShort(date)}</h2>
+              <div className="overflow-hidden rounded-3xl bg-row">
                 <table className="w-full text-left text-[15px]">
-                  <thead className="border-b border-line text-sm text-ink-3">
+                  <thead className="border-b border-line text-[15px] text-ink-3">
                     <tr>
                       <th className="px-4 py-2.5 font-medium">Sito</th>
                       <th className="px-4 py-2.5 font-medium">Zona</th>
@@ -202,12 +217,12 @@ export default function Dashboard() {
                       <th className="px-4 py-2.5 text-right font-medium">Liberi</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-line">
+                  <tbody className="divide-y divide-row-2">
                     {SITES.map((s) => {
                       const used = occupancy[s.id] ?? 0
                       const free = Math.max(s.capacity - used, 0)
                       return (
-                        <tr key={s.id} onClick={() => setFocusSite(s.id)} className={cn('cursor-pointer transition-colors hover:bg-ground', focusSite === s.id && 'bg-accent-soft')}>
+                        <tr key={s.id} onClick={() => setFocusSite(s.id)} className={cn('cursor-pointer transition-colors hover:bg-row-2', focusSite === s.id && 'bg-accent-soft')}>
                           <td className="px-4 py-3 font-medium">{s.name}</td>
                           <td className="px-4 py-3 text-ink-2">{s.zone}</td>
                           <td className="px-4 py-3">
@@ -225,30 +240,30 @@ export default function Dashboard() {
             </section>
           </div>
 
-          <section className="flex max-h-[900px] flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-line">
-            <div role="tablist" className="flex gap-1 border-b border-line px-2">
+          <section className="flex max-h-[900px] flex-col overflow-hidden rounded-3xl bg-row">
+            <div role="tablist" className="flex gap-1 border-b border-row-2 px-2">
               <TabButton active={tab === 'uscite'} onClick={() => setTab('uscite')} count={bookings?.length}>
                 Uscite
               </TabButton>
               <TabButton active={tab === 'segnalazioni'} onClick={() => setTab('segnalazioni')} count={openReports.length}>
                 Segnalazioni
               </TabButton>
-              <TabButton active={tab === 'richieste'} onClick={() => setTab('richieste')} count={requests?.length}>
+              <TabButton active={tab === 'richieste'} onClick={() => setTab('richieste')} count={openRequests.length}>
                 Richieste
               </TabButton>
             </div>
             <div className="flex-1 overflow-y-auto">
               {tab === 'uscite' && onlyPending && (
-                <div className="flex items-center justify-between border-b border-line bg-accent-soft px-5 py-2.5 text-sm">
-                  <span className="font-medium text-accent">Solo uscite da prendere in visione</span>
-                  <button onClick={() => setOnlyPending(false)} className="cursor-pointer font-semibold text-accent hover:underline">
+                <div className="flex items-center justify-between border-b border-line bg-accent-soft px-5 py-2.5 text-[15px]">
+                  <span className="font-medium text-accent-ink">Solo uscite da prendere in visione</span>
+                  <button onClick={() => setOnlyPending(false)} className="cursor-pointer font-semibold text-accent-ink hover:underline">
                     Mostra tutte
                   </button>
                 </div>
               )}
               {tab === 'uscite' &&
                 (bookings?.length ? (
-                  <div className="divide-y divide-line">
+                  <div className="divide-y divide-row-2">
                     {bookings.filter((b) => !onlyPending || b.status === 'inviata').map((b) => (
                       <BookingItem
                         key={b.id}
@@ -257,7 +272,7 @@ export default function Dashboard() {
                         open={openId === b.id}
                         onToggle={() => {
                           setOpenId(openId === b.id ? null : b.id)
-                          setFocusSite(b.site_id)
+                          if (b.site_id) setFocusSite(b.site_id)
                         }}
                       />
                     ))}
@@ -267,7 +282,7 @@ export default function Dashboard() {
                 ))}
               {tab === 'segnalazioni' &&
                 (reports?.length ? (
-                  <div className="divide-y divide-line">
+                  <div className="divide-y divide-row-2">
                     {reports.map((r) => (
                       <ReportItem key={r.id} report={r} fresh={fresh.has(r.id)} />
                     ))}
@@ -277,7 +292,7 @@ export default function Dashboard() {
                 ))}
               {tab === 'richieste' &&
                 (requests?.length ? (
-                  <div className="divide-y divide-line">
+                  <div className="divide-y divide-row-2">
                     {requests.map((r) => (
                       <RequestItem key={r.id} request={r} fresh={fresh.has(r.id)} />
                     ))}
@@ -292,11 +307,11 @@ export default function Dashboard() {
 
       <div className="fixed right-6 bottom-6 z-[2000] flex w-80 flex-col gap-2" aria-live="polite">
         {toasts.map((t) => (
-          <div key={t.id} className="flex animate-enter gap-3 rounded-2xl bg-night p-4 text-white shadow-[0_16px_40px_-12px_rgba(11,15,20,.6)]">
+          <div key={t.id} className="flex animate-enter gap-3 rounded-2xl bg-night p-4 text-white shadow-[0_16px_40px_-12px_rgba(17,17,19,.5)]">
             <Bell className="mt-0.5 size-4 shrink-0 text-night-3" />
             <div className="min-w-0">
-              <p className="text-sm font-semibold">{t.title}</p>
-              <p className="truncate text-sm text-night-3">{t.text}</p>
+              <p className="text-[15px] font-semibold">{t.title}</p>
+              <p className="truncate text-[15px] text-night-3">{t.text}</p>
             </div>
           </div>
         ))}
@@ -307,9 +322,8 @@ export default function Dashboard() {
 
 function Stat({ value, label, tone }: { value: number; label: string; tone?: 'bad' }) {
   return (
-    <div className="flex items-baseline gap-2">
-      <dd className={cn('text-xl font-bold tracking-tight', tone === 'bad' && 'text-bad-bright')}>{value}</dd>
-      <dt className="text-sm text-night-3">{label}</dt>
+    <div className={cn('text-[15px]', tone === 'bad' ? 'text-bad-bright' : 'text-night-3')}>
+      <dd className={cn('inline font-semibold', !tone && 'text-white')}>{value}</dd> <dt className="inline">{label}</dt>
     </div>
   )
 }
@@ -322,11 +336,11 @@ function TabButton({ active, onClick, count, children }: { active: boolean; onCl
       onClick={onClick}
       className={cn(
         '-mb-px flex h-12 cursor-pointer items-center gap-2 border-b-2 px-3 text-[15px] font-medium transition-colors',
-        active ? 'border-ink text-ink' : 'border-transparent text-ink-3 hover:text-ink',
+        active ? 'border-accent text-accent-ink' : 'border-transparent text-ink-3 hover:text-ink',
       )}
     >
       {children}
-      {!!count && <span className="rounded-full bg-ground px-1.5 text-xs font-semibold text-ink-2">{count}</span>}
+      {!!count && <span className="rounded-full bg-row-2 px-1.5 text-[13px] font-semibold text-ink-2">{count}</span>}
     </button>
   )
 }
@@ -337,31 +351,35 @@ function Empty({ text }: { text: string }) {
 
 function BookingItem({ booking: b, fresh, open, onToggle }: { booking: Booking; fresh: boolean; open: boolean; onToggle: () => void }) {
   const [saving, setSaving] = useState(false)
-  const site = getSite(b.site_id)
+  const seaWatching = b.activity_type === 'sea_watching'
   return (
-    <div className={cn(fresh && 'animate-flash', open && 'bg-ground/60')}>
+    <div className={cn(fresh && 'animate-flash', open && 'bg-row-2')}>
       <div className="flex items-center gap-4 px-5 py-4">
-        <button onClick={onToggle} className="flex min-w-0 flex-1 cursor-pointer items-center gap-4 text-left" aria-expanded={open}>
+        <button onClick={onToggle} className={cn('flex min-w-0 flex-1 cursor-pointer items-center gap-4 text-left', b.status === 'annullata' && 'text-ink-3 [&_p]:text-ink-3')} aria-expanded={open}>
           <div className="w-14 shrink-0">
             <p className="text-[15px] font-semibold">{hhmm(b.time_in)}</p>
-            <p className="text-sm text-ink-3">{hhmm(b.time_out)}</p>
+            <p className="text-[15px] text-ink-3">{hhmm(b.time_out)}</p>
           </div>
           <div className="min-w-0 flex-1">
             <p className="truncate text-[15px] font-semibold">
               {b.org_name}
-              {fresh && <span className="ml-2 text-sm font-medium text-accent">nuova</span>}
+              {fresh && b.status !== 'annullata' && <span className="ml-2 text-[13px] font-semibold text-accent-ink">nuova</span>}
             </p>
-            <p className="truncate text-sm text-ink-2">
-              {site?.name} · {totalDivers(b)} subacquei
+            <p className="text-[15px] text-ink-2">
+              {placeName(b)} · {peopleShort(b)}
             </p>
-            <p className="truncate text-sm text-ink-3">{ACTIVITY_LABEL[b.activity_type]}</p>
+            <p className="truncate text-[15px] text-ink-3">{ACTIVITY_LABEL[b.activity_type]}</p>
           </div>
         </button>
-        {b.status === 'presa_visione' ? (
+        {b.status === 'annullata' ? (
+          <Status tone="neutral">Annullata</Status>
+        ) : b.status === 'presa_visione' ? (
           <Status tone="ok">Vista</Status>
         ) : (
           <Button
             size="sm"
+            variant="secondary"
+            className="bg-card hover:bg-row-2"
             loading={saving}
             onClick={async () => {
               setSaving(true)
@@ -369,7 +387,7 @@ function BookingItem({ booking: b, fresh, open, onToggle }: { booking: Booking; 
               setSaving(false)
             }}
           >
-            <Check className="size-4" /> Presa visione
+            <Check className="size-[18px]" strokeWidth={2} /> Presa visione
           </Button>
         )}
         <button onClick={onToggle} className="-mr-2 flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg text-ink-3 hover:bg-ink/5" aria-label={open ? 'Chiudi dettagli' : 'Apri dettagli'}>
@@ -378,17 +396,27 @@ function BookingItem({ booking: b, fresh, open, onToggle }: { booking: Booking; 
       </div>
       {open && (
         <div className="animate-enter px-5 pb-5">
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
-            <Info label="Istruttori" value={b.instructors.join(', ') || '—'} />
-            <Info label="Guide" value={b.guides.join(', ') || '—'} />
-            <Info label="Ospiti" value={b.guests.join(', ') || '—'} />
-            <Info label="Pallone · uscita" value={`${b.buoy ? 'Presente' : 'Assente'} · ${EXIT_LABEL[b.exit_mode]}`} />
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-3 text-[15px]">
+            {seaWatching ? (
+              <>
+                <Info label="Accompagnatori" value={[...b.instructors, ...b.guides].join(', ') || '—'} />
+                <Info label="Partecipanti" value={`${b.participants + b.guests.length}`} />
+                <Info label="Boa · accesso" value={`${b.buoy ? 'Presente' : 'Assente'} · ${EXIT_LABEL[b.exit_mode]}`} />
+              </>
+            ) : (
+              <>
+                <Info label="Istruttori" value={b.instructors.join(', ') || '—'} />
+                <Info label="Guide" value={b.guides.join(', ') || '—'} />
+                <Info label="Ospiti" value={b.guests.join(', ') || '—'} />
+                <Info label="Pallone · uscita" value={`${b.buoy ? 'Presente' : 'Assente'} · ${EXIT_LABEL[b.exit_mode]}`} />
+              </>
+            )}
           </dl>
           <details className="mt-4">
-            <summary className="cursor-pointer text-sm font-medium text-accent">Testo della comunicazione</summary>
-            <pre className="mt-2 rounded-xl bg-card p-3 font-sans text-sm leading-relaxed whitespace-pre-wrap text-ink-2 ring-1 ring-line">{communicationText(b)}</pre>
+            <summary className="cursor-pointer text-[13px] font-semibold text-accent-ink">Testo della comunicazione</summary>
+            <pre className="mt-2 rounded-2xl bg-card p-3 font-sans text-[15px] leading-snug whitespace-pre-wrap text-ink-2">{communicationText(b)}</pre>
           </details>
-          <p className="mt-3 text-xs text-ink-3">Ricevuta {timeAgo(b.created_at)}</p>
+          <p className="mt-3 text-[13px] text-ink-3">Ricevuta {timeAgo(b.created_at)}</p>
         </div>
       )}
     </div>
@@ -401,16 +429,16 @@ function ReportItem({ report: r, fresh }: { report: Report; fresh: boolean }) {
       <div className="min-w-0 flex-1">
         <p className="text-[15px] font-semibold">
           {REPORT_LABEL[r.category]}
-          {fresh && <span className="ml-2 text-sm font-medium text-accent">nuova</span>}
+          {fresh && <span className="ml-2 text-[13px] font-semibold text-accent-ink">nuova</span>}
         </p>
         <p className="mt-0.5 text-[15px] text-ink-2">{r.description}</p>
-        <p className="mt-1 text-sm text-ink-3">
+        <p className="mt-1 text-[15px] text-ink-3">
           {r.org_name} · {timeAgo(r.created_at)}
         </p>
       </div>
       {r.status === 'aperta' ? (
-        <Button variant="secondary" size="sm" onClick={() => api.setReportStatus(r.id, 'gestita')}>
-          Segna gestita
+        <Button variant="secondary" size="sm" className="bg-card hover:bg-row-2" onClick={() => api.setReportStatus(r.id, 'gestita')}>
+          <Check className="size-[18px]" strokeWidth={2} /> Segna gestita
         </Button>
       ) : (
         <Status tone="ok">Gestita</Status>
@@ -421,16 +449,25 @@ function ReportItem({ report: r, fresh }: { report: Report; fresh: boolean }) {
 
 function RequestItem({ request: r, fresh }: { request: AmpRequest; fresh: boolean }) {
   return (
-    <div className={cn('px-5 py-4', fresh && 'animate-flash')}>
+    <div className={cn('flex items-start gap-4 px-5 py-4', fresh && 'animate-flash')}>
+      <div className="min-w-0 flex-1">
       <p className="text-[15px] font-semibold">
         {REQUEST_LABEL[r.kind]}
-        {fresh && <span className="ml-2 text-sm font-medium text-accent">nuova</span>}
+        {fresh && <span className="ml-2 text-[13px] font-semibold text-accent-ink">nuova</span>}
       </p>
       <p className="mt-0.5 text-[15px] text-ink-2">{r.message}</p>
-      <p className="mt-1 text-sm text-ink-3">
+      <p className="mt-1 text-[15px] text-ink-3">
         {r.org_name} · {timeAgo(r.created_at)}
         {r.preferred_date && ` · data preferita ${formatDateShort(r.preferred_date)}`}
       </p>
+      </div>
+      {r.status === 'gestita' ? (
+        <Status tone="ok">Gestita</Status>
+      ) : (
+        <Button variant="secondary" size="sm" className="bg-card hover:bg-row-2" onClick={() => api.setRequestStatus(r.id, 'gestita')}>
+          <Check className="size-[18px]" strokeWidth={2} /> Segna gestita
+        </Button>
+      )}
     </div>
   )
 }

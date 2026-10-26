@@ -1,71 +1,99 @@
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ChevronRight, ClipboardCheck, Fish, Plus } from 'lucide-react'
+import { ChevronDown, CircleUserRound, MapPin, Plus, Users, Waves, WavesArrowDown } from 'lucide-react'
 import { api } from '@/lib/api'
-import { ACTIVITY_LABEL, formatDateLong, formatDateShort, hhmm, totalDivers } from '@/lib/format'
-import { useLive } from '@/lib/hooks'
-import { SITES, getSite } from '@/lib/sites'
+import { ACTIVITY_LABEL, firstName, formatDateLong, formatDateShort, hhmm, peopleShort, placeName, placeZone, totalDivers } from '@/lib/format'
+import { useAuth, useLive } from '@/lib/hooks'
+import { getSite } from '@/lib/sites'
 import type { Booking } from '@/lib/types'
 import { cn, todayISO } from '@/lib/utils'
 import { CapacityGauge } from '@/components/CapacityGauge'
-import { DepthProfile, SiteThumb, Stat, StatRow } from '@/components/Tour'
-import { ConditionsPill } from '@/components/Weather'
-import { Button, EmptyState, List, NavRow, PageHeader, SectionHeading, Status } from '@/components/ui'
+import { CyclopsEye } from '@/components/Logo'
+import { ConditionsLine } from '@/components/Weather'
+import { Button, EmptyState, List, PageHeader, Pill, SectionHeading, Status } from '@/components/ui'
 
 export function BookingStatus({ status, className }: { status: Booking['status']; className?: string }) {
-  return status === 'presa_visione' ? (
+  if (status === 'annullata') {
+    return (
+      <Status tone="neutral" className={className}>
+        Annullata
+      </Status>
+    )
+  }
+  // L'AMP non dà riscontri nell'app: al diving basta sapere che la comunicazione è arrivata
+  return (
     <Status tone="ok" className={className}>
-      Vista dall'AMP
-    </Status>
-  ) : (
-    <Status tone="warn" className={className}>
-      In attesa dell'AMP
+      Invio confermato
     </Status>
   )
 }
 
-/** "tra 2 ore", "tra 25 min", "in corso", oppure la data. */
-function relativeStart(b: Booking) {
-  if (b.date !== todayISO()) return formatDateShort(b.date)
-  const now = new Date()
-  const [h, m] = b.time_in.split(':').map(Number)
-  const [eh, em] = b.time_out.split(':').map(Number)
-  const start = new Date(now)
-  start.setHours(h, m, 0, 0)
-  const end = new Date(now)
-  end.setHours(eh, em, 0, 0)
-  const mins = Math.round((start.getTime() - now.getTime()) / 60000)
-  if (now >= start && now <= end) return 'in corso'
-  if (mins < 0) return 'oggi'
-  if (mins < 60) return `tra ${mins} min`
-  const hours = Math.round(mins / 60)
-  return `tra ${hours} ${hours === 1 ? 'ora' : 'ore'}`
+// Oltre tre uscite in programma l'elenco si chiude in una riga "Altre N"
+const VISIBLE_NEXT = 3
+
+/** Saluto secondo l'ora del giorno. */
+function greeting() {
+  const h = new Date().getHours()
+  return h < 13 ? 'Buongiorno' : h < 18 ? 'Buon pomeriggio' : 'Buonasera'
 }
 
 export default function Attivita() {
   const navigate = useNavigate()
+  const { profile } = useAuth()
   const today = todayISO()
   const { data: bookings } = useLive(() => api.listMyBookings(), [])
   const { data: occupancy } = useLive(() => api.getOccupancy(today), [today])
 
-  const upcoming = (bookings ?? []).filter((b) => b.date >= today).sort((a, b) => a.date.localeCompare(b.date) || a.time_in.localeCompare(b.time_in))
-  const past = (bookings ?? []).filter((b) => b.date < today)
-  const next = upcoming[0]
-  const rest = upcoming.slice(1)
-  const openSites = SITES.map((s) => ({ site: s, free: s.capacity - (occupancy?.[s.id] ?? 0) })).sort((a, b) => b.free - a.free)
+  const [showAllPast, setShowAllPast] = useState(false)
+  const [showAllNext, setShowAllNext] = useState(false)
+  // un'uscita di oggi già terminata non è più "prossima"
+  const nowHHMM = new Date().toTimeString().slice(0, 5)
+  const isOver = (b: Booking) => b.date < today || (b.date === today && hhmm(b.time_out) < nowHHMM)
+  const upcoming = (bookings ?? []).filter((b) => !isOver(b)).sort((a, b) => a.date.localeCompare(b.date) || a.time_in.localeCompare(b.time_in))
+  const past = (bookings ?? []).filter(isOver).sort((a, b) => b.date.localeCompare(a.date) || b.time_in.localeCompare(a.time_in))
+  // un'uscita annullata resta in elenco ma non è mai la "prossima"
+  const next = upcoming.find((b) => b.status !== 'annullata')
+  const rest = upcoming.filter((b) => b !== next)
 
   return (
     <div className="pb-section">
-      <PageHeader title="Oggi" subtitle={formatDateLong(today)} aside={<ConditionsPill />} />
+      <PageHeader
+        title="Oggi"
+        eyebrow={
+          <p className="flex min-w-0 items-center gap-2 text-[15px] font-medium text-ink-2">
+            <CyclopsEye sclera="fill-ground" look className="w-7 shrink-0" label="" />
+            <span className="truncate">
+              {greeting()}
+              {profile?.full_name && `, ${firstName(profile.full_name)}`}
+            </span>
+          </p>
+        }
+        aside={
+          <Link
+            to="/account"
+            aria-label="Account e impostazioni"
+            className="-mt-2 -mr-1.5 flex size-10 shrink-0 items-center justify-center rounded-full text-ink-2 transition-colors hover:bg-row-2 hover:text-ink"
+          >
+            <CircleUserRound className="size-7" strokeWidth={1.75} />
+          </Link>
+        }
+        subtitle={
+          <>
+            {formatDateLong(today)}
+            <ConditionsLine className="block" />
+          </>
+        }
+      />
 
       <div className="mt-group px-gutter">
         {next ? (
-          <TourCard booking={next} used={occupancy?.[next.site_id] ?? 0} />
+          <NextOuting booking={next} used={next.site_id ? (occupancy?.[next.site_id] ?? 0) : 0} />
         ) : (
-          bookings && <EmptyState title="Nessuna uscita in programma" text="Pianifica la prossima uscita: l'AMP e la Guardia Costiera la ricevono subito." />
+          bookings && <EmptyState title="Nessuna uscita in programma" text="Comunica la prossima immersione o sea watching: arriva subito ad AMP e Guardia Costiera." />
         )}
-        <Button size="lg" className="mt-stack" onClick={() => navigate('/attivita/nuova/visita_guidata')}>
-          <Plus className="size-5 text-ice" strokeWidth={2.5} />
-          Pianifica un'uscita
+        <Button size="lg" className="mt-3" onClick={() => navigate('/attivita/nuova')}>
+          <Plus className="size-[18px]" strokeWidth={2} />
+          Nuova attività
         </Button>
       </div>
 
@@ -73,118 +101,103 @@ export default function Attivita() {
         <section className="mt-section px-gutter">
           <SectionHeading>In programma</SectionHeading>
           <List>
-            {rest.map((b) => (
+            {(showAllNext ? rest : rest.slice(0, VISIBLE_NEXT)).map((b) => (
               <BookingRow key={b.id} booking={b} />
             ))}
+            {rest.length > VISIBLE_NEXT && (
+              <button
+                type="button"
+                onClick={() => setShowAllNext(!showAllNext)}
+                aria-expanded={showAllNext}
+                className="flex min-h-12 w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-row-2"
+              >
+                <span className="flex-1 text-[15px] text-ink-2">
+                  {showAllNext ? 'Mostra meno' : `Altre ${rest.length - VISIBLE_NEXT} in programma · fino al ${formatDateShort(rest[rest.length - 1].date)}`}
+                </span>
+                <ChevronDown className={cn('size-4 shrink-0 text-ink-3 transition-transform', showAllNext && 'rotate-180')} strokeWidth={2.5} />
+              </button>
+            )}
           </List>
         </section>
       )}
-
-      <section className="mt-section">
-        <SectionHeading
-          className="px-gutter"
-          action={
-            <Link to="/mappa" className="text-[15px] font-semibold text-accent">
-              Mappa
-            </Link>
-          }
-        >
-          Siti con posti oggi
-        </SectionHeading>
-        <div className="flex snap-x snap-mandatory scroll-px-gutter gap-3 overflow-x-auto no-scrollbar px-gutter pb-2">
-          {openSites.map(({ site, free }) => (
-            <button
-              key={site.id}
-              disabled={free <= 0}
-              onClick={() => navigate(`/attivita/nuova/visita_guidata?site=${site.id}&date=${today}`)}
-              className="w-56 shrink-0 cursor-pointer snap-start overflow-hidden rounded-2xl bg-card text-left shadow-[0_1px_0_var(--color-line),0_10px_24px_-20px_rgba(10,37,64,.45)] ring-1 ring-line transition-transform active:scale-[.98] disabled:cursor-not-allowed"
-            >
-              <SiteThumb site={site} className="h-28" />
-              <div className="p-3.5">
-                <p className="truncate text-base font-bold tracking-tight">{site.name}</p>
-                <p className={cn('mt-0.5 text-sm', free <= 0 ? 'font-semibold text-bad' : 'text-ink-3')}>
-                  {free <= 0 ? 'Pieno oggi' : `${free} liberi`} · {site.depth}
-                </p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-section px-gutter">
-        <SectionHeading>Altre attività</SectionHeading>
-        <List>
-          <NavRow icon={<Fish />} title="Sea watching guidato" description="Comunica una sessione di snorkeling" onClick={() => navigate('/attivita/nuova/sea_watching')} />
-          <NavRow icon={<ClipboardCheck />} title="Rinnovo autorizzazione annuale" description="Per continuare a operare nell'AMP" onClick={() => navigate('/amp/richiesta/rinnovo')} />
-        </List>
-      </section>
 
       {past.length > 0 && (
         <section className="mt-section px-gutter">
           <SectionHeading>Uscite passate</SectionHeading>
           <List>
-            {past.map((b) => (
-              <BookingRow key={b.id} booking={b} />
+            {(showAllPast ? past : past.slice(0, 5)).map((b) => (
+              <BookingRow key={b.id} booking={b} past />
             ))}
           </List>
+          {past.length > 5 && !showAllPast && (
+            <Button variant="secondary" size="lg" className="mt-3" onClick={() => setShowAllPast(true)}>
+              Mostra tutte ({past.length})
+            </Button>
+          )}
         </section>
       )}
     </div>
   )
 }
 
-/** La prossima uscita come scheda percorso: mappa, titolo, statistiche, profilo e capienza. */
-function TourCard({ booking: b, used }: { booking: Booking; used: number }) {
+/** Icona dell'attività: onde con la freccia per l'immersione, onde per il sea watching. */
+const ACTIVITY_ICON = { visita_guidata: WavesArrowDown, sea_watching: Waves } as const
+
+/** Pannello scuro della prossima uscita, con la capienza del suo sito (il sea watching non ne ha). */
+function NextOuting({ booking: b, used }: { booking: Booking; used: number }) {
   const site = getSite(b.site_id)
-  if (!site) return null
+  const isToday = b.date === todayISO()
   const mine = Math.min(totalDivers(b), used)
-  const free = Math.max(site.capacity - used, 0)
   return (
-    <Link
-      to={`/attivita/${b.id}`}
-      className="block overflow-hidden rounded-3xl bg-card shadow-[0_1px_0_var(--color-line),0_16px_36px_-24px_rgba(10,37,64,.55)] ring-1 ring-line transition-transform active:scale-[.99]"
-    >
-      <SiteThumb site={site} zoom={16} pin="label" caption={`${site.name} · Zona ${site.zone}`} className="h-40">
-        <BookingStatus status={b.status} className="absolute top-3 left-3 shadow-sm" />
-        <span className="absolute top-3 right-3 rounded-full bg-accent px-2.5 py-1 text-xs font-semibold text-white first-letter:uppercase">{relativeStart(b)}</span>
-      </SiteThumb>
-      <div className="p-4 pb-5">
-        <h2 className="text-xl leading-snug font-bold tracking-[-0.02em]">
-          {ACTIVITY_LABEL[b.activity_type]} {site.at}
-        </h2>
-        <StatRow className="mt-3">
-          <Stat icon="time">
-            {hhmm(b.time_in)}–{hhmm(b.time_out)}
-          </Stat>
-          <Stat icon="divers">{totalDivers(b)} sub</Stat>
-          <Stat icon="depth">{site.depth}</Stat>
-        </StatRow>
-        <DepthProfile site={site} className="mt-stack" />
-        <div className="mt-4 flex items-baseline justify-between text-sm">
-          <span className="text-ink-3">
-            Posti al sito · <span className="font-semibold text-ice-ink">tuoi {mine}</span>
-          </span>
-          <span className={cn('font-semibold', free === 0 ? 'text-bad' : 'text-ink')}>{free === 0 ? 'Pieno' : `${free} liberi su ${site.capacity}`}</span>
-        </div>
-        <CapacityGauge used={used} mine={mine} capacity={site.capacity} className="mt-2 h-2" />
+    <Link to={`/attivita/${b.id}`} className="block rounded-3xl bg-night p-5 text-white transition-transform active:scale-[.99]">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-[15px] text-night-3">{isToday ? 'Prossima uscita' : `Prossima uscita · ${formatDateShort(b.date)}`}</span>
+        <span className="flex h-6 items-center gap-1.5 rounded-full bg-ok-bright/15 px-2.5 text-[13px] font-semibold text-ok-bright">
+          <span className="size-1.5 rounded-full bg-current" />
+          Invio confermato
+        </span>
       </div>
+      <p className="mt-3 text-[34px] leading-none font-bold tracking-[-0.03em]">
+        {hhmm(b.time_in)}
+        <span className="text-night-3">–{hhmm(b.time_out)}</span>
+      </p>
+      <p className="mt-2.5 flex items-center gap-2 text-[17px] font-semibold">
+        <MapPin className="size-[18px] text-night-3" strokeWidth={2} />
+        {placeName(b)}
+        {placeZone(b) && ` · Zona ${placeZone(b)}`}
+      </p>
+      <p className="mt-1 flex items-center gap-2 text-[15px] text-night-3">
+        <Users className="size-[18px]" strokeWidth={2} />
+        {ACTIVITY_LABEL[b.activity_type]} · {peopleShort(b)}
+      </p>
+      {site && (
+        <div className="mt-4 border-t border-dashed border-night-free pt-3.5">
+          <div className="mb-2 flex items-center justify-between text-[13px] text-night-3">
+            <span>
+              Posti al sito {isToday ? 'oggi' : 'quel giorno'} · <span className="text-accent-bright">tuoi {mine}</span>
+            </span>
+            {used >= site.capacity ? <span className="font-semibold text-bad-bright">Pieno</span> : <span className="font-semibold text-white">{site.capacity - used} liberi su {site.capacity}</span>}
+          </div>
+          <CapacityGauge used={used} mine={mine} capacity={site.capacity} tone="dark" />
+        </div>
+      )}
     </Link>
   )
 }
 
-export function BookingRow({ booking: b }: { booking: Booking }) {
-  const site = getSite(b.site_id)
+export function BookingRow({ booking: b, past }: { booking: Booking; past?: boolean }) {
+  const Icon = ACTIVITY_ICON[b.activity_type]
   return (
-    <Link to={`/attivita/${b.id}`} className="flex items-center gap-3.5 p-3 transition-colors hover:bg-ground">
-      {site && <SiteThumb site={site} zoom={14} className="size-[72px] shrink-0 rounded-xl" />}
+    <Link to={`/attivita/${b.id}`} className={cn('flex min-h-14 items-center gap-3 px-4 py-3 transition-colors hover:bg-row-2', b.status === 'annullata' && 'text-ink-3')}>
+      <Icon className="size-[22px] shrink-0 text-ink-2" strokeWidth={1.75} />
       <div className="min-w-0 flex-1">
-        <p className="truncate text-base font-semibold">{site?.name}</p>
-        <p className="text-sm text-ink-3">
-          {formatDateShort(b.date)} · {hhmm(b.time_in)}–{hhmm(b.time_out)} · {totalDivers(b)} sub
+        <p className="truncate text-[17px]">{placeName(b)}</p>
+        <p className="truncate text-[13px] text-ink-3">
+          {formatDateShort(b.date)} · {peopleShort(b)}
         </p>
-        <BookingStatus status={b.status} className="mt-1.5" />
+        {!past && b.status === 'annullata' && <BookingStatus status={b.status} className="mt-1.5" />}
       </div>
-      <ChevronRight className="size-4 shrink-0 text-ink-3" />
+      <Pill tone={past || b.status === 'annullata' ? 'neutral' : 'accent'}>{hhmm(b.time_in)}</Pill>
     </Link>
   )
 }
