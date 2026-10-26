@@ -282,6 +282,7 @@ grant usage on schema public to authenticated;
 grant select, insert on public.bookings, public.reports, public.requests to authenticated;
 grant select on public.profiles, public.organizations, public.dive_sites to authenticated;
 grant execute on function public.site_occupancy(date) to authenticated;
+grant execute on function public.is_amp(), public.my_org(), public.is_org_admin() to authenticated;
 revoke execute on function public.site_occupancy(date) from anon, public;
 
 -- =====================================================================
